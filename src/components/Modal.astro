@@ -11,29 +11,22 @@
   const backdrop = document.getElementById('sub-modal-backdrop');
   const closeBtn = document.getElementById('sub-close-btn');
   const continueBtn = document.getElementById('sub-continue-btn');
-  let pendingUrl = '';
 
-  // Intercept Medium clicks
+  // Intercept Medium clicks, but don't block them
   document.addEventListener('click', (e) => {
     const link = e.target.closest('a');
     if (link && (link.href.includes('medium.com') || link.href.includes('rendoire.medium.com')) && !link.href.includes('subscribe')) {
-      e.preventDefault();
-      pendingUrl = link.href;
-      backdrop.classList.add('active');
+      // Show the modal on this page when they click, so it's waiting when they return
+      setTimeout(() => {
+        backdrop.classList.add('active');
+      }, 500);
     }
   });
 
   const closePortal = () => {
     backdrop.classList.remove('active');
-    if (pendingUrl) {
-      window.open(pendingUrl, '_blank');
-      pendingUrl = '';
-    }
   };
 
   closeBtn.addEventListener('click', closePortal);
-  continueBtn.addEventListener('click', () => {
-    backdrop.classList.remove('active');
-    // Let the standard href handle the open
-  });
+  continueBtn.addEventListener('click', closePortal);
 </script>
