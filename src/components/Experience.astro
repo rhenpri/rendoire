@@ -2,9 +2,9 @@
 const experiences = [
   {
     period: '2019 to Present',
-    role: 'Consultant',
-    sector: 'Software & AI Engineering · Global Industries · 7+ Years',
-    desc: 'Building AI systems at scale for global industries. Solving hard problems in architecture and live service engineering under real-world enterprise pressure.',
+    role: 'Building Software & AI systems',
+    sector: '',
+    desc: '',
     tag: 'Engineering',
     color: 'b'
   },
@@ -37,8 +37,8 @@ const experiences = [
         <div class="exp-period">{exp.period}</div>
         <div class="exp-body">
           <div class="exp-role">{exp.role}</div>
-          <div class="exp-sector">{exp.sector}</div>
-          <p class="exp-desc">{exp.desc}</p>
+          {exp.sector && <div class="exp-sector">{exp.sector}</div>}
+          {exp.desc && <p class="exp-desc">{exp.desc}</p>}
         </div>
         <div class={`exp-tag chip-${exp.color}`}>{exp.tag}</div>
       </div>
