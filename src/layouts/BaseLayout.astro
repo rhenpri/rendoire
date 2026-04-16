@@ -1,0 +1,97 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { 
+  title = "rendoire, Software & AI Engineer",
+  description = "Software & AI Engineer for the past 7 years. Business & Technology since childhood. Creativity for a lifetime."
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+    
+    <slot name="head" />
+  </head>
+  <body>
+    <div class="ambient-bg" aria-hidden="true">
+      <div class="ambient-blob amb-p"></div>
+      <div class="ambient-blob amb-b"></div>
+    </div>
+
+    <slot />
+
+    <script is:inline>
+      // Scroll Reveal Logic
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, observerOptions);
+
+      // Initial observation
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+      // Magnetic Card Mouse Glow
+      document.addEventListener('mousemove', e => {
+        const cards = document.querySelectorAll('.card-polished');
+        cards.forEach(card => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          card.style.setProperty('--mouse-x', `${x}px`);
+          card.style.setProperty('--mouse-y', `${y}px`);
+        });
+      });
+
+      // Handle dynamic word animation if it exists on the page
+      const initDynamicWord = () => {
+        const dynWords = ['build', 'connect', 'code', 'learn', 'design'];
+        const dynColors = ['var(--blue)', 'var(--green)', 'var(--purple)', 'var(--amber)', 'var(--mid)'];
+        let wordIdx = 0;
+        const dynEl = document.getElementById('dynamic-word');
+
+        if (dynEl) {
+          setInterval(() => {
+            dynEl.style.opacity = '0';
+            dynEl.style.transform = 'translateY(-10px)';
+            
+            setTimeout(() => {
+              wordIdx = (wordIdx + 1) % dynWords.length;
+              dynEl.innerText = dynWords[wordIdx];
+              dynEl.style.color = dynColors[wordIdx];
+              dynEl.style.transform = 'translateY(10px)';
+              
+              void dynEl.offsetWidth; // trigger reflow
+              
+              dynEl.style.opacity = '1';
+              dynEl.style.transform = 'translateY(0)';
+            }, 400);
+          }, 2500);
+        }
+      };
+
+      initDynamicWord();
+    </script>
+  </body>
+</html>

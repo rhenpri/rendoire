@@ -1,0 +1,60 @@
+<section id="writing">
+  <div class="s-label label-a">04 / Writing</div>
+  <h2 class="s-title reveal">RENDOIRE</h2>
+
+  <div id="articles-list" class="writing-list reveal">
+    <div class="articles-loading">
+      <span class="loading-dot"></span>
+      <span class="loading-dot"></span>
+      <span class="loading-dot"></span>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:2rem" class="reveal">
+    <a href="https://rendoire.medium.com" target="_blank" rel="noopener"
+       style="display:inline-block;font-family:var(--fm);font-size:.72rem;letter-spacing:.1em;color:var(--text);border:1px solid var(--border);padding:.7rem 1.75rem;text-decoration:none;transition:border-color .2s,color .2s"
+       onmouseover="this.style.borderColor='var(--amber)';this.style.color='var(--amber)'"
+       onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text)'">
+      All articles on Medium ↗
+    </a>
+  </div>
+</section>
+
+<script is:inline>
+  const RSS_URL = 'https://medium.com/feed/@rendoire';
+  const API = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(RSS_URL) + '&v=' + Date.now();
+
+  async function fetchArticles() {
+    const list = document.getElementById('articles-list');
+    try {
+      const res = await fetch(API);
+      const data = await res.json();
+
+      if (data.status !== 'ok') {
+        throw new Error(data.message || 'RSS to JSON conversion failed');
+      }
+
+      const items = data.items.slice(0, 6);
+      if (!items.length) {
+        list.innerHTML = '<div class="articles-error">No articles found in the feed.</div>';
+        return;
+      }
+
+      list.innerHTML = items.map(item => `
+        <a href="${item.link}" target="_blank" rel="noopener" class="article-card card-polished">
+          <div class="article-body">
+            <span class="article-pub">${new Date(item.pubDate).toLocaleDateString(undefined, {month:'short', day:'numeric', year:'numeric'})}</span>
+            <h3 class="article-title">${item.title}</h3>
+            <span class="article-arrow">Read Article ↗</span>
+          </div>
+        </a>
+      `).join('');
+
+    } catch (err) {
+      console.error('RSS Fetch Error:', err);
+      list.innerHTML = '<div class="articles-error">Error loading feed: ' + err.message + '</div>';
+    }
+  }
+
+  fetchArticles();
+</script>

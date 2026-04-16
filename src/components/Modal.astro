@@ -1,0 +1,39 @@
+<div class="sub-modal-backdrop" id="sub-modal-backdrop">
+  <div class="sub-modal">
+    <h3>Join the List</h3>
+    <p>Subscribe to rendoire on Medium to get notified of new deep-dives into AI engineering and systems philosophy.</p>
+    <a href="https://rendoire.medium.com/subscribe" target="_blank" rel="noopener" class="sub-btn" id="sub-continue-btn">Subscribe on Medium ↗</a>
+    <button class="sub-close" id="sub-close-btn">Maybe later</button>
+  </div>
+</div>
+
+<script is:inline>
+  const backdrop = document.getElementById('sub-modal-backdrop');
+  const closeBtn = document.getElementById('sub-close-btn');
+  const continueBtn = document.getElementById('sub-continue-btn');
+  let pendingUrl = '';
+
+  // Intercept Medium clicks
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a');
+    if (link && (link.href.includes('medium.com') || link.href.includes('rendoire.medium.com')) && !link.href.includes('subscribe')) {
+      e.preventDefault();
+      pendingUrl = link.href;
+      backdrop.classList.add('active');
+    }
+  });
+
+  const closePortal = () => {
+    backdrop.classList.remove('active');
+    if (pendingUrl) {
+      window.open(pendingUrl, '_blank');
+      pendingUrl = '';
+    }
+  };
+
+  closeBtn.addEventListener('click', closePortal);
+  continueBtn.addEventListener('click', () => {
+    backdrop.classList.remove('active');
+    // Let the standard href handle the open
+  });
+</script>

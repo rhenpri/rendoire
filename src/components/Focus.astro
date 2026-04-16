@@ -1,0 +1,56 @@
+---
+const focusAreas = [
+  {
+    label: '[AI]',
+    title: 'Intelligent Systems Design',
+    desc: 'Building reasoning systems from the ground up. I focus on native architectural integration where AI is part of the core logic, not just an API wrapper.',
+    color: 'g'
+  },
+  {
+    label: '[SWE]',
+    title: 'Software Delivery',
+    desc: 'Seven years of shipping code that has to work. I focus on bridging the gap between AI research and production products where the constraints are real.',
+    color: 'b'
+  },
+  {
+    label: '[EDU]',
+    title: 'AI Training',
+    desc: 'Building hands-on training for people who actually want to build with AI. Designed the curriculum and ran cohort sessions for practitioners across multiple industries.',
+    color: 'p'
+  },
+  {
+    label: '[INF]',
+    title: 'Self-Hosted Infrastructure',
+    desc: "I run my own AI stack at home. Proxmox, Ollama, open-source models, n8n for automation. Partly because it's useful, partly because I just enjoy it.",
+    color: 'a'
+  },
+  {
+    label: '[OPS]',
+    title: 'AI-Native Ops',
+    desc: 'Operationalizing AI. Building custom runbooks, agentic workflows, and incident response layers where AI handles the heavy lifting in production.',
+    color: 'g'
+  },
+  {
+    label: '[CNT]',
+    title: 'Content',
+    desc: 'I write at RENDOIRE about AI, software, and the infrastructure side of things. No hype, no thought leadership. Just stuff I find interesting or have figured out the hard way.',
+    color: 'b'
+  }
+];
+---
+
+<section id="focus">
+  <div class="s-label label-g">01 / Focus</div>
+  <h2 class="s-title reveal">Technical Focus</h2>
+
+  <div class="focus-grid reveal">
+    {focusAreas.map(area => (
+      <div class="focus-card card-polished">
+        <div class={`focus-top-bar bar-${area.color}`}></div>
+        <span class={`focus-icon icon-${area.color}`}>{area.label}</span>
+        <div class="focus-title">{area.title}</div>
+        <p class="focus-desc">{area.desc}</p>
+      </div>
+    ))}
+  </div>
+</section>

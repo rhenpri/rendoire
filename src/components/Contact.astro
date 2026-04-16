@@ -1,0 +1,60 @@
+---
+const socialLinks = [
+  {
+    icon: 'MG',
+    label: 'Knowledge & Writing',
+    handle: '@rendoire',
+    link: 'https://rendoire.medium.com',
+    color: 'b'
+  },
+  {
+    icon: 'IG',
+    label: 'Design & Visuals',
+    handle: '@rendoire',
+    link: 'https://instagram.com/rendoire',
+    color: 'p'
+  },
+  {
+    icon: 'YT',
+    label: 'Watch the builds',
+    handle: '@rendoire',
+    link: 'https://www.youtube.com/@rendoire?sub_confirmation=1',
+    color: 'a'
+  },
+  {
+    icon: 'GH',
+    label: 'Open Source & Labs',
+    handle: 'rhenpri',
+    link: 'https://github.com/rhenpri',
+    color: 'g'
+  }
+];
+---
+
+<section id="contact" class="contact-sec">
+  <div class="contact-wrap reveal">
+    <div class="contact-left">
+      <div class="s-label label-g">06 / Get in touch</div>
+      <h2 class="contact-heading">
+        Let's <span id="dynamic-word" style="color: var(--blue); transition: all 0.4s ease;">build</span><br />
+        something.
+      </h2>
+      <p class="contact-sub">
+        Always open to discussing systems design, AI agent frameworks, or interesting software challenges. Reach out on any platform.
+      </p>
+    </div>
+
+    <div class="contact-links">
+      {socialLinks.map(link => (
+        <a href={link.link} target="_blank" rel="noopener" class="contact-link card-polished">
+          <div class={`cl-icon cl-${link.color}`}>{link.icon}</div>
+          <div class="cl-label">
+            {link.label}
+            <div class="cl-handle">{link.handle}</div>
+          </div>
+          <div class="cl-arrow">↗</div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
