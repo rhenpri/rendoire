@@ -1,0 +1,84 @@
+---
+const books = [
+  {
+    author: "Steven Pressfield",
+    title: "The War of Art",
+    desc: "A short manifesto on creative work that names the universal enemy as \"Resistance\" — the internal force of procrastination and self-doubt.",
+    color: "var(--green)"
+  },
+  {
+    author: "Walter Isaacson",
+    title: "Steve Jobs",
+    desc: "A look at the contradictions of a visionary who built the iPod/iPhone/iPad era. Honest about product taste paired with the \"reality distortion field.\"",
+    color: "var(--blue)"
+  },
+  {
+    author: "John Markoff",
+    title: "What the Dormouse Said",
+    desc: "A history of how personal computing emerged from 1960s Bay Area counterculture: psychedelics, anti-war politics, and communal living.",
+    color: "var(--purple)"
+  },
+  {
+    author: "Cal Newport",
+    title: "Deep Work",
+    desc: "The case for focused, undistracted work in a world of shallow distractions. Essential for anyone trying to build complex things.",
+    color: "var(--amber)"
+  },
+  {
+    author: "Nassim Taleb",
+    title: "Antifragile",
+    desc: "Systems that gain from disorder. How to build things — and lives — that don't just survive shocks, but get better because of them.",
+    color: "var(--green)"
+  },
+  {
+    author: "O'Reilly Media",
+    title: "AI Engineering",
+    desc: "Deep practical strategies for building modern LLM-driven applications and maintaining intelligent systems natively.",
+    color: "var(--blue)"
+  },
+  {
+    author: "The Economist",
+    title: "The Intelligent App",
+    desc: "A study on how software architecture is evolving to be agent-first, shifting away from standard monolithic structures.",
+    color: "var(--purple)"
+  },
+  {
+    author: "Marcus Aurelius",
+    title: "Meditations",
+    desc: "The literal notes to self from a Roman Emperor on stoicism, duty, and keeping a cool head under immense stress.",
+    color: "var(--amber)"
+  },
+  {
+    author: "Paul Graham",
+    title: "Hackers & Painters",
+    desc: "Essays on the craft of software, the philosophy of programming, and why the best hackers are more like artists than engineers.",
+    color: "var(--green)"
+  }
+];
+---
+
+<section id="books">
+  <div class="s-label label-a">05 / Reading List</div>
+  <h2 class="s-title reveal">Books I Enjoy</h2>
+
+  <div class="books-marquee">
+    <div class="books-track" id="books-track">
+      <div class="books-track-inner" style="display:flex; gap:1.25rem;">
+        {books.map(book => (
+          <div class="book-card card-polished">
+            <div class="book-author" style={`color: ${book.color}`}>{book.author}</div>
+            <h3 class="book-title">{book.title}</h3>
+            <p class="book-desc">{book.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  const bTrack = document.getElementById('books-track');
+  const bInner = bTrack.querySelector('.books-track-inner');
+  const clone = bInner.cloneNode(true);
+  bTrack.appendChild(clone);
+</script>

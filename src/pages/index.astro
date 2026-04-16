@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Hero from '../components/Hero.astro';
+import Focus from '../components/Focus.astro';
+import Experience from '../components/Experience.astro';
+import Projects from '../components/Projects.astro';
+import Writing from '../components/Writing.astro';
+import Books from '../components/Books.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+import Modal from '../components/Modal.astro';
+---
+
+<BaseLayout>
+  <Navigation />
+  
+  <main>
+    <Hero />
+    <Focus />
+    <Experience />
+    <Projects />
+    <Writing />
+    <Books />
+    <Contact />
+  </main>
+
+  <Footer />
+  <Modal />
+</BaseLayout>

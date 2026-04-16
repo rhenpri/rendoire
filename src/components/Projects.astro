@@ -1,0 +1,120 @@
+---
+const projects = [
+  {
+    num: '001',
+    name: 'cade.golf',
+    desc: 'A social golf app for Irish golfers. Log your rounds, track your mates, discover courses, and settle arguments mid-round. Phase 1 is live.',
+    link: 'https://cade.golf',
+    linkText: 'Visit cade.golf ↗',
+    color: 'g',
+    diagram: 'golf'
+  },
+  {
+    num: '002',
+    name: 'Self-Hosted AI',
+    desc: 'Designed and built complete AI systems on hardware I own and manage. Language models, agent frameworks, reasoning pipelines, and automation networks, all running privately.',
+    color: 'b',
+    diagram: 'ai'
+  },
+  {
+    num: '003',
+    name: 'Software Engineer - Live Service',
+    desc: 'Handling high-stakes incident response, observability, and production tooling. Hard-won expertise in keeping complex, distributed systems alive in production.',
+    color: 'p',
+    diagram: 'ops'
+  },
+  {
+    num: '004',
+    name: 'AI Education',
+    desc: 'Built and delivered workshops, written content, and digital learning materials to teach AI and Agents to practitioners. Co-founded a programme that ran cohort training.',
+    color: 'a',
+    diagram: 'edu'
+  }
+];
+---
+
+<section id="projects">
+  <div class="s-label label-p">03 / Projects</div>
+  <h2 class="s-title reveal">Recent Work</h2>
+
+  <div class="proj-grid">
+    {projects.map((proj, idx) => (
+      <div class={`proj-card card-polished hover-${proj.color} reveal`} style={`transition-delay: ${idx * 0.05}s`}>
+        <div class="proj-img">
+          {proj.diagram === 'golf' && (
+            <div class="tech-diagram diag-g">
+              <svg viewBox="0 0 400 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="160" y="40" width="80" height="100" rx="8" stroke="currentColor" stroke-opacity="0.2" />
+                <path d="M180 60h40M180 75h40M180 90h20" stroke="currentColor" stroke-opacity="0.3" stroke-width="2" />
+                <circle cx="80" cy="90" r="20" stroke="currentColor" stroke-width="2" />
+                <path d="M100 90h40" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 4" />
+                <path d="M240 90h40" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 4" />
+                <rect x="280" y="70" width="60" height="40" rx="4" stroke="currentColor" stroke-width="2" />
+                <circle cx="280" cy="90" r="4" fill="currentColor" />
+                <circle cx="140" cy="90" r="4" fill="currentColor" />
+              </svg>
+            </div>
+          )}
+          {proj.diagram === 'ai' && (
+            <div class="tech-diagram diag-b">
+              <svg viewBox="0 0 400 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="100" y="60" width="60" height="60" rx="4" stroke="currentColor" stroke-width="2" />
+                <rect x="105" y="70" width="50" height="2" fill="currentColor" opacity="0.4" />
+                <rect x="105" y="80" width="50" height="2" fill="currentColor" opacity="0.4" />
+                <path d="M160 90h40" stroke="currentColor" stroke-width="1.5" />
+                <path d="M200 60 L240 90 L200 120 Z" stroke="currentColor" stroke-width="2" />
+                <circle cx="280" cy="90" r="30" stroke="currentColor" stroke-width="2" stroke-dasharray="6 3" />
+                <path d="M270 90h20M280 80v20" stroke="currentColor" stroke-width="2" />
+              </svg>
+            </div>
+          )}
+          {proj.diagram === 'ops' && (
+            <div class="tech-diagram diag-p">
+              <svg viewBox="0 0 400 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="200" cy="90" r="50" stroke="currentColor" stroke-width="1.5" opacity="0.2" />
+                <path d="M150 90h100M200 40v100" stroke="currentColor" stroke-width="1" opacity="0.3" />
+                <path d="M170 70 L210 90 L170 110 Z" fill="currentColor" opacity="0.8" />
+                <rect x="230" y="80" width="40" height="20" rx="2" stroke="currentColor" stroke-width="2" />
+                <path d="M80 80 L120 80 L100 100 Z" stroke="currentColor" stroke-width="2" />
+              </svg>
+            </div>
+          )}
+          {proj.diagram === 'edu' && (
+            <div class="tech-diagram diag-a">
+              <svg viewBox="0 0 400 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="120" y="50" width="160" height="80" rx="4" stroke="currentColor" stroke-width="2" />
+                <path d="M140 70h120M140 85h80M140 100h100" stroke="currentColor" stroke-width="2" opacity="0.4" />
+                <circle cx="200" cy="140" r="10" stroke="currentColor" stroke-width="1.5" />
+                <path d="M180 50 L200 30 L220 50" stroke="currentColor" stroke-width="2" />
+              </svg>
+            </div>
+          )}
+        </div>
+        <div class="proj-num">{proj.num}</div>
+        <h3 class="proj-name">{proj.name}</h3>
+        <p class="proj-desc">{proj.desc}</p>
+        {proj.link && <a href={proj.link} target="_blank" rel="noopener" class="proj-link">{proj.linkText}</a>}
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .tech-diagram {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at center, rgba(255,255,255,0.03), transparent 70%);
+  }
+  .tech-diagram svg {
+    width: 240px;
+    height: auto;
+    filter: drop-shadow(0 0 12px currentColor);
+  }
+  .diag-g { color: var(--green); }
+  .diag-b { color: var(--blue); }
+  .diag-p { color: var(--purple); }
+  .diag-a { color: var(--amber); }
+</style>

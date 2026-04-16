@@ -1,0 +1,47 @@
+---
+const experiences = [
+  {
+    period: '2019 to Present',
+    role: 'Consultant',
+    sector: 'Software & AI Engineering · Global Industries · 7+ Years',
+    desc: 'Building AI systems at scale for global industries. Solving hard problems in architecture and live service engineering under real-world enterprise pressure.',
+    tag: 'Engineering',
+    color: 'b'
+  },
+  {
+    period: '2024 to Present',
+    role: 'Co-founder, AI Practitioner Programme',
+    sector: 'Education · AI Enablement',
+    desc: 'Building hands-on training for people who actually want to build with AI. Designed the curriculum and ran cohort sessions for practitioners across multiple industries.',
+    tag: 'Education',
+    color: 'p'
+  },
+  {
+    period: '2022 to Present',
+    role: 'Founder, RENDOIRE',
+    sector: 'Content & Brand · AI Writing',
+    desc: "Writing about AI and software under the RENDOIRE name. Medium for longer pieces, Instagram for shorter content. Topics I actually care about, not what's trending.",
+    tag: 'Brand',
+    color: 'g'
+  }
+];
+---
+
+<section id="experience">
+  <div class="s-label label-b">02 / Experience</div>
+  <h2 class="s-title reveal">Background</h2>
+
+  <div class="exp-list reveal">
+    {experiences.map(exp => (
+      <div class="exp-row card-polished">
+        <div class="exp-period">{exp.period}</div>
+        <div class="exp-body">
+          <div class="exp-role">{exp.role}</div>
+          <div class="exp-sector">{exp.sector}</div>
+          <p class="exp-desc">{exp.desc}</p>
+        </div>
+        <div class={`exp-tag chip-${exp.color}`}>{exp.tag}</div>
+      </div>
+    ))}
+  </div>
+</section>
