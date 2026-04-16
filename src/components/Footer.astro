@@ -1,3 +1,41 @@
+<div class="footer-nudge reveal">
+  <p>Get new writing straight to your inbox.</p>
+  <a href="https://rendoire.medium.com/subscribe" target="_blank" rel="noopener">Subscribe ↗</a>
+</div>
+
 <footer>
   <span>&copy; {new Date().getFullYear()} rendoire. Created & imagineerd in 🇮🇪</span>
 </footer>
+
+<style>
+.footer-nudge {
+  text-align: center;
+  padding: 5rem 1.5rem;
+  border-top: 1px solid var(--border);
+}
+.footer-nudge p {
+  font-family: var(--fd);
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin-bottom: 2rem;
+  color: var(--text);
+  letter-spacing: 0.02em;
+}
+.footer-nudge a {
+  display: inline-block;
+  font-family: var(--fm);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #000;
+  background: var(--amber);
+  padding: 0.85rem 2.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s, transform 0.2s;
+}
+.footer-nudge a:hover {
+  background: #ffcc66;
+  transform: translateY(-2px);
+}
+</style>
