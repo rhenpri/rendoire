@@ -42,18 +42,7 @@ const projects = [
       <div class={`proj-card card-polished hover-${proj.color} reveal`} style={`transition-delay: ${idx * 0.05}s`}>
         <div class="proj-img">
           {proj.diagram === 'golf' && (
-            <div class="tech-diagram diag-g">
-              <svg viewBox="0 0 400 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="160" y="40" width="80" height="100" rx="8" stroke="currentColor" stroke-opacity="0.2" />
-                <path d="M180 60h40M180 75h40M180 90h20" stroke="currentColor" stroke-opacity="0.3" stroke-width="2" />
-                <circle cx="80" cy="90" r="20" stroke="currentColor" stroke-width="2" />
-                <path d="M100 90h40" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 4" />
-                <path d="M240 90h40" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 4" />
-                <rect x="280" y="70" width="60" height="40" rx="4" stroke="currentColor" stroke-width="2" />
-                <circle cx="280" cy="90" r="4" fill="currentColor" />
-                <circle cx="140" cy="90" r="4" fill="currentColor" />
-              </svg>
-            </div>
+            <img src="/cade.png" alt="cade.golf screenshot" loading="lazy" />
           )}
           {proj.diagram === 'ai' && (
             <div class="tech-diagram diag-b">
