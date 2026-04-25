@@ -4,12 +4,27 @@ import '../styles/global.css';
 interface Props {
   title?: string;
   description?: string;
+  canonical?: string;
 }
 
 const { 
   title = "rendoire, Software & AI Engineer",
-  description = "Software & AI Engineer for the past 7 years. Business & Technology since childhood. Creativity for a lifetime."
+  description = "Software & AI Engineer for the past 7 years. Business & Technology since childhood. Creativity for a lifetime.",
+  canonical = Astro.url.pathname === '/' ? "https://rendoire.com/" : `https://rendoire.com${Astro.url.pathname}`
 } = Astro.props;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "rendoire",
+  "url": "https://rendoire.com",
+  "jobTitle": "Software & AI Engineer",
+  "sameAs": [
+    "https://rendoire.medium.com",
+    "https://github.com/rhenpri"
+  ],
+  "knowsAbout": ["AI Systems", "Software Engineering", "Live Service Engineering"]
+};
 ---
 
 <!DOCTYPE html>
@@ -21,14 +36,36 @@ const {
     <meta name="description" content={description} />
     <meta name="google-site-verification" content="cT6a2uprHKG7X6cYmBHFSFzvUQM1Jztg6mUjX-r6pNs" />
     
+    <link rel="canonical" href={canonical} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="alternate" type="application/rss+xml" title="rendoire writing" href="/feed.xml" />
+    
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="https://rendoire.com/og-image.png" />
+    
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonical} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="https://rendoire.com/og-image.png" />
+    
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://api.rss2json.com" />
+    <link rel="preconnect" href="https://medium.com" />
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
     <link rel="icon" type="image/png" href="/logo.png" />
     
     <slot name="head" />
   </head>
   <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
     <div class="ambient-bg" aria-hidden="true">
       <div class="ambient-blob amb-p"></div>
       <div class="ambient-blob amb-b"></div>

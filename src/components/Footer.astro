@@ -1,10 +1,37 @@
+---
+import { execSync } from 'child_process';
+
+let buildHash = 'dev';
+try {
+  buildHash = execSync('git rev-parse --short HEAD').toString().trim();
+} catch (e) {}
+
+const buildDate = new Date().toISOString().split('T')[0];
+---
+
 <div class="footer-nudge reveal">
   <p>Get new writing straight to your inbox.</p>
   <a href="https://rendoire.medium.com/subscribe" target="_blank" rel="noopener">Subscribe ↗</a>
 </div>
 
 <footer>
-  <span>&copy; {new Date().getFullYear()} rendoire. Created & imagineerd in 🇮🇪</span>
+  <div class="footer-top">
+    <span>&copy; {new Date().getFullYear()} rendoire. Created & imagineerd in 🇮🇪</span>
+    <span class="license">Content licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC-BY 4.0</a>.</span>
+  </div>
+  
+  <div class="footer-links">
+    <a href="/feed.xml">RSS Feed</a>
+    <a href="/sitemap-index.xml">Sitemap</a>
+    <a href="/now">/now</a>
+  </div>
+
+  <div class="footer-bottom">
+    <a href="https://github.com/rhenpri/rendoire" target="_blank" rel="noopener" class="gh-badge" aria-label="View Github Repository">
+      <img src="https://img.shields.io/github/last-commit/rhenpri/rendoire?style=flat-square&color=888888&label=LAST+COMMIT&logo=github&logoColor=ffffff" alt="GitHub last commit" loading="lazy" decoding="async" />
+    </a>
+    <span class="build-info">build:{buildHash} :: {buildDate}</span>
+  </div>
 </footer>
 
 <style>
@@ -38,4 +65,43 @@
   background: #ffcc66;
   transform: translateY(-2px);
 }
+
+footer {
+  padding: 3rem 3rem 2rem;
+  border-top: 1px solid var(--border);
+  display: flex; flex-direction: column; gap: 2rem;
+}
+.footer-top {
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: .5rem;
+}
+.footer-top span { font-family: var(--fm); font-size: 0.65rem; color: var(--muted); }
+.license a { color: var(--muted); text-decoration: underline; transition: color 0.2s; }
+.license a:hover { color: var(--text); }
+
+.footer-links {
+  display: flex;
+  gap: 1.5rem;
+  font-family: var(--fm);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.footer-links a { color: var(--mid); transition: color 0.2s; text-decoration: none; padding: 0.5rem 0; }
+.footer-links a:hover { color: var(--amber); }
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 1.5rem;
+}
+.build-info {
+  font-family: var(--fm);
+  font-size: 0.6rem;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+}
+.gh-badge { display: flex; align-items: center; }
 </style>

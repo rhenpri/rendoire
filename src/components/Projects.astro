@@ -1,4 +1,7 @@
 ---
+import { Picture } from 'astro:assets';
+import cadeImg from '../assets/cade.png';
+
 const projects = [
   {
     num: '001',
@@ -42,7 +45,7 @@ const projects = [
       <div class={`proj-card card-polished hover-${proj.color} reveal`} style={`transition-delay: ${idx * 0.05}s`}>
         <div class="proj-img">
           {proj.diagram === 'golf' && (
-            <img src="/cade.png" alt="cade.golf screenshot" loading="lazy" />
+            <Picture src={cadeImg} alt="cade.golf screenshot" formats={['avif', 'webp']} widths={[480, 960, 1440]} fallbackFormat="png" loading="lazy" decoding="async" widths={[400, 800]} sizes="(max-width: 800px) 100vw, 800px" />
           )}
           {proj.diagram === 'ai' && (
             <div class="tech-diagram diag-b">
