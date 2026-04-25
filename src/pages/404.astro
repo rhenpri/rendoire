@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout title="404 - Not Found // rendoire" description="Page not found.">
+  <Navigation />
+  
+  <main id="main-content" class="article-page" style="min-height: 80vh; max-width: 800px; margin: 0 auto; padding: 120px 2rem 4rem; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+    <div class="s-label label-p" style="margin-bottom: 2rem;">Error 404</div>
+    <h1 style="font-family: var(--fd); font-size: clamp(3rem, 8vw, 6rem); letter-spacing: -0.04em; line-height: 1; color: var(--text); margin-bottom: 1rem;">
+      Off<span style="color: var(--purple);">_</span>Grid
+    </h1>
+    <p style="font-size: 1.1rem; color: var(--muted); max-width: 500px; margin: 0 auto 3rem; line-height: 1.6;">
+      The route you requested cannot be resolved. The edge node might have been dropped, or the page never existed.
+    </p>
+    
+    <a href="/" class="sub-btn" style="display: inline-block; font-family: var(--fm); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: #000; background: var(--amber); padding: 0.8rem 2rem; border-radius: 6px; text-decoration: none; font-weight: 600; transition: opacity 0.2s;">
+      Return Home ↗
+    </a>
+  </main>
+
+  <Footer />
+</BaseLayout>
