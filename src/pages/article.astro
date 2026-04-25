@@ -1,0 +1,263 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import Modal from '../components/Modal.astro';
+---
+
+<BaseLayout title="Writing // rendoire">
+  <Navigation />
+  
+  <main class="article-page" style="min-height: 80vh; max-width: 800px; margin: 0 auto; padding: 120px 2rem 4rem;">
+    <div id="article-loading" class="article-status reveal">
+      <span class="loading-dot"></span>
+      <span class="loading-dot"></span>
+      <span class="loading-dot"></span>
+    </div>
+    
+    <div id="article-error" class="article-status" style="display: none; color: var(--red);">
+      Could not load article.
+    </div>
+    
+    <article id="article-content" class="article-content" style="display: none;">
+      <a href="/#writing" class="back-link">← Back to Home</a>
+      
+      <header class="article-header">
+        <div id="article-date" class="article-date"></div>
+        <h1 id="article-title" class="article-h1"></h1>
+        <div id="article-categories" class="article-categories"></div>
+      </header>
+      
+      <div id="article-body" class="formatted-content"></div>
+    </article>
+  </main>
+
+  <Footer />
+  <Modal />
+</BaseLayout>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', async () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const articleId = urlParams.get('id');
+    
+    const loadingEl = document.getElementById('article-loading');
+    const errorEl = document.getElementById('article-error');
+    const contentEl = document.getElementById('article-content');
+    
+    if (!articleId) {
+      loadingEl.style.display = 'none';
+      errorEl.innerText = 'Article ID missing.';
+      errorEl.style.display = 'block';
+      return;
+    }
+    
+    const RSS_URL = 'https://medium.com/feed/@rendoire';
+    const API = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(RSS_URL) + '&v=' + Date.now();
+    
+    try {
+      const res = await fetch(API);
+      const data = await res.json();
+      
+      if (data.status !== 'ok') {
+        throw new Error('Could not fetch feed');
+      }
+      
+      const item = data.items.find(i => i.guid === articleId);
+      
+      if (!item) {
+        throw new Error('Article not found.');
+      }
+      
+      // Populate metadata
+      document.title = item.title + " // rendoire";
+      document.getElementById('article-title').innerText = item.title;
+      document.getElementById('article-date').innerText = new Date(item.pubDate).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' });
+      
+      const catsEl = document.getElementById('article-categories');
+      if (item.categories && item.categories.length) {
+        catsEl.innerHTML = item.categories.map(cat => `<span class="cat-pill">${cat}</span>`).join('');
+      }
+      
+      // Populate content
+      document.getElementById('article-body').innerHTML = item.content;
+      
+      // Show content
+      loadingEl.style.display = 'none';
+      contentEl.style.display = 'block';
+      contentEl.classList.add('visible');
+    } catch (err) {
+      console.error(err);
+      loadingEl.style.display = 'none';
+      errorEl.innerText = err.message;
+      errorEl.style.display = 'block';
+    }
+  });
+</script>
+
+<style is:global>
+  .article-page {
+    position: relative;
+    z-index: 10;
+  }
+  .article-status {
+    text-align: center;
+    padding: 4rem 0;
+    font-family: var(--fm);
+    letter-spacing: 0.05em;
+  }
+  .back-link {
+    display: inline-block;
+    font-family: var(--fm);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    margin-bottom: 2rem;
+    transition: color 0.2s;
+  }
+  .back-link:hover {
+    color: var(--amber);
+  }
+  
+  .article-header {
+    margin-bottom: 3rem;
+  }
+  .article-date {
+    font-family: var(--fm);
+    font-size: 0.85rem;
+    color: var(--amber);
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+  }
+  .article-h1 {
+    font-family: var(--fb);
+    font-size: 3.5rem;
+    line-height: 1.1;
+    letter-spacing: 0.01em;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+  }
+  .cat-pill {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    margin: 0 0.5rem 0.5rem 0;
+    font-family: var(--fm);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--surface);
+  }
+  
+  /* Formatted Content Styles for injected Medium HTML */
+  .formatted-content {
+    font-family: var(--fi);
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: var(--text);
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+    animation-delay: 0.1s;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .formatted-content p {
+    margin-bottom: 1.75rem;
+  }
+  .formatted-content h1, 
+  .formatted-content h2, 
+  .formatted-content h3, 
+  .formatted-content h4 {
+    font-family: var(--fb);
+    color: var(--text);
+    margin: 3rem 0 1.5rem;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+  }
+  .formatted-content h1 { font-size: 2.2rem; }
+  .formatted-content h2 { font-size: 1.8rem; }
+  .formatted-content h3 { font-size: 1.5rem; }
+  
+  .formatted-content a {
+    color: var(--amber);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,183,3,0.3);
+    transition: all 0.2s;
+  }
+  .formatted-content a:hover {
+    border-bottom-color: var(--amber);
+    color: #fff;
+  }
+  
+  .formatted-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 2.5rem 0;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    border: 1px solid var(--border);
+  }
+  
+  .formatted-content figure {
+    margin: 2.5rem 0;
+    text-align: center;
+  }
+  .formatted-content figcaption {
+    font-family: var(--fm);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 0.75rem;
+  }
+  
+  .formatted-content blockquote {
+    border-left: 3px solid var(--amber);
+    padding-left: 1.5rem;
+    margin: 2.5rem 0;
+    font-style: italic;
+    color: var(--text-muted);
+    font-size: 1.25rem;
+    background: linear-gradient(90deg, rgba(255,183,3,0.05) 0%, transparent 100%);
+    padding: 1rem 1.5rem;
+    border-radius: 0 8px 8px 0;
+  }
+  
+  .formatted-content pre {
+    background: #0d0d0d;
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 2rem 0;
+    font-family: var(--fm);
+    font-size: 0.9rem;
+    color: #e6e6e6;
+  }
+  .formatted-content code {
+    font-family: var(--fm);
+    background: rgba(255,255,255,0.05);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+  .formatted-content pre code {
+    background: none;
+    padding: 0;
+  }
+  
+  .formatted-content ul, 
+  .formatted-content ol {
+    margin: 0 0 1.75rem 0;
+    padding-left: 1.5rem;
+  }
+  .formatted-content li {
+    margin-bottom: 0.5rem;
+  }
+  .formatted-content hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 3rem 0;
+  }
+</style>
