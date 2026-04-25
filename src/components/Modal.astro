@@ -1,32 +1,115 @@
-<div class="sub-modal-backdrop" id="sub-modal-backdrop">
-  <div class="sub-modal">
-    <h3>Join the List</h3>
-    <p>Subscribe to rendoire on Medium to get notified of new deep-dives into AI engineering and systems philosophy.</p>
-    <a href="https://rendoire.medium.com/subscribe" target="_blank" rel="noopener" class="sub-btn" id="sub-continue-btn">Subscribe on Medium ↗</a>
-    <button class="sub-close" id="sub-close-btn">Maybe later</button>
+<div class="scroll-banner" id="scroll-cta" aria-hidden="true">
+  <div class="sb-inner">
+    <div class="sb-text">
+      <span style="color:var(--amber); font-weight:600; margin-right:8px;">rendoire</span>
+      <span>Get the newest writing straight to your inbox.</span>
+    </div>
+    <div class="sb-actions">
+      <a href="https://rendoire.medium.com/subscribe" target="_blank" rel="noopener" class="sb-btn">Subscribe ↗</a>
+      <button class="sb-close" id="sb-close" aria-label="Dismiss banner">✕</button>
+    </div>
   </div>
 </div>
 
+<style>
+.scroll-banner {
+  position: fixed;
+  bottom: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 600px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+  padding: 1rem 1.25rem;
+  z-index: 999;
+  transition: bottom 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s;
+  opacity: 0;
+  pointer-events: none;
+}
+.scroll-banner.visible {
+  bottom: 2rem;
+  opacity: 1;
+  pointer-events: auto;
+}
+.sb-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+.sb-text {
+  font-family: var(--fm);
+  font-size: 0.75rem;
+  color: var(--text);
+}
+.sb-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.sb-btn {
+  font-family: var(--fm);
+  font-size: 0.7rem;
+  background: var(--text);
+  color: #000;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+.sb-btn:hover { background: var(--amber); }
+.sb-close {
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 0.25rem;
+  transition: color 0.2s;
+}
+.sb-close:hover { color: var(--text); }
+</style>
+
 <script is:inline>
-  const backdrop = document.getElementById('sub-modal-backdrop');
-  const closeBtn = document.getElementById('sub-close-btn');
-  const continueBtn = document.getElementById('sub-continue-btn');
+  const banner = document.getElementById('scroll-cta');
+  const closeBtn = document.getElementById('sb-close');
+  
+  const dismissed = document.cookie.includes('sb_dismissed=true');
+  let lastScrollY = window.scrollY;
+  let shown = false;
 
-  // Intercept Medium clicks, but don't block them
-  document.addEventListener('click', (e) => {
-    const link = e.target.closest('a');
-    if (link && (link.href.includes('medium.com') || link.href.includes('rendoire.medium.com')) && !link.href.includes('subscribe')) {
-      // Show the modal on this page when they click, so it's waiting when they return
-      setTimeout(() => {
-        backdrop.classList.add('active');
-      }, 500);
-    }
-  });
+  if (!dismissed) {
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      
+      // Calculate 50% depth
+      if (scrollY > (docHeight * 0.5)) {
+        // Show on scroll UP
+        if (scrollY < lastScrollY - 10) {
+          banner.classList.add('visible');
+          banner.setAttribute('aria-hidden', 'false');
+          shown = true;
+        }
+      } else if (shown && scrollY < 100) {
+        // Hide if they go back to the very top
+        banner.classList.remove('visible');
+        banner.setAttribute('aria-hidden', 'true');
+      }
+      
+      lastScrollY = scrollY;
+    }, { passive: true });
 
-  const closePortal = () => {
-    backdrop.classList.remove('active');
-  };
-
-  closeBtn.addEventListener('click', closePortal);
-  continueBtn.addEventListener('click', closePortal);
+    closeBtn.addEventListener('click', () => {
+      banner.classList.remove('visible');
+      banner.setAttribute('aria-hidden', 'true');
+      // Set cookie for 90 days
+      const d = new Date();
+      d.setTime(d.getTime() + (90*24*60*60*1000));
+      document.cookie = "sb_dismissed=true;expires=" + d.toUTCString() + ";path=/";
+    });
+  }
 </script>

@@ -1,12 +1,73 @@
+---
+const RSS_URL = 'https://medium.com/feed/@rendoire';
+const API = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(RSS_URL) + '&v=' + Date.now();
+
+let articles = [];
+let error = null;
+
+try {
+  const res = await fetch(API);
+  const data = await res.json();
+  
+  if (data.status === 'ok') {
+    articles = data.items.slice(0, 3).map(item => {
+      let img = item.thumbnail;
+      if (!img && item.description) {
+        const match = item.description.match(/<img[^>]+src="([^">]+)"/);
+        if (match) img = match[1];
+      }
+      const slug = item.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+      return {
+        title: item.title,
+        link: `/article?id=${slug}`,
+        pubDate: new Date(item.pubDate).toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'}),
+        img: img,
+        readingTime: Math.max(1, Math.ceil(item.description.replace(/<[^>]*>?/gm, '').length / 1000)) + ' min read'
+      };
+    });
+  } else {
+    throw new Error(data.message || 'RSS to JSON conversion failed');
+  }
+} catch (err) {
+  error = err.message;
+}
+---
+
 <section id="writing">
   <div class="s-label label-a">04 / Writing</div>
   <h2 class="s-title reveal">RENDOIRE</h2>
 
   <div id="articles-list" class="writing-list reveal">
-    <div class="articles-loading">
-      <span class="loading-dot"></span>
-      <span class="loading-dot"></span>
-      <span class="loading-dot"></span>
+    {error || articles.length === 0 ? (
+      <div class="articles-error" style="padding:2rem;text-align:center;font-family:var(--fm);font-size:0.75rem;color:var(--muted)">Articles are temporarily unavailable. Please visit Medium directly.</div>
+    ) : (
+      articles.map(item => (
+        <a href={item.link} class="article-card card-polished" style="overflow: hidden;">
+          {item.img && (
+            <div style="height: 160px; margin: -1.75rem -1.75rem 1.5rem; overflow: hidden; background: var(--surface2); border-bottom: 1px solid var(--border);">
+              <img src={item.img} loading="lazy" decoding="async" alt={item.title} style="width: 100%; height: 100%; object-fit: cover; opacity: 0.85; transition: opacity 0.3s, transform 0.4s;" onmouseover="this.style.opacity='1'; this.style.transform='scale(1.03)'" onmouseout="this.style.opacity='0.85'; this.style.transform='scale(1)'"/>
+            </div>
+          )}
+          <div class="article-body">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+              <span class="article-pub">{item.pubDate}</span>
+              <span class="article-pub" style="color: var(--muted);">{item.readingTime}</span>
+            </div>
+            <h3 class="article-title">{item.title}</h3>
+            <span class="article-arrow">Read Article ↗</span>
+          </div>
+        </a>
+      ))
+    )}
+  </div>
+
+  <div class="inline-subscribe reveal" style="margin-top:3rem;background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:2rem;">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:2rem;flex-wrap:wrap;">
+      <div style="flex:1;min-width:280px;">
+        <h3 style="font-family:var(--fd);font-size:1.5rem;color:var(--amber);margin-bottom:0.5rem;letter-spacing:0.02em;">Get the latest writing</h3>
+        <p style="font-size:0.85rem;color:var(--mid);margin:0;">Subscribe to get new deep-dives into AI engineering and systems philosophy.</p>
+      </div>
+      <a href="https://rendoire.medium.com/subscribe" target="_blank" rel="noopener" style="white-space:nowrap;font-family:var(--fm);font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:#000;background:var(--amber);padding:0.75rem 1.5rem;border-radius:6px;text-decoration:none;font-weight:600;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">Subscribe on Medium ↗</a>
     </div>
   </div>
 
@@ -19,55 +80,3 @@
     </a>
   </div>
 </section>
-
-<script is:inline>
-  const RSS_URL = 'https://medium.com/feed/@rendoire';
-  const API = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(RSS_URL) + '&v=' + Date.now();
-
-  async function fetchArticles() {
-    const list = document.getElementById('articles-list');
-    try {
-      const res = await fetch(API);
-      const data = await res.json();
-
-      if (data.status !== 'ok') {
-        throw new Error(data.message || 'RSS to JSON conversion failed');
-      }
-
-      const items = data.items.slice(0, 6);
-      if (!items.length) {
-        list.innerHTML = '<div class="articles-error">No articles found in the feed.</div>';
-        return;
-      }
-
-      list.innerHTML = items.map(item => {
-        let img = item.thumbnail;
-        if (!img && item.description) {
-            const match = item.description.match(/<img[^>]+src="([^">]+)"/);
-            if (match) img = match[1];
-        }
-
-        const slug = item.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
-        return `
-        <a href="/article?id=${slug}" class="article-card card-polished" style="overflow: hidden;">
-          ${img ? `
-          <div style="height: 160px; margin: -1.75rem -1.75rem 1.5rem; overflow: hidden; background: var(--surface2); border-bottom: 1px solid var(--border);">
-            <img src="${img}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.85; transition: opacity 0.3s, transform 0.4s;" onmouseover="this.style.opacity='1'; this.style.transform='scale(1.03)'" onmouseout="this.style.opacity='0.85'; this.style.transform='scale(1)'"/>
-          </div>
-          ` : ''}
-          <div class="article-body">
-            <span class="article-pub">${new Date(item.pubDate).toLocaleDateString(undefined, {month:'short', day:'numeric', year:'numeric'})}</span>
-            <h3 class="article-title">${item.title}</h3>
-            <span class="article-arrow">Read Article ↗</span>
-          </div>
-        </a>
-      `}).join('');
-
-    } catch (err) {
-      console.error('RSS Fetch Error:', err);
-      list.innerHTML = '<div class="articles-error">Error loading feed: ' + err.message + '</div>';
-    }
-  }
-
-  fetchArticles();
-</script>
