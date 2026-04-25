@@ -1,6 +1,10 @@
+---
+import { Picture } from 'astro:assets';
+import logoImg from '../assets/logo.png';
+---
 <nav>
   <a href="/" class="nav-logo">
-    <img src="/logo.png" alt="rendoire logo" class="nav-icon" />
+    <Picture src={logoImg} alt="rendoire logo" class="nav-icon" formats={['avif', 'webp']} width={64} height={64} loading="eager" />
     <span>rendoire</span>
   </a>
   <ul class="nav-links">
