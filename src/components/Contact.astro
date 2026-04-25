@@ -53,13 +53,13 @@ const socialLinks = [
 
     <div class="contact-links">
       {socialLinks.map(link => (
-        <a href={link.link} target="_blank" rel="noopener" class="contact-link card-polished">
-          <div class={`cl-icon cl-${link.color}`}>{link.icon}</div>
+        <a href={link.link} target="_blank" rel="noopener" class="contact-link card-polished" aria-label={link.label}>
+          <div class={`cl-icon cl-${link.color}`} aria-hidden="true">{link.icon}</div>
           <div class="cl-label">
             {link.label}
             <div class="cl-handle">{link.handle}</div>
           </div>
-          <div class="cl-arrow">↗</div>
+          <div class="cl-arrow" aria-hidden="true">↗</div>
         </a>
       ))}
     </div>

@@ -10,28 +10,32 @@ const projects = [
     link: 'https://cade.golf',
     linkText: 'Visit cade.golf ↗',
     color: 'g',
-    diagram: 'golf'
+    diagram: 'golf',
+    stack: ['Astro', 'TypeScript', 'Node.js', 'PostgreSQL']
   },
   {
     num: '002',
     name: 'Self-Hosted AI',
     desc: 'Designed and built complete AI systems on hardware I own and manage. Language models, agent frameworks, reasoning pipelines, and automation networks, all running privately.',
     color: 'b',
-    diagram: 'ai'
+    diagram: 'ai',
+    stack: ['Proxmox', 'Ollama', 'n8n', 'Tailscale']
   },
   {
     num: '003',
     name: 'Software Engineer - Live Service',
     desc: 'Handling high-stakes incident response, observability, and production tooling. Hard-won expertise in keeping complex, distributed systems alive in production.',
     color: 'p',
-    diagram: 'ops'
+    diagram: 'ops',
+    stack: ['Go', 'Kubernetes', 'Datadog', 'Terraform']
   },
   {
     num: '004',
     name: 'AI Education',
     desc: 'Built and delivered workshops, written content, and digital learning materials to teach AI and Agents to practitioners. Co-founded a programme that ran cohort training.',
     color: 'a',
-    diagram: 'edu'
+    diagram: 'edu',
+    stack: ['Python', 'Langchain', 'Jupyter', 'Vercel']
   }
 ];
 ---
@@ -42,14 +46,14 @@ const projects = [
 
   <div class="proj-grid">
     {projects.map((proj, idx) => (
-      <div class={`proj-card card-polished hover-${proj.color} reveal`} style={`transition-delay: ${idx * 0.05}s`}>
+      <div tabindex="0" class={`proj-card card-polished hover-${proj.color} reveal`} style={`transition-delay: ${idx * 0.05}s`}>
         <div class="proj-img">
           {proj.diagram === 'golf' && (
-            <Picture src={cadeImg} alt="cade.golf screenshot" formats={['avif', 'webp']} widths={[480, 960, 1440]} fallbackFormat="png" loading="lazy" decoding="async" widths={[400, 800]} sizes="(max-width: 800px) 100vw, 800px" />
+            <Picture src={cadeImg} alt="cade.golf screenshot" formats={['avif', 'webp']} widths={[480, 960, 1440]} fallbackFormat="png" loading="lazy" decoding="async" sizes="(max-width: 800px) 100vw, 800px" />
           )}
           {proj.diagram === 'ai' && (
             <div class="tech-diagram diag-b">
-              <svg viewBox="0 0 400 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg viewBox="0 0 400 180" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <rect x="100" y="60" width="60" height="60" rx="4" stroke="currentColor" stroke-width="2" />
                 <rect x="105" y="70" width="50" height="2" fill="currentColor" opacity="0.4" />
                 <rect x="105" y="80" width="50" height="2" fill="currentColor" opacity="0.4" />
@@ -62,7 +66,7 @@ const projects = [
           )}
           {proj.diagram === 'ops' && (
             <div class="tech-diagram diag-p">
-              <svg viewBox="0 0 400 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg viewBox="0 0 400 180" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <circle cx="200" cy="90" r="50" stroke="currentColor" stroke-width="1.5" opacity="0.2" />
                 <path d="M150 90h100M200 40v100" stroke="currentColor" stroke-width="1" opacity="0.3" />
                 <path d="M170 70 L210 90 L170 110 Z" fill="currentColor" opacity="0.8" />
@@ -73,7 +77,7 @@ const projects = [
           )}
           {proj.diagram === 'edu' && (
             <div class="tech-diagram diag-a">
-              <svg viewBox="0 0 400 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg viewBox="0 0 400 180" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <rect x="120" y="50" width="160" height="80" rx="4" stroke="currentColor" stroke-width="2" />
                 <path d="M140 70h120M140 85h80M140 100h100" stroke="currentColor" stroke-width="2" opacity="0.4" />
                 <circle cx="200" cy="140" r="10" stroke="currentColor" stroke-width="1.5" />
@@ -85,6 +89,13 @@ const projects = [
         <div class="proj-num">{proj.num}</div>
         <h3 class="proj-name">{proj.name}</h3>
         <p class="proj-desc">{proj.desc}</p>
+        
+        {proj.stack && (
+          <div class="proj-stack">
+            {proj.stack.join(' · ')}
+          </div>
+        )}
+
         {proj.link && <a href={proj.link} target="_blank" rel="noopener" class="proj-link">{proj.linkText}</a>}
       </div>
     ))}
@@ -109,4 +120,13 @@ const projects = [
   .diag-b { color: var(--blue); }
   .diag-p { color: var(--purple); }
   .diag-a { color: var(--amber); }
+
+  .proj-stack {
+    font-family: var(--fm);
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    margin-top: -0.5rem;
+    margin-bottom: 1.5rem;
+  }
 </style>

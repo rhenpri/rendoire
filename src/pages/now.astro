@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout title="/now // rendoire" description="What I'm currently focused on.">
+  <Navigation />
+  
+  <main id="main-content" class="article-page" style="min-height: 80vh; max-width: 800px; margin: 0 auto; padding: 120px 2rem 4rem;">
+    <article class="article-content reveal visible">
+      <a href="/" class="back-link">← Back to Home</a>
+      
+      <header class="article-header">
+        <h1 class="article-h1">/now</h1>
+        <div class="article-date">Updated: {new Date().toLocaleDateString('en-US', {month: 'long', year: 'numeric'})}</div>
+      </header>
+      
+      <div class="formatted-content" style="opacity: 1; transform: translateY(0); animation: none;">
+        <p>This is a <a href="https://nownownow.com/about" target="_blank" rel="noopener">now page</a>. It documents what I am currently focused on.</p>
+        
+        <h2>Focus</h2>
+        <ul>
+          <li><strong>Building cade.golf:</strong> Shipping Phase 1 and monitoring early active user metrics. Expanding the social graph mechanics.</li>
+          <li><strong>Live Service Resilience:</strong> Working heavily on infrastructure observability and scaling out high-throughput event queues.</li>
+          <li><strong>Self-Hosting:</strong> Optimizing Proxmox topologies, tweaking local LLM response caching, and streamlining home-lab automation pipelines.</li>
+        </ul>
+
+        <h2>Reading</h2>
+        <ul>
+          <li><em>Designing Data-Intensive Applications</em> by Martin Kleppmann [reading]</li>
+          <li><em>Zero to One</em> by Peter Thiel [finished 2024]</li>
+        </ul>
+
+        <h2>Exploring</h2>
+        <ul>
+          <li>Heavy lifting, trail running, and spending deliberate time disconnected from the digital world.</li>
+        </ul>
+      </div>
+    </article>
+  </main>
+  <Footer />
+</BaseLayout>

@@ -4,55 +4,73 @@ const books = [
     author: "Steven Pressfield",
     title: "The War of Art",
     desc: "A short manifesto on creative work that names the universal enemy as \"Resistance\", the internal force of procrastination and self-doubt.",
-    color: "var(--green)"
+    color: "var(--green)",
+    status: "[finished 2021]",
+    link: "https://www.goodreads.com/book/show/1319"
   },
   {
     author: "Walter Isaacson",
     title: "Steve Jobs",
     desc: "A look at the contradictions of a visionary who built the iPod/iPhone/iPad era. Honest about product taste paired with the \"reality distortion field.\"",
-    color: "var(--blue)"
+    color: "var(--blue)",
+    status: "[finished 2023]",
+    link: "https://www.goodreads.com/book/show/11084145"
   },
   {
     author: "John Markoff",
     title: "What the Dormouse Said",
     desc: "A history of how personal computing emerged from 1960s Bay Area counterculture: psychedelics, anti-war politics, and communal living.",
-    color: "var(--purple)"
+    color: "var(--purple)",
+    status: "[reading]",
+    link: "https://www.goodreads.com/book/show/136706"
   },
   {
     author: "Cal Newport",
     title: "Deep Work",
     desc: "The case for focused, undistracted work in a world of shallow distractions. Essential for anyone trying to build complex things.",
-    color: "var(--amber)"
+    color: "var(--amber)",
+    status: "[finished 2022]",
+    link: "https://www.goodreads.com/book/show/25744928"
   },
   {
     author: "Nassim Taleb",
     title: "Antifragile",
     desc: "Systems that gain from disorder. How to build things, and lives, that don't just survive shocks but get better because of them.",
-    color: "var(--green)"
+    color: "var(--green)",
+    status: "[finished 2020]",
+    link: "https://www.goodreads.com/book/show/13530973"
   },
   {
     author: "O'Reilly Media",
     title: "AI Engineering",
     desc: "Deep practical strategies for building modern LLM-driven applications and maintaining intelligent systems natively.",
-    color: "var(--blue)"
+    color: "var(--blue)",
+    status: "[want to read]",
+    link: "https://bookshop.org/books/ai-engineering-building-applications-with-foundation-models"
   },
   {
-    author: "The Economist",
-    title: "The Intelligent App",
-    desc: "A study on how software architecture is evolving to be agent-first, shifting away from standard monolithic structures.",
-    color: "var(--purple)"
+    author: "Martin Kleppmann",
+    title: "Designing Data-Intensive Applications",
+    desc: "An incredible deep-dive into the guts of databases and distributed systems.",
+    color: "var(--purple)",
+    status: "[reading]",
+    link: "https://www.goodreads.com/book/show/23463279"
   },
   {
     author: "Marcus Aurelius",
     title: "Meditations",
     desc: "The literal notes to self from a Roman Emperor on stoicism, duty, and keeping a cool head under immense stress.",
-    color: "var(--amber)"
+    color: "var(--amber)",
+    status: "[finished 2019]",
+    link: "https://www.goodreads.com/book/show/30659"
   },
   {
     author: "Paul Graham",
     title: "Hackers & Painters",
     desc: "Essays on the craft of software, the philosophy of programming, and why the best hackers are more like artists than engineers.",
-    color: "var(--green)"
+    color: "var(--green)",
+    status: "[finished 2022]",
+    link: "https://www.goodreads.com/book/show/41793"
   }
 ];
 ---
@@ -65,11 +83,14 @@ const books = [
     <div class="books-track" id="books-track">
       <div class="books-track-inner" style="display:flex; gap:1.25rem;">
         {books.map(book => (
-          <div class="book-card card-polished">
-            <div class="book-author" style={`color: ${book.color}`}>{book.author}</div>
+          <a href={book.link} target="_blank" rel="noopener" class="book-card card-polished" style="color: inherit; text-decoration: none;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem;">
+              <div class="book-author" style={`color: ${book.color}; margin-bottom: 0;`}>{book.author}</div>
+              <div style={`font-family: var(--fm); font-size: 0.55rem; padding: 0.2rem 0.5rem; letter-spacing: 0.05em; border: 1px solid ${book.color}; color: ${book.color}; border-radius: 4px;`}>{book.status}</div>
+            </div>
             <h3 class="book-title">{book.title}</h3>
             <p class="book-desc">{book.desc}</p>
-          </div>
+          </a>
         ))}
       </div>
     </div>
