@@ -63,7 +63,10 @@ import Modal from '../components/Modal.astro';
         throw new Error('Could not fetch feed');
       }
       
-      const item = data.items.find(i => i.guid === articleId);
+      const item = data.items.find(i => {
+        const slug = i.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+        return slug === articleId;
+      });
       
       if (!item) {
         throw new Error('Article not found.');
