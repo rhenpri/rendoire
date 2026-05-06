@@ -12,7 +12,7 @@ export default function ProjectStack({ projects }: { projects: any[] }) {
 
   return (
     <ReactLenis root>
-      <div ref={container} className="relative flex w-full flex-col items-center justify-center pb-[10vh] pt-[10vh]">
+      <div ref={container} className="relative flex w-full flex-col items-center justify-center pb-[50vh] pt-[15vh]">
         {projects.map((proj, i) => {
           const targetScale = Math.max(0.9, 1 - (projects.length - i - 1) * 0.05);
           return (
@@ -22,7 +22,7 @@ export default function ProjectStack({ projects }: { projects: any[] }) {
               progress={scrollYProgress}
               range={[i * 0.25, 1]}
               targetScale={targetScale}
-              className={`proj-card card-polished hover-${proj.color} shadow-2xl`}
+              className={`proj-card card-polished hover-${proj.color} shadow-2xl bg-[#111]!`}
             >
               <div className="proj-img">
                 {proj.diagram === 'golf' && (
