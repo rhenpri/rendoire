@@ -1,6 +1,7 @@
 ---
 import { Picture } from 'astro:assets';
 import cadeImg from '../assets/cade.png';
+import ProjectStack from './react/ProjectStack.tsx';
 
 const projects = [
   {
@@ -44,62 +45,7 @@ const projects = [
   <div class="s-label label-p">03 / Projects</div>
   <h2 class="s-title reveal">Recent Work</h2>
 
-  <div class="proj-grid">
-    {projects.map((proj, idx) => (
-      <div tabindex="0" class={`proj-card card-polished hover-${proj.color} reveal`} style={`transition-delay: ${idx * 0.05}s`}>
-        <div class="proj-img">
-          {proj.diagram === 'golf' && (
-            <Picture src={cadeImg} alt="cade.golf screenshot" formats={['avif', 'webp']} widths={[480, 960, 1440]} fallbackFormat="png" loading="lazy" decoding="async" sizes="(max-width: 800px) 100vw, 800px" />
-          )}
-          {proj.diagram === 'ai' && (
-            <div class="tech-diagram diag-b">
-              <svg viewBox="0 0 400 180" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <rect x="100" y="60" width="60" height="60" rx="4" stroke="currentColor" stroke-width="2" />
-                <rect x="105" y="70" width="50" height="2" fill="currentColor" opacity="0.4" />
-                <rect x="105" y="80" width="50" height="2" fill="currentColor" opacity="0.4" />
-                <path d="M160 90h40" stroke="currentColor" stroke-width="1.5" />
-                <path d="M200 60 L240 90 L200 120 Z" stroke="currentColor" stroke-width="2" />
-                <circle cx="280" cy="90" r="30" stroke="currentColor" stroke-width="2" stroke-dasharray="6 3" />
-                <path d="M270 90h20M280 80v20" stroke="currentColor" stroke-width="2" />
-              </svg>
-            </div>
-          )}
-          {proj.diagram === 'ops' && (
-            <div class="tech-diagram diag-p">
-              <svg viewBox="0 0 400 180" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <circle cx="200" cy="90" r="50" stroke="currentColor" stroke-width="1.5" opacity="0.2" />
-                <path d="M150 90h100M200 40v100" stroke="currentColor" stroke-width="1" opacity="0.3" />
-                <path d="M170 70 L210 90 L170 110 Z" fill="currentColor" opacity="0.8" />
-                <rect x="230" y="80" width="40" height="20" rx="2" stroke="currentColor" stroke-width="2" />
-                <path d="M80 80 L120 80 L100 100 Z" stroke="currentColor" stroke-width="2" />
-              </svg>
-            </div>
-          )}
-          {proj.diagram === 'edu' && (
-            <div class="tech-diagram diag-a">
-              <svg viewBox="0 0 400 180" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <rect x="120" y="50" width="160" height="80" rx="4" stroke="currentColor" stroke-width="2" />
-                <path d="M140 70h120M140 85h80M140 100h100" stroke="currentColor" stroke-width="2" opacity="0.4" />
-                <circle cx="200" cy="140" r="10" stroke="currentColor" stroke-width="1.5" />
-                <path d="M180 50 L200 30 L220 50" stroke="currentColor" stroke-width="2" />
-              </svg>
-            </div>
-          )}
-        </div>
-        <div class="proj-num">{proj.num}</div>
-        <h3 class="proj-name">{proj.name}</h3>
-        <p class="proj-desc">{proj.desc}</p>
-        
-        {proj.stack && (
-          <div class="proj-stack">
-            {proj.stack.join(' · ')}
-          </div>
-        )}
-
-        {proj.link && <a href={proj.link} target="_blank" rel="noopener" class="proj-link">{proj.linkText}</a>}
-      </div>
-    ))}
-  </div>
+  <ProjectStack client:visible projects={projects.map(p => ({ ...p, imageSrc: cadeImg.src }))} />
 </section>
 
 <style>
