@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import CustomCursor from '../components/react/CustomCursor.tsx';
 
 interface Props {
   title?: string;
@@ -65,6 +66,7 @@ const schema = {
   </head>
   <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
+    <CustomCursor client:load />
     
     <div class="ambient-bg" aria-hidden="true">
       <div class="ambient-blob amb-p"></div>

@@ -1,5 +1,6 @@
 ---
 const RSS_URL = 'https://medium.com/feed/@rendoire';
+import AnimatedHeading from './react/AnimatedHeading';
 const API = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(RSS_URL) + '&v=' + Date.now();
 
 let articles = [];
@@ -35,7 +36,7 @@ try {
 
 <section id="writing">
   <div class="s-label label-a">04 / Writing</div>
-  <h2 class="s-title reveal">RENDOIRE</h2>
+  <AnimatedHeading client:load text="RENDOIRE" className="s-title" />
 
   <div id="articles-list" class="writing-list reveal">
     {error || articles.length === 0 ? (
