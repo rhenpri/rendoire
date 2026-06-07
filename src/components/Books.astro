@@ -1,4 +1,9 @@
 ---
+// CONFIGURATION: Add your public Goodreads or StoryGraph RSS feed URL here.
+// e.g., Goodreads: "https://www.goodreads.com/review/list_rss/12345?key=abcde&shelf=read"
+// If left empty, it will fall back to your curated static list below.
+const GOODREADS_FEED_URL = '';
+
 const books = [
   {
     author: "Steven Pressfield",
@@ -79,7 +84,7 @@ const books = [
   <div class="s-label label-a">05 / Reading List</div>
   <h2 class="s-title reveal">Books I Enjoy</h2>
 
-  <div class="books-marquee">
+  <div class="books-marquee" data-feed-url={GOODREADS_FEED_URL}>
     <div class="books-track" id="books-track">
       <div class="books-track-inner" style="display:flex; gap:1.25rem;">
         {books.map(book => (
@@ -98,8 +103,96 @@ const books = [
 </section>
 
 <script is:inline>
-  const bTrack = document.getElementById('books-track');
-  const bInner = bTrack.querySelector('.books-track-inner');
-  const clone = bInner.cloneNode(true);
-  bTrack.appendChild(clone);
+  (function() {
+    const bTrack = document.getElementById('books-track');
+    if (!bTrack) return;
+    const bInner = bTrack.querySelector('.books-track-inner');
+    if (!bInner) return;
+
+    const marqueeContainer = document.querySelector('.books-marquee');
+    const feedUrl = marqueeContainer ? marqueeContainer.getAttribute('data-feed-url') : '';
+
+    const setupMarqueeClone = () => {
+      const existingClones = bTrack.querySelectorAll('.books-track-inner-clone');
+      existingClones.forEach(el => el.remove());
+
+      const clone = bInner.cloneNode(true);
+      clone.classList.add('books-track-inner-clone');
+      bTrack.appendChild(clone);
+    };
+
+    const loadDynamicBooks = async () => {
+      if (!feedUrl || feedUrl.trim() === '') {
+        setupMarqueeClone();
+        return;
+      }
+
+      const API = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(feedUrl) + '&v=' + Date.now();
+
+      try {
+        const res = await fetch(API);
+        const data = await res.json();
+
+        if (data.status === 'ok' && data.items && data.items.length > 0) {
+          const colors = ['var(--green)', 'var(--blue)', 'var(--purple)', 'var(--amber)'];
+          
+          const freshBooks = data.items.map((item, idx) => {
+            let title = item.title || 'Untitled Book';
+            let author = 'Unknown Author';
+            const byIndex = title.lastIndexOf(' by ');
+            if (byIndex !== -1) {
+              author = title.substring(byIndex + 4);
+              title = title.substring(0, byIndex);
+            } else if (item.author) {
+              author = item.author;
+            }
+
+            let desc = item.description || '';
+            desc = desc.replace(/<[^>]*>?/gm, '').trim();
+            if (desc.length > 120) {
+              desc = desc.substring(0, 117) + '...';
+            }
+            if (!desc) {
+              desc = 'Recommended read from my personal library.';
+            }
+
+            const color = colors[idx % colors.length];
+            const link = item.link || 'https://www.goodreads.com';
+            
+            let status = '[finished]';
+            if (feedUrl.toLowerCase().includes('currently-reading')) {
+              status = '[reading]';
+            } else if (feedUrl.toLowerCase().includes('to-read')) {
+              status = '[want to read]';
+            }
+
+            return { title, author, desc, color, link, status };
+          });
+
+          if (freshBooks.length > 0) {
+            bInner.innerHTML = freshBooks.map(book => `
+              <a href="${book.link}" target="_blank" rel="noopener" class="book-card card-polished" style="color: inherit; text-decoration: none;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem;">
+                  <div class="book-author" style="color: ${book.color}; margin-bottom: 0;">${book.author}</div>
+                  <div style="font-family: var(--fm); font-size: 0.55rem; padding: 0.2rem 0.5rem; letter-spacing: 0.05em; border: 1px solid ${book.color}; color: ${book.color}; border-radius: 4px;">${book.status}</div>
+                </div>
+                <h3 class="book-title">${book.title}</h3>
+                <p class="book-desc">${book.desc}</p>
+              </a>
+            `).join('');
+          }
+        }
+      } catch (err) {
+        console.warn('Failed to dynamically fetch books feed:', err);
+      } finally {
+        setupMarqueeClone();
+      }
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', loadDynamicBooks);
+    } else {
+      loadDynamicBooks();
+    }
+  })();
 </script>
