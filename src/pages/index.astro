@@ -1,32 +1,130 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navigation from '../components/Navigation.astro';
-import Hero from '../components/Hero.astro';
-import Focus from '../components/Focus.astro';
-import Homelab from '../components/Homelab.astro';
-import Experience from '../components/Experience.astro';
-import Projects from '../components/Projects.astro';
-import Writing from '../components/Writing.astro';
-import Books from '../components/Books.astro';
-import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
-import Modal from '../components/Modal.astro';
+import PostCard from '../components/blog/PostCard.astro';
+import { getPosts } from '../lib/blog';
+
+const posts = await getPosts();
+const featured = posts.find((p) => p.featured) ?? posts[0];
+const recent = posts.filter((p) => p.slug !== featured?.slug).slice(0, 6);
+
+const social = [
+  { label: 'Medium', href: 'https://rendoire.medium.com' },
+  { label: 'GitHub', href: 'https://github.com/rhenpri' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/rhenderson832/' },
+  { label: 'YouTube', href: 'https://www.youtube.com/@rendoire' },
+  { label: 'Instagram', href: 'https://instagram.com/rendoire' },
+  { label: 'RSS', href: '/feed.xml' },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'rendoire',
+  url: 'https://rendoire.com',
+  description: 'Essays on artificial intelligence, software engineering, and self-hosting.',
+  author: {
+    '@type': 'Person',
+    name: 'rendoire',
+    url: 'https://rendoire.com',
+    sameAs: [
+      'https://rendoire.medium.com',
+      'https://github.com/rhenpri',
+      'https://www.linkedin.com/in/rhenderson832/',
+      'https://www.youtube.com/@rendoire',
+    ],
+  },
+};
 ---
 
-<BaseLayout>
+<BaseLayout jsonLd={jsonLd}>
   <Navigation />
-  
-  <main id="main-content">
-    <Hero />
-    <Focus />
-    <Homelab />
-    <Experience />
-    <Projects />
-    <Writing />
-    <Books />
-    <Contact />
+
+  <main id="main">
+    <!-- Hero -->
+    <header class="hero container">
+      <p class="hero-eyebrow">writing · building · self-hosting</p>
+      <h1 class="hero-wordmark">ren<em class="accent">doire</em></h1>
+      <p class="hero-tagline">
+        Essays on artificial intelligence, software engineering, and the quieter art of
+        building systems you actually own. No hype — just things I've figured out the hard way.
+      </p>
+      <div class="hero-links">
+        {social.map((s) => (
+          <a href={s.href} target={s.href.startsWith('http') ? '_blank' : undefined} rel={s.href.startsWith('http') ? 'noopener' : undefined}>{s.label}</a>
+        ))}
+      </div>
+    </header>
+
+    <!-- Featured post -->
+    {featured && (
+      <section class="container" style="padding-top: 1rem;">
+        <a href={`/blog/${featured.slug}/`} class="featured-card card-polished">
+          <div class="featured-body">
+            <span class="featured-kicker">Featured essay</span>
+            <h2 class="featured-title">{featured.title}</h2>
+            {featured.description && <p class="featured-desc">{featured.description}</p>}
+            <div class="post-meta" style="margin-bottom:0;">
+              <span>{featured.dateLabel}</span>
+              <span>{featured.readingTime}</span>
+            </div>
+          </div>
+          {featured.cover && (
+            <div class="featured-media">
+              <img src={featured.cover} alt="" loading="eager" decoding="async" />
+            </div>
+          )}
+        </a>
+      </section>
+    )}
+
+    <!-- Recent posts -->
+    <section class="section container" style="border-top:none;">
+      <div class="section-label">Latest writing</div>
+      <h2 class="section-title">From the <em>journal</em></h2>
+      <div class="post-grid">
+        {recent.map((post) => <PostCard post={post} />)}
+      </div>
+      <div style="margin-top: 2.5rem;">
+        <a href="/blog/" class="post-arrow" style="font-size:0.75rem;">All essays →</a>
+      </div>
+    </section>
+
+    <!-- Elsewhere teasers -->
+    <section class="section container">
+      <div class="section-label">More about me</div>
+      <div class="teaser-grid">
+        <a href="/about" class="teaser-card card-polished">
+          <span class="teaser-index">01</span>
+          <h3 class="teaser-title">About</h3>
+          <p class="teaser-desc">Who I am, what I've built, and where I focus.</p>
+          <span class="teaser-link">About me →</span>
+        </a>
+        <a href="/projects" class="teaser-card card-polished">
+          <span class="teaser-index">02</span>
+          <h3 class="teaser-title">Projects</h3>
+          <p class="teaser-desc">Recent work in AI systems, live service, and self-hosting.</p>
+          <span class="teaser-link">See work →</span>
+        </a>
+        <a href="/lab" class="teaser-card card-polished">
+          <span class="teaser-index">03</span>
+          <h3 class="teaser-title">Lab</h3>
+          <p class="teaser-desc">My homelab and the books I'm reading.</p>
+          <span class="teaser-link">Visit the lab →</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="container">
+      <div class="newsletter reveal">
+        <h3>Get new essays in your inbox</h3>
+        <p>Occasional, considered writing on AI and building. No spam, unsubscribe any time.</p>
+        <a href="https://rendoire.medium.com/subscribe" target="_blank" rel="noopener" class="newsletter-cta">Subscribe on Medium ↗</a>
+      </div>
+    </section>
   </main>
 
   <Footer />
-  <Modal />
 </BaseLayout>

@@ -1,0 +1,88 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+
+const focus = [
+  { tag: '[AI]', title: 'Intelligent systems', desc: 'Building reasoning systems where AI is part of the core logic — not just an API wrapper.' },
+  { tag: '[SWE]', title: 'Software delivery', desc: 'Seven years of shipping code that has to work, bridging AI research and production.' },
+  { tag: '[EDU]', title: 'AI training', desc: 'Hands-on training for people who actually want to build with AI, across multiple industries.' },
+  { tag: '[INF]', title: 'Self-hosted infra', desc: 'Proxmox, Ollama, open models, n8n. Running my own AI stack because it is useful — and fun.' },
+  { tag: '[OPS]', title: 'AI-native ops', desc: 'Runbooks, agentic workflows, and incident response where AI handles the heavy lifting.' },
+  { tag: '[CNT]', title: 'Writing', desc: 'Essays on AI, software, and infrastructure. No hype — just things worth writing down.' },
+];
+
+const experience = [
+  { period: '2024 →', role: 'Co-founder, AI Practitioner Programme', desc: 'Building hands-on training for people who actually want to build with AI. Designed the curriculum and ran cohort sessions.' },
+  { period: '2022 →', role: 'Founder, RENDOIRE', desc: 'Writing about AI and software. Medium for longer pieces, Instagram for shorter ones.' },
+  { period: '2019 →', role: 'Building software & AI systems', desc: 'Live service engineering, observability, and applied intelligence in production.' },
+];
+
+const social = [
+  { label: 'Medium', handle: '@rendoire', href: 'https://rendoire.medium.com' },
+  { label: 'GitHub', handle: 'rhenpri', href: 'https://github.com/rhenpri' },
+  { label: 'LinkedIn', handle: 'rhenderson832', href: 'https://www.linkedin.com/in/rhenderson832/' },
+  { label: 'YouTube', handle: '@rendoire', href: 'https://www.youtube.com/@rendoire' },
+  { label: 'Instagram', handle: '@rendoire', href: 'https://instagram.com/rendoire' },
+];
+---
+
+<BaseLayout
+  title="About — rendoire"
+  description="Software & AI engineer. Seven years of building systems that have to work."
+  canonical="https://rendoire.com/about/"
+>
+  <Navigation />
+
+  <main id="main" class="container section" style="padding-top: 4rem;">
+    <div class="section-label">About</div>
+    <h1 class="section-title">Software & <em>AI</em>, built to work</h1>
+    <p style="color: var(--muted); max-width: 44rem; font-size: 1.05rem; line-height: 1.8;">
+      I'm a software and AI engineer who has spent the last seven years building systems that
+      have to keep working. I run my own AI stack at home, write about the layer between the
+      model and the business, and teach people how to build with AI for real.
+    </p>
+  </main>
+
+  <section class="container" style="padding: 3rem 0 4rem;">
+    <div class="section-label">Focus</div>
+    <div class="teaser-grid">
+      {focus.map((f) => (
+        <div class="teaser-card card-polished" style="min-height:auto;">
+          <span class="teaser-index" style="color:var(--amber);">{f.tag}</span>
+          <h3 class="teaser-title" style="font-size:1.4rem;">{f.title}</h3>
+          <p class="teaser-desc">{f.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="container" style="padding: 2rem 0 4rem;">
+    <div class="section-label">Background</div>
+    <div style="display:flex; flex-direction:column; gap:1rem;">
+      {experience.map((e) => (
+        <div class="card-polished" style="padding:2rem; display:grid; grid-template-columns: 120px 1fr; gap:1.5rem; align-items:start;">
+          <span style="font-family:var(--fm); font-size:0.72rem; color:var(--muted); letter-spacing:0.04em;">{e.period}</span>
+          <div>
+            <h3 style="font-weight:600; margin-bottom:0.4rem;">{e.role}</h3>
+            <p style="color:var(--mid); font-size:0.88rem; line-height:1.7;">{e.desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="container" style="padding: 2rem 0 3rem;">
+    <div class="section-label">Find me</div>
+    <div class="post-grid" style="grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));">
+      {social.map((s) => (
+        <a href={s.href} target="_blank" rel="noopener" class="teaser-card card-polished" style="min-height:auto; gap:0.4rem;">
+          <h3 class="teaser-title" style="font-size:1.25rem;">{s.label}</h3>
+          <span style="font-family:var(--fm); font-size:0.72rem; color:var(--mid);">{s.handle}</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>

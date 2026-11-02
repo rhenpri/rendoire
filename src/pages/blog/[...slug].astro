@@ -1,0 +1,126 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navigation from '../../components/Navigation.astro';
+import Footer from '../../components/Footer.astro';
+import ReadingProgress from '../../components/react/ReadingProgress.tsx';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+  return Promise.all(
+    posts.map(async (post, i) => {
+      const { Content } = await render(post);
+      const words = (post.body ?? '').split(/\s+/).filter(Boolean).length;
+      return {
+        params: { slug: post.id },
+        props: {
+          post: {
+            title: post.data.title,
+            description: post.data.description,
+            pubDate: post.data.pubDate,
+            updatedDate: post.data.updatedDate,
+            dateLabel: post.data.pubDate.toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            }),
+            readingTime: `${Math.max(1, Math.ceil(words / 200))} min read`,
+            tags: post.data.tags ?? [],
+            cover: post.data.cover,
+            medium: post.data.medium,
+            slug: post.id,
+          },
+          Content,
+          prev: i < posts.length - 1 ? { slug: posts[i + 1].id, title: posts[i + 1].data.title } : null,
+          next: i > 0 ? { slug: posts[i - 1].id, title: posts[i - 1].data.title } : null,
+        },
+      };
+    }),
+  );
+}
+
+const { post, Content, prev, next } = Astro.props;
+
+const url = `https://rendoire.com/blog/${post.slug}/`;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.title,
+  description: post.description,
+  datePublished: post.pubDate.toISOString(),
+  dateModified: (post.updatedDate ?? post.pubDate).toISOString(),
+  url,
+  image: post.cover ?? 'https://rendoire.com/og-image.png',
+  author: { '@type': 'Person', name: 'rendoire', url: 'https://rendoire.com' },
+  publisher: { '@type': 'Person', name: 'rendoire', url: 'https://rendoire.com' },
+  keywords: post.tags.join(', '),
+  mainEntityOfPage: url,
+};
+---
+
+<BaseLayout
+  title={`${post.title} — rendoire`}
+  description={post.description ?? post.title}
+  canonical={url}
+  image={post.cover ?? 'https://rendoire.com/og-image.png'}
+  type="article"
+  jsonLd={jsonLd}
+>
+  <Navigation />
+  <ReadingProgress client:load />
+
+  <main id="main" class="container" style="padding-top: 4rem; padding-bottom: 2rem;">
+    <div class="article-wrap">
+      <a href="/blog/" class="article-back">← All essays</a>
+
+      <header class="article-header">
+        <div class="article-meta">
+          <time datetime={post.pubDate.toISOString()}>{post.dateLabel}</time>
+          <span aria-hidden="true">·</span>
+          <span>{post.readingTime}</span>
+        </div>
+        <h1 class="article-title">{post.title}</h1>
+        {post.tags.length > 0 && (
+          <div class="post-tags">
+            {post.tags.map((tag: string) => <a href={`/blog/?tag=${encodeURIComponent(tag)}`} class="tag" style="transition:color .2s,border-color .2s">#{tag}</a>)}
+          </div>
+        )}
+      </header>
+
+      {post.cover && (
+        <div class="article-cover">
+          <img src={post.cover} alt="" loading="eager" decoding="async" />
+        </div>
+      )}
+
+      <div class="article-body">
+        <Content />
+      </div>
+
+      <div class="article-foot">
+        {post.medium ? (
+          <a href={post.medium} target="_blank" rel="noopener" class="article-medium">
+            Also published on Medium ↗
+          </a>
+        ) : (
+          <span />
+        )}
+
+        <div style="display:flex; gap:1.5rem;">
+          {next && <a href={`/blog/${next.slug}/`} style="font-family:var(--fm);font-size:0.72rem;color:var(--muted);transition:color .2s">← {next.title}</a>}
+          {prev && <a href={`/blog/${prev.slug}/`} style="font-family:var(--fm);font-size:0.72rem;color:var(--muted);text-align:right;transition:color .2s">{prev.title} →</a>}
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .article-foot a:hover { color: var(--amber); }
+  .article-header .tag:hover { color: var(--text); border-color: var(--border-strong); }
+</style>
