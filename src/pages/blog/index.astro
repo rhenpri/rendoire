@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navigation from '../../components/Navigation.astro';
+import Footer from '../../components/Footer.astro';
+import PostCard from '../../components/blog/PostCard.astro';
+import { getPosts, allTags } from '../../lib/blog';
+
+const posts = await getPosts();
+const tags = allTags(posts);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  name: 'rendoire',
+  url: 'https://rendoire.com/blog',
+  description: 'Essays on artificial intelligence, software engineering, and self-hosting.',
+};
+---
+
+<BaseLayout
+  title="Writing — rendoire"
+  description="All essays on artificial intelligence, software engineering, and self-hosting."
+  canonical="https://rendoire.com/blog/"
+  jsonLd={jsonLd}
+>
+  <Navigation />
+
+  <main id="main" class="container section" style="padding-top: 4rem;">
+    <div class="section-label">All essays</div>
+    <h1 class="section-title">The <em>journal</em></h1>
+    <p style="color: var(--muted); max-width: 40rem; margin-top: -1.5rem; margin-bottom: 2.5rem;">
+      {posts.length} essays and counting. Filter by topic below.
+    </p>
+
+    <div class="filter-bar" id="filter-bar" role="group" aria-label="Filter by topic">
+      <button class="filter-chip" aria-pressed="true" data-filter="all">All</button>
+      {tags.map((tag) => (
+        <button class="filter-chip" aria-pressed="false" data-filter={tag}>#{tag}</button>
+      ))}
+    </div>
+
+    <div class="post-grid" id="post-grid">
+      {posts.map((post) => <PostCard post={post} />)}
+    </div>
+
+    <p id="no-results" style="display:none; color:var(--muted); font-family:var(--fm); font-size:0.8rem; padding:2rem 0;">
+      No essays match that topic.
+    </p>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<script is:inline>
+  const bar = document.getElementById('filter-bar');
+  const grid = document.getElementById('post-grid');
+  const noResults = document.getElementById('no-results');
+  if (!bar || !grid) return;
+
+  bar.addEventListener('click', (e) => {
+    const chip = e.target.closest('.filter-chip');
+    if (!chip) return;
+    const filter = chip.dataset.filter;
+
+    bar.querySelectorAll('.filter-chip').forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
+    const cards = grid.querySelectorAll('[data-tags]');
+    let visible = 0;
+    cards.forEach((card) => {
+      const tags = (card.getAttribute('data-tags') || '').split(',');
+      const show = filter === 'all' || tags.includes(filter);
+      card.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    noResults.style.display = visible === 0 ? '' : 'none';
+  });
+</script>

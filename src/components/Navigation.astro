@@ -1,17 +1,50 @@
 ---
 import { Picture } from 'astro:assets';
 import logoImg from '../assets/logo.png';
+
+const path = Astro.url.pathname;
+
+const links = [
+  { href: '/blog', label: 'Writing' },
+  { href: '/about', label: 'About' },
+  { href: '/projects', label: 'Projects' },
+  { href: '/lab', label: 'Lab' },
+];
+
+const isCurrent = (href: string) => (href === '/' ? path === '/' : path === href || path.startsWith(href + '/'));
 ---
-<nav>
-  <a href="/" class="nav-logo">
-    <Picture src={logoImg} alt="rendoire logo" class="nav-icon" formats={['avif', 'webp']} width={64} height={64} loading="eager" />
-    <span>rendoire</span>
-  </a>
-  <ul class="nav-links">
-    <li><a href="/#focus">Focus</a></li>
-    <li><a href="/#experience">Experience</a></li>
-    <li><a href="/#projects">Projects</a></li>
-    <li><a href="/#writing">Writing</a></li>
-    <li><a href="/#contact">Contact</a></li>
-  </ul>
+
+<nav class="site-nav">
+  <div class="container nav-inner">
+    <a href="/" class="nav-logo">
+      <Picture src={logoImg} alt="" formats={['avif', 'webp']} width={56} height={56} loading="eager" />
+      <span>ren<em>doire</em></span>
+    </a>
+
+    <ul class="nav-links" id="nav-links">
+      {links.map((l) => (
+        <li>
+          <a href={l.href} aria-current={isCurrent(l.href) ? 'page' : undefined}>{l.label}</a>
+        </li>
+      ))}
+      <li>
+        <a class="nav-cta" href="https://rendoire.medium.com/subscribe" target="_blank" rel="noopener">Subscribe</a>
+      </li>
+    </ul>
+
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
+      <span aria-hidden="true">☰</span>
+    </button>
+  </div>
 </nav>
+
+<script is:inline>
+  const toggle = document.getElementById('nav-toggle');
+  const links = document.getElementById('nav-links');
+  if (toggle && links) {
+    toggle.addEventListener('click', () => {
+      const open = links.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(open));
+    });
+  }
+</script>
