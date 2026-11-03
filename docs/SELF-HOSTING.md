@@ -12,6 +12,45 @@ That keeps your options wide open. Here's the honest landscape.
 This is already a solid setup — GitHub Pages handles the build/deploy/availability, and
 your proxy lets you add security headers (see `docs/SECURITY.md`).
 
+## ⚠️ Fix: the `www` redirect
+
+Your `www` subdomain currently does a broken redirect chain that drops HTTPS:
+
+```
+https://www.rendoire.com  →  301  →  http://rendoire.com/   ← HTTPS → HTTP downgrade
+```
+
+Browsers tolerate it, but crawlers (Impact, search engines) and security scanners refuse
+to follow an HTTPS→HTTP downgrade — which is why affiliate verification failed on `www`.
+
+Fix it by making `www.rendoire.com` redirect straight to the **HTTPS** apex, in one hop.
+
+### APISIX (redirect plugin)
+
+```yaml
+# Add a route for the www host that 301s to https://rendoire.com
+routes:
+  - name: www-to-apex
+    uri: /*
+    host: www.rendoire.com
+    priority: 10
+    plugins:
+      redirect:
+        uri: "https://rendoire.com$request_uri"
+        ret_code: 301
+```
+
+### Caddy (if you move the proxy)
+
+```caddyfile
+www.rendoire.com {
+    redir https://rendoire.com{uri} permanent
+}
+```
+
+After applying, `https://www.rendoire.com` should return a single 301 to
+`https://rendoire.com/` (no HTTP hop).
+
 ## The spectrum of options
 
 | Option | Effort | Cost | Control | Best for |

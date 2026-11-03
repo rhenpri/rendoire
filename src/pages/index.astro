@@ -11,23 +11,23 @@ const recent = posts.filter((p) => p.slug !== featured?.slug).slice(0, 6);
 
 const pillars = [
   {
-    glyph: '✍️',
+    index: '01',
     title: 'Writing',
     desc: 'Essays on AI, software, and the layer between the model and the real world.',
     href: '/blog',
     cta: 'Read the journal',
   },
   {
-    glyph: '🛠️',
+    index: '02',
     title: 'Self-hosting',
-    desc: 'Tools I actually rate for owning your data — Linux, private cloud, and more.',
+    desc: 'Tools for owning your data — Linux, private cloud, and the boxes to run them.',
     href: '/self-hosting',
-    cta: 'Browse recommendations',
+    cta: 'Browse the list',
   },
   {
-    glyph: '🧠',
+    index: '03',
     title: 'AI knowledge',
-    desc: 'A practical learning path and the O\u2019Reilly books that actually earn their shelf space.',
+    desc: 'A practical learning path and the O\u2019Reilly books that earn their shelf space.',
     href: '/ai',
     cta: 'Start learning',
   },
@@ -46,29 +46,26 @@ const jsonLd = {
   <Navigation />
 
   <main id="main">
-    <!-- Hero -->
     <header class="hero container">
-      <p class="hero-eyebrow"><span class="dot"></span> AI · software · owning your tools</p>
-      <h1 class="hero-wordmark">ren<em class="accent">doire</em></h1>
+      <p class="hero-eyebrow">writing · building · owning my tools<span class="cursor"></span></p>
+      <h1 class="hero-title">ren<em>doire</em></h1>
       <p class="hero-tagline">
         I write about artificial intelligence, build software, and keep my data on machines I
-        actually own. This is where I share what I've learned — and what I'd tell a friend to use.
+        actually own. This is where I share what I've learned — and what I'd hand to a friend.
       </p>
       <div class="hero-links">
         <a href="/blog">Writing</a>
         <a href="/self-hosting">Self-hosting</a>
         <a href="/ai">AI resources</a>
         <a href="/tools">Tools I rate</a>
-        <a href="/feed.xml">RSS</a>
       </div>
     </header>
 
-    <!-- Pillars -->
     <section class="container" style="padding: 1rem 0 4rem;">
       <div class="pillar-grid">
         {pillars.map((p) => (
-          <a href={p.href} class="pillar-card card-polished">
-            <span class="pillar-glyph" aria-hidden="true">{p.glyph}</span>
+          <a href={p.href} class="pillar-card">
+            <span class="pillar-index">{p.index}</span>
             <h2 class="pillar-title">{p.title}</h2>
             <p class="pillar-desc">{p.desc}</p>
             <span class="pillar-link">{p.cta} →</span>
@@ -77,10 +74,9 @@ const jsonLd = {
       </div>
     </section>
 
-    <!-- Featured post -->
     {featured && (
       <section class="container" style="padding: 0 0 1rem;">
-        <a href={`/blog/${featured.slug}/`} class="featured-card card-polished">
+        <a href={`/blog/${featured.slug}/`} class="featured-card">
           <div class="featured-body">
             <span class="featured-kicker">Latest essay</span>
             <h2 class="featured-title">{featured.title}</h2>
@@ -99,9 +95,8 @@ const jsonLd = {
       </section>
     )}
 
-    <!-- Recent posts -->
     <section class="section container">
-      <div class="section-label">From the journal</div>
+      <div class="section-label">Journal</div>
       <h2 class="section-title">Recent <em>writing</em></h2>
       <div class="post-grid">
         {recent.map((post) => <PostCard post={post} />)}
@@ -111,11 +106,10 @@ const jsonLd = {
       </div>
     </section>
 
-    <!-- Newsletter -->
     <section class="container">
       <div class="newsletter reveal">
-        <h3>Get new essays in your inbox</h3>
-        <p>Occasional, considered writing on AI and building. No spam, unsubscribe any time.</p>
+        <h3>New essays, occasionally</h3>
+        <p>Considered writing on AI and building. No spam, unsubscribe any time.</p>
         <a href="https://rendoire.medium.com/subscribe" target="_blank" rel="noopener" class="newsletter-cta">Subscribe on Medium ↗</a>
       </div>
     </section>

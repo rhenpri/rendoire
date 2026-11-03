@@ -37,7 +37,6 @@ const pubLabel = (p: string) => (p === 'oreilly' ? 'O\u2019Reilly' : p === 'mann
           </linearGradient>
         </defs>
 
-        <!-- input tokens -->
         <g class="viz-token" style="animation-delay:0s">
           <circle cx="50" cy="30" r="7" fill="var(--green)" />
           <circle cx="50" cy="75" r="7" fill="var(--green)" />
@@ -49,33 +48,29 @@ const pubLabel = (p: string) => (p === 'oreilly' ? 'O\u2019Reilly' : p === 'mann
           <circle cx="110" cy="120" r="7" fill="var(--green)" />
         </g>
 
-        <!-- flow lines input -> model -->
         <path d="M170 30 C 240 30, 280 75, 340 75" stroke="url(#flowGrad)" stroke-width="1.5" class="viz-flow" />
         <path d="M170 120 C 240 120, 280 75, 340 75" stroke="url(#flowGrad)" stroke-width="1.5" class="viz-flow" style="animation-delay:0.3s" />
         <path d="M170 75 L 340 75" stroke="url(#flowGrad)" stroke-width="1.5" class="viz-flow" style="animation-delay:0.15s" />
 
-        <!-- model block -->
-        <rect x="345" y="35" width="150" height="80" rx="14" stroke="var(--purple)" stroke-width="1.5" fill="var(--purple-dim)" />
-        <text x="420" y="80" text-anchor="middle" fill="var(--purple-soft)" font-family="var(--fm)" font-size="11" letter-spacing="2">MODEL</text>
+        <rect x="345" y="35" width="150" height="80" rx="8" stroke="var(--purple)" stroke-width="1.5" fill="rgba(196,181,253,0.05)" />
+        <text x="420" y="80" text-anchor="middle" fill="var(--purple)" font-family="var(--fm)" font-size="11" letter-spacing="2">MODEL</text>
         <g class="viz-pulse">
-          <rect x="345" y="35" width="150" height="80" rx="14" stroke="var(--purple)" stroke-width="1.5" fill="none" />
+          <rect x="345" y="35" width="150" height="80" rx="8" stroke="var(--purple)" stroke-width="1.5" fill="none" />
         </g>
 
-        <!-- flow lines model -> output -->
         <path d="M495 75 C 560 75, 600 30, 670 30" stroke="url(#flowGrad)" stroke-width="1.5" class="viz-flow" style="animation-delay:0.45s" />
         <path d="M495 75 C 560 75, 600 75, 670 75" stroke="url(#flowGrad)" stroke-width="1.5" class="viz-flow" style="animation-delay:0.15s" />
         <path d="M495 75 C 560 75, 600 120, 670 120" stroke="url(#flowGrad)" stroke-width="1.5" class="viz-flow" style="animation-delay:0.6s" />
 
-        <!-- output tokens -->
         <g class="viz-token" style="animation-delay:0.5s">
-          <circle cx="730" cy="30" r="7" fill="var(--purple-soft)" />
-          <circle cx="730" cy="75" r="7" fill="var(--purple-soft)" />
-          <circle cx="730" cy="120" r="7" fill="var(--purple-soft)" />
+          <circle cx="730" cy="30" r="7" fill="var(--purple)" />
+          <circle cx="730" cy="75" r="7" fill="var(--purple)" />
+          <circle cx="730" cy="120" r="7" fill="var(--purple)" />
         </g>
         <g class="viz-token" style="animation-delay:0.8s">
-          <circle cx="790" cy="30" r="7" fill="var(--purple-soft)" />
-          <circle cx="790" cy="75" r="7" fill="var(--purple-soft)" />
-          <circle cx="790" cy="120" r="7" fill="var(--purple-soft)" />
+          <circle cx="790" cy="30" r="7" fill="var(--purple)" />
+          <circle cx="790" cy="75" r="7" fill="var(--purple)" />
+          <circle cx="790" cy="120" r="7" fill="var(--purple)" />
         </g>
       </svg>
     </div>
@@ -86,7 +81,7 @@ const pubLabel = (p: string) => (p === 'oreilly' ? 'O\u2019Reilly' : p === 'mann
       <h2 class="section-title" style="font-size:2.2rem;">From zero to <em>agents</em></h2>
       <div class="path-list">
         {stages.map((stage) => (
-          <div class="path-stage card-polished reveal">
+          <div class="path-stage reveal">
             <div class="path-num">{stage.label}</div>
             <div class="path-body">
               <h3>{stage.title}</h3>
@@ -111,10 +106,10 @@ const pubLabel = (p: string) => (p === 'oreilly' ? 'O\u2019Reilly' : p === 'mann
       <h2 class="section-title" style="font-size:2.2rem;">Worth the <em>shelf space</em></h2>
       <div class="book-grid">
         {books.map((book) => (
-          <a href={withRef(book.url)} target="_blank" rel="noopener" class="book-card card-polished">
+          <a href={withRef(book.url)} target="_blank" rel="noopener" class="card book-card">
             <div class="book-top">
               <span class={`book-publisher ${book.publisher === 'oreilly' ? 'pub-oreilly' : 'pub-other'}`}>{pubLabel(book.publisher)}</span>
-              <span class="book-author">{book.year}</span>
+              <span class="book-year">{book.year}</span>
             </div>
             <h3 class="book-title">{book.title}</h3>
             <span class="book-author">by {book.author}</span>
@@ -123,7 +118,7 @@ const pubLabel = (p: string) => (p === 'oreilly' ? 'O\u2019Reilly' : p === 'mann
           </a>
         ))}
       </div>
-      <p style="font-family:var(--fm); font-size:0.66rem; color:var(--mid); margin-top:1.5rem; line-height:1.7;">
+      <p style="font-family:var(--fm); font-size:0.64rem; color:var(--mid); margin-top:1.5rem; line-height:1.7;">
         Book links may include a referral tag that helps support this site — no extra cost to you.
       </p>
     </section>
@@ -138,7 +133,7 @@ const pubLabel = (p: string) => (p === 'oreilly' ? 'O\u2019Reilly' : p === 'mann
             <h3>{group}</h3>
             <div class="glossary-grid">
               {glossary.filter((t) => t.group === group).map((term) => (
-                <div class="term-card card-polished reveal">
+                <div class="card reveal">
                   <div class="term-word">{term.term}</div>
                   <p class="term-def">{term.def}</p>
                 </div>
@@ -156,8 +151,7 @@ const pubLabel = (p: string) => (p === 'oreilly' ? 'O\u2019Reilly' : p === 'mann
 <style>
   .model-viz {
     border: 1px solid var(--border);
-    border-radius: 14px;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.015), transparent);
+    border-radius: var(--radius);
     padding: 1rem;
     overflow: hidden;
   }
@@ -167,16 +161,16 @@ const pubLabel = (p: string) => (p === 'oreilly' ? 'O\u2019Reilly' : p === 'mann
     display: block;
   }
   .viz-token circle {
-    opacity: 0.45;
+    opacity: 0.4;
     animation: vizPulse 2.6s ease-in-out infinite;
   }
   @keyframes vizPulse {
     0%,
     100% {
-      opacity: 0.25;
+      opacity: 0.22;
     }
     50% {
-      opacity: 0.95;
+      opacity: 0.9;
     }
   }
   .viz-flow {

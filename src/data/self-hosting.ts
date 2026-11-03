@@ -11,7 +11,6 @@ export interface Item {
 export interface Category {
   id: string;
   label: string;
-  emoji: string;
   blurb: string;
   items: Item[];
 }
@@ -22,7 +21,6 @@ export const categories: Category[] = [
   {
     id: 'os',
     label: 'Operating systems',
-    emoji: '🖥️',
     blurb: 'Take the OS back. Linux for the desktop, and a de-Googled Android for the pocket.',
     items: [
       {
@@ -79,7 +77,6 @@ export const categories: Category[] = [
   {
     id: 'cloud',
     label: 'Cloud & storage',
-    emoji: '☁️',
     blurb: 'Your own Dropbox, Photos, and sync — data stays on your hardware.',
     items: [
       {
@@ -122,7 +119,6 @@ export const categories: Category[] = [
   {
     id: 'media',
     label: 'Media & home',
-    emoji: '🎬',
     blurb: 'Your own Netflix and smart-home, without the subscription or the spying.',
     items: [
       {
@@ -158,7 +154,6 @@ export const categories: Category[] = [
   {
     id: 'security',
     label: 'Security & network',
-    emoji: '🛡️',
     blurb: 'Passwords, DNS, VPN, and the reverse proxy that ties it together.',
     items: [
       {
@@ -208,7 +203,6 @@ export const categories: Category[] = [
   {
     id: 'infra',
     label: 'Infrastructure',
-    emoji: '🧱',
     blurb: 'The boxes, containers, and dashboards that hold it all together.',
     items: [
       {
@@ -258,7 +252,6 @@ export const categories: Category[] = [
   {
     id: 'ai',
     label: 'Local AI',
-    emoji: '🧠',
     blurb: 'Run language and image models on your own hardware.',
     items: [
       {
@@ -294,7 +287,6 @@ export const categories: Category[] = [
   {
     id: 'productivity',
     label: 'Productivity & automation',
-    emoji: '⚙️',
     blurb: 'Documents, notes, tasks, and the glue that automates your life.',
     items: [
       {

@@ -1,7 +1,4 @@
 ---
-import { Picture } from 'astro:assets';
-import logoImg from '../assets/logo.png';
-
 const path = Astro.url.pathname;
 
 const links = [
@@ -17,10 +14,7 @@ const isCurrent = (href: string) => (href === '/' ? path === '/' : path === href
 
 <nav class="site-nav">
   <div class="container nav-inner">
-    <a href="/" class="nav-logo">
-      <Picture src={logoImg} alt="" formats={['avif', 'webp']} width={56} height={56} loading="eager" />
-      <span>ren<em>doire</em></span>
-    </a>
+    <a href="/" class="wordmark">ren<em>doire</em><span class="tick">▮</span></a>
 
     <ul class="nav-links" id="nav-links">
       {links.map((l) => (
@@ -28,9 +22,6 @@ const isCurrent = (href: string) => (href === '/' ? path === '/' : path === href
           <a href={l.href} aria-current={isCurrent(l.href) ? 'page' : undefined}>{l.label}</a>
         </li>
       ))}
-      <li>
-        <a class="nav-cta" href="https://rendoire.medium.com/subscribe" target="_blank" rel="noopener">Subscribe</a>
-      </li>
     </ul>
 
     <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">

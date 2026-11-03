@@ -38,7 +38,7 @@ const social = [
       <div class="section-label">What I care about</div>
       <div class="post-grid">
         {values.map((v) => (
-          <div class="post-card card-polished" style="padding: 1.75rem; min-height: 150px;">
+          <div class="card" style="min-height: 150px;">
             <h3 class="post-title" style="font-size:1.3rem;">{v.title}</h3>
             <p class="post-desc" style="-webkit-line-clamp: unset;">{v.desc}</p>
           </div>
@@ -50,8 +50,8 @@ const social = [
       <div class="section-label">Find me</div>
       <div class="post-grid" style="grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));">
         {social.map((s) => (
-          <a href={s.href} target={s.href.startsWith('http') ? '_blank' : undefined} rel={s.href.startsWith('http') ? 'noopener' : undefined} class="post-card card-polished" style="padding:1.5rem; gap:0.3rem;">
-            <h3 class="post-title" style="font-size:1.15rem;">{s.label}</h3>
+          <a href={s.href} target={s.href.startsWith('http') ? '_blank' : undefined} rel={s.href.startsWith('http') ? 'noopener' : undefined} class="card" style="padding:1.5rem;">
+            <h3 class="post-title" style="font-size:1.15rem; margin-bottom:0.3rem;">{s.label}</h3>
             <span style="font-family:var(--fm); font-size:0.72rem; color:var(--mid);">{s.handle}</span>
           </a>
         ))}

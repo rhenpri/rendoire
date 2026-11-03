@@ -1,6 +1,5 @@
 ---
 import '../styles/global.css';
-import CustomCursor from '../components/react/CustomCursor.tsx';
 
 interface Props {
   title?: string;
@@ -69,14 +68,6 @@ const resolvedCanonical =
   </head>
   <body>
     <a href="#main" class="skip-link">Skip to content</a>
-    <CustomCursor client:load />
-
-    <div class="aurora" aria-hidden="true">
-      <div class="aurora-blob aur-g"></div>
-      <div class="aurora-blob aur-p"></div>
-      <div class="aurora-blob aur-p2"></div>
-    </div>
-    <div class="grain" aria-hidden="true"></div>
 
     <slot />
 
@@ -87,20 +78,6 @@ const resolvedCanonical =
         { threshold: 0.1, rootMargin: '0px 0px -40px 0px' },
       );
       document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
-
-      // Magnetic card glow
-      document.addEventListener(
-        'pointermove',
-        (e) => {
-          const cards = document.querySelectorAll('.card-polished');
-          for (const card of cards) {
-            const r = card.getBoundingClientRect();
-            card.style.setProperty('--mouse-x', `${e.clientX - r.left}px`);
-            card.style.setProperty('--mouse-y', `${e.clientY - r.top}px`);
-          }
-        },
-        { passive: true },
-      );
     </script>
   </body>
 </html>
