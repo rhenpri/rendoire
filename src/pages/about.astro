@@ -16,6 +16,21 @@ const social = [
   { label: 'YouTube', handle: '@rendoire', href: 'https://www.youtube.com/@rendoire' },
   { label: 'RSS', handle: 'feed.xml', href: '/feed.xml' },
 ];
+
+const euResources = [
+  { name: 'Free Software Foundation Europe', desc: 'The leading European voice for software freedom and open standards.', href: 'https://fsfe.org', eu: true },
+  { name: 'European Commission · Digital Strategy', desc: 'The EU\u2019s policy hub for open source, data, and digital sovereignty.', href: 'https://digital-strategy.ec.europa.eu', eu: true },
+  { name: 'EU Open Source Observatory', desc: 'Tracks open source policy and adoption across EU public services.', href: 'https://joinup.ec.europa.eu/collection/open-source-observatory-osor', eu: true },
+  { name: 'Next Generation Internet', desc: 'EU-funded programme building an open, human-centric internet.', href: 'https://www.ngi.eu', eu: true },
+  { name: 'Linux Foundation Europe', desc: 'The European hub for open source industry and standards.', href: 'https://linuxfoundation.eu', eu: true },
+  { name: 'European Digital Rights (EDRi)', desc: 'The network defending digital rights and freedoms across Europe.', href: 'https://edri.org', eu: true },
+  { name: 'Gaia-X', desc: 'European initiative for sovereign, federated data infrastructure.', href: 'https://gaia-x.eu', eu: true },
+  { name: 'European Data Protection Board', desc: 'Independent GDPR guidance and enforcement across the EU.', href: 'https://www.edpb.europa.eu', eu: true },
+  { name: 'Open Source Initiative', desc: 'Stewards the Open Source Definition and the licenses behind it.', href: 'https://opensource.org' },
+  { name: 'Creative Commons', desc: 'Open licensing that keeps content and culture shareable.', href: 'https://creativecommons.org' },
+];
+
+const domain = (url: string) => new URL(url).hostname.replace(/^www\./, '');
 ---
 
 <BaseLayout
@@ -42,6 +57,27 @@ const social = [
             <h3 class="post-title" style="font-size:1.3rem;">{v.title}</h3>
             <p class="post-desc" style="-webkit-line-clamp: unset;">{v.desc}</p>
           </div>
+        ))}
+      </div>
+    </section>
+
+    <section style="margin-top: 4rem;">
+      <div class="section-label">Read more</div>
+      <h2 class="section-title" style="font-size:2.2rem;">EU &amp; <em>open source</em></h2>
+      <p class="lead" style="margin-top:-1rem; margin-bottom:2rem;">
+        Reputable places to go deeper on European technology and open source — the ideas this
+        site is built on.
+      </p>
+      <div class="dir-grid">
+        {euResources.map((r) => (
+          <a href={r.href} target="_blank" rel="noopener" class="card dir-card">
+            <div class="dir-card-top">
+              <h3 class="dir-name" style="font-size:1.2rem;">{r.name}</h3>
+              {r.eu && <span class="eu-badge" title="European">EU</span>}
+            </div>
+            <p class="dir-why">{r.desc}</p>
+            <span class="dir-link">{domain(r.href)} ↗</span>
+          </a>
         ))}
       </div>
     </section>
