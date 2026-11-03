@@ -52,25 +52,27 @@ const jsonLd = {
 </BaseLayout>
 
 <script is:inline>
-  const bar = document.getElementById('filter-bar');
-  const grid = document.getElementById('post-grid');
-  const noResults = document.getElementById('no-results');
-  if (!bar || !grid) return;
+  (function () {
+    const bar = document.getElementById('filter-bar');
+    const grid = document.getElementById('post-grid');
+    const noResults = document.getElementById('no-results');
+    if (!bar || !grid) return;
 
-  bar.addEventListener('click', (e) => {
-    const chip = e.target.closest('.filter-chip');
-    if (!chip) return;
-    const filter = chip.dataset.filter;
+    bar.addEventListener('click', (e) => {
+      const chip = e.target.closest('.filter-chip');
+      if (!chip) return;
+      const filter = chip.dataset.filter;
 
-    bar.querySelectorAll('.filter-chip').forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
-    const cards = grid.querySelectorAll('[data-tags]');
-    let visible = 0;
-    cards.forEach((card) => {
-      const tags = (card.getAttribute('data-tags') || '').split(',');
-      const show = filter === 'all' || tags.includes(filter);
-      card.style.display = show ? '' : 'none';
-      if (show) visible++;
+      bar.querySelectorAll('.filter-chip').forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
+      const cards = grid.querySelectorAll('[data-tags]');
+      let visible = 0;
+      cards.forEach((card) => {
+        const tags = (card.getAttribute('data-tags') || '').split(',');
+        const show = filter === 'all' || tags.includes(filter);
+        card.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+      noResults.style.display = visible === 0 ? '' : 'none';
     });
-    noResults.style.display = visible === 0 ? '' : 'none';
-  });
+  })();
 </script>
