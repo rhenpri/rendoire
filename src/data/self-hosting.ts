@@ -6,6 +6,8 @@ export interface Item {
   why: string;
   link: string;
   status: Status;
+  /** European / EU-based project */
+  eu?: boolean;
 }
 
 export interface Category {
@@ -85,6 +87,7 @@ export const categories: Category[] = [
         why: 'The self-hosted productivity suite. The closest thing to a full replacement for Google Drive/Docs if you want one tool for everything.',
         link: 'https://nextcloud.com',
         status: 'recommended',
+        eu: true,
       },
       {
         name: 'Immich',
@@ -99,6 +102,7 @@ export const categories: Category[] = [
         why: 'Peer-to-peer, no cloud in the middle. Sync folders across your machines without trusting a third party.',
         link: 'https://syncthing.net',
         status: 'tried',
+        eu: true,
       },
       {
         name: 'PhotoPrism',
@@ -119,6 +123,13 @@ export const categories: Category[] = [
         tagline: 'Your own location history',
         why: 'Self-hosted Google Timeline — log where you\u2019ve been and own the data yourself. Pairs with a Home Assistant or OwnTracks setup.',
         link: 'https://dawarich.app',
+        status: 'explore',
+      },
+      {
+        name: 'Duplicati',
+        tagline: 'Encrypted, scheduled backups',
+        why: 'Point it at local storage or any cloud and it handles encrypted, versioned backups on a schedule. Friendly web UI.',
+        link: 'https://duplicati.com',
         status: 'explore',
       },
     ],
@@ -170,6 +181,13 @@ export const categories: Category[] = [
         link: 'https://emby.media',
         status: 'explore',
       },
+      {
+        name: 'Kavita',
+        tagline: 'A self-hosted ebook and comic server',
+        why: 'A beautiful reader for your EPUBs, PDFs, and comics, with a clean web UI. Great alongside an e-reader.',
+        link: 'https://www.kavitareader.com',
+        status: 'explore',
+      },
     ],
   },
   {
@@ -218,6 +236,20 @@ export const categories: Category[] = [
         why: 'The easiest way to put your apps behind a domain with TLS, on by default. A great first reverse proxy.',
         link: 'https://caddyserver.com',
         status: 'recommended',
+      },
+      {
+        name: 'Nginx Proxy Manager',
+        tagline: 'Reverse proxy without the config files',
+        why: 'A friendly web UI over Nginx — map domains to apps and issue TLS certs in a few clicks. Popular for a reason.',
+        link: 'https://nginxproxymanager.com',
+        status: 'recommended',
+      },
+      {
+        name: 'Authentik',
+        tagline: 'Self-hosted single sign-on',
+        why: 'One login for every app you run, with two-factor and fine-grained access control. The identity layer for a bigger homelab.',
+        link: 'https://goauthentik.io',
+        status: 'explore',
       },
       {
         name: 'CrowdSec',
@@ -303,6 +335,27 @@ export const categories: Category[] = [
         link: 'https://www.zimaspace.com',
         status: 'explore',
       },
+      {
+        name: 'Grafana',
+        tagline: 'Dashboards and alerting for everything',
+        why: 'The visualization layer for Prometheus and beyond. Turn metrics into the graphs you actually watch.',
+        link: 'https://grafana.com',
+        status: 'recommended',
+      },
+      {
+        name: 'Portainer',
+        tagline: 'A web UI for managing Docker',
+        why: 'See every container at a glance, read logs, and deploy stacks without touching the CLI. Big quality-of-life upgrade.',
+        link: 'https://www.portainer.io',
+        status: 'recommended',
+      },
+      {
+        name: 'Watchtower',
+        tagline: 'Auto-update your containers',
+        why: 'Keeps your Docker containers patched by pulling new images on a schedule. One less thing to remember.',
+        link: 'https://containrrr.dev/watchtower',
+        status: 'explore',
+      },
     ],
   },
   {
@@ -380,6 +433,36 @@ export const categories: Category[] = [
         link: 'https://actualbudget.org',
         status: 'explore',
       },
+      {
+        name: 'Wallabag',
+        tagline: 'Save articles and read them later',
+        why: 'Your own Pocket. Clip anything from the web and read it in a clean view — no algorithm, no paywall tricks.',
+        link: 'https://wallabag.org',
+        status: 'recommended',
+        eu: true,
+      },
+      {
+        name: 'OnlyOffice',
+        tagline: 'A full office suite you can host',
+        why: 'Documents, spreadsheets, and slides with strong Microsoft compatibility — and a self-hosted edition.',
+        link: 'https://www.onlyoffice.com',
+        status: 'recommended',
+        eu: true,
+      },
+      {
+        name: 'Mealie',
+        tagline: 'A self-hosted recipe manager',
+        why: 'Import recipes from any URL and keep them in one clean, searchable place. The nicest self-hosted cookbook.',
+        link: 'https://mealie.io',
+        status: 'explore',
+      },
+      {
+        name: 'Firefly III',
+        tagline: 'A self-hosted personal finance manager',
+        why: 'Detailed, privacy-first budgeting with reports and rules. More powerful than Actual if you like the data.',
+        link: 'https://www.firefly-iii.org',
+        status: 'explore',
+      },
     ],
   },
   {
@@ -393,6 +476,7 @@ export const categories: Category[] = [
         why: 'Decentralized, open, and yours. Join any server or run your own instance and still talk to the whole fediverse.',
         link: 'https://joinmastodon.org',
         status: 'recommended',
+        eu: true,
       },
       {
         name: 'FreshRSS',
@@ -400,6 +484,31 @@ export const categories: Category[] = [
         why: 'Your own feed aggregator with a clean web UI and mobile apps. The private way to keep up with the sites you follow.',
         link: 'https://freshrss.org',
         status: 'recommended',
+        eu: true,
+      },
+      {
+        name: 'Matrix',
+        tagline: 'Open, decentralized chat you can host',
+        why: 'Run your own chat on an open protocol — Element is the flagship client. Talk to anyone, on your terms.',
+        link: 'https://matrix.org',
+        status: 'recommended',
+        eu: true,
+      },
+      {
+        name: 'Jitsi Meet',
+        tagline: 'Self-hosted video calls in the browser',
+        why: 'Encrypted video conferencing with no accounts and no installs. Spin it up for private meetings.',
+        link: 'https://jitsi.org',
+        status: 'recommended',
+        eu: true,
+      },
+      {
+        name: 'PeerTube',
+        tagline: 'A federated, self-hosted video platform',
+        why: 'Your own YouTube that talks to other instances. From Framasoft, the French non-profit behind the fediverse.',
+        link: 'https://joinpeertube.org',
+        status: 'explore',
+        eu: true,
       },
     ],
   },

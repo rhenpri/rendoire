@@ -2,6 +2,8 @@ export interface Tool {
   name: string;
   note: string;
   link: string;
+  /** European / EU-based project */
+  eu?: boolean;
 }
 
 export interface ToolGroup {
@@ -21,6 +23,7 @@ export const toolGroups: ToolGroup[] = [
         name: 'Proton',
         note: 'Encrypted email, calendar, drive, VPN and password manager — one suite, no ads, no data mining.',
         link: 'https://proton.me',
+        eu: true,
       },
       {
         name: 'Mullvad VPN',
@@ -76,6 +79,18 @@ export const toolGroups: ToolGroup[] = [
         name: 'Aurora Store',
         note: 'Browse and install Google Play apps without a Google account, with a clean privacy-respecting client.',
         link: 'https://auroraoss.com',
+      },
+      {
+        name: 'Tuta Mail',
+        note: 'Encrypted email, calendar, and contacts from Germany — open source and privacy-first.',
+        link: 'https://tuta.com',
+        eu: true,
+      },
+      {
+        name: 'Ecosia',
+        note: 'A privacy-respecting search engine that plants trees with its revenue. European and independent.',
+        link: 'https://www.ecosia.org',
+        eu: true,
       },
     ],
   },
@@ -133,6 +148,12 @@ export const toolGroups: ToolGroup[] = [
         name: 'Framework',
         note: 'A repairable, upgradeable laptop built to be opened — the anti-landfill choice for portable computing.',
         link: 'https://frame.work',
+      },
+      {
+        name: 'Fairphone',
+        note: 'A modular, repairable, ethically-made phone from the Netherlands. Designed to last and be opened.',
+        link: 'https://www.fairphone.com',
+        eu: true,
       },
     ],
   },
