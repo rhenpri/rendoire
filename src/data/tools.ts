@@ -7,7 +7,6 @@ export interface Tool {
 export interface ToolGroup {
   id: string;
   label: string;
-  emoji: string;
   items: Tool[];
 }
 
@@ -17,7 +16,6 @@ export const toolGroups: ToolGroup[] = [
   {
     id: 'privacy',
     label: 'Privacy & mobile',
-    emoji: '🛡️',
     items: [
       {
         name: 'Proton',
@@ -64,7 +62,6 @@ export const toolGroups: ToolGroup[] = [
   {
     id: 'ai-dev',
     label: 'AI & dev',
-    emoji: '💻',
     items: [
       {
         name: 'OpenCode',
@@ -96,7 +93,6 @@ export const toolGroups: ToolGroup[] = [
   {
     id: 'hardware',
     label: 'Hardware',
-    emoji: '🧱',
     items: [
       {
         name: 'Synology',
