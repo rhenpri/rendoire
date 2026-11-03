@@ -1274,6 +1274,60 @@ a.card:hover {
 }
 
 /* ------------------------------------------------------------------ */
+/*  Mini visualisations                                                */
+/* ------------------------------------------------------------------ */
+.vz-flow {
+  stroke-dasharray: 4 6;
+  animation: vz-dash 1.5s linear infinite;
+}
+.vz-flow-slow {
+  stroke-dasharray: 4 6;
+  animation: vz-dash 2.4s linear infinite;
+}
+.vz-pulse {
+  animation: vz-pulse 2.6s ease-in-out infinite;
+}
+.vz-pulse-alt {
+  animation: vz-pulse 2.6s ease-in-out infinite;
+  animation-delay: 1.3s;
+}
+@keyframes vz-dash {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+@keyframes vz-pulse {
+  0%,
+  100% {
+    opacity: 0.22;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vz-flow,
+  .vz-flow-slow,
+  .vz-pulse,
+  .vz-pulse-alt {
+    animation: none !important;
+  }
+}
+.term-viz {
+  display: block;
+  width: 104px;
+  height: auto;
+  margin-bottom: 0.75rem;
+}
+.cat-viz {
+  display: inline-block;
+  width: 46px;
+  height: auto;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+
+/* ------------------------------------------------------------------ */
 /*  Tailwind theme aliases                                             */
 /* ------------------------------------------------------------------ */
 @theme inline {

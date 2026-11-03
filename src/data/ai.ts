@@ -205,23 +205,25 @@ export interface Term {
   term: string;
   def: string;
   group: string;
+  /** key into the MiniViz diagrams */
+  viz: string;
 }
 
 export const glossary: Term[] = [
-  { term: 'Machine learning', group: 'Core', def: 'Programs that improve with data instead of explicit rules — they learn a mapping from inputs to outputs by example.' },
-  { term: 'Neural network', group: 'Core', def: 'A stack of connected layers of weighted neurons, trained to approximate a function. The building block of deep learning.' },
-  { term: 'Deep learning', group: 'Core', def: 'Neural networks with many layers, which learn hierarchical features automatically from raw data.' },
-  { term: 'Foundation model', group: 'Core', def: 'A large model trained on broad data that can be adapted to many tasks — GPT and Llama are the obvious examples.' },
-  { term: 'Large language model (LLM)', group: 'Core', def: 'A foundation model trained on text to predict the next token; with enough scale, this simple objective yields fluent reasoning.' },
-  { term: 'Transformer', group: 'Architecture', def: 'The attention-based architecture behind modern LLMs. Its self-attention lets each token weigh every other token in context.' },
-  { term: 'Token', group: 'Architecture', def: 'A chunk of text (a word or part of a word) that a model reads and writes. Billing and context windows are measured in tokens.' },
-  { term: 'Embedding', group: 'Architecture', def: 'A dense vector that represents a word, image, or passage in a space where similar things sit close together.' },
-  { term: 'Context window', group: 'Architecture', def: 'How much text a model can hold in working memory at once. Bigger windows mean more material in a single prompt.' },
-  { term: 'Training vs inference', group: 'Ops', def: 'Training updates the model weights (expensive, rare). Inference runs the trained model to produce output (cheap, frequent).' },
-  { term: 'Fine-tuning', group: 'Ops', def: 'Further training a base model on a smaller, targeted dataset to improve it on a specific task or style.' },
-  { term: 'RAG', group: 'Ops', def: 'Retrieval-augmented generation — look up relevant documents at query time and feed them to the model, grounding its answer in your data.' },
-  { term: 'Agent', group: 'Ops', def: 'An LLM given tools and a goal, allowed to plan and act over multiple steps instead of answering in one shot.' },
-  { term: 'Model Context Protocol (MCP)', group: 'Ops', def: 'An open standard for connecting models to tools and data — a common plug so integrations are written once and work everywhere.' },
-  { term: 'Hallucination', group: 'Core', def: 'When a model produces fluent but false output. A reminder that LLMs predict text, not facts — which is why grounding matters.' },
-  { term: 'Multimodal', group: 'Core', def: 'Models that handle more than one medium — text, images, audio — in a single system.' },
+  { term: 'Machine learning', group: 'Core', viz: 'ml', def: 'Programs that improve with data instead of explicit rules — they learn a mapping from inputs to outputs by example.' },
+  { term: 'Neural network', group: 'Core', viz: 'nn', def: 'A stack of connected layers of weighted neurons, trained to approximate a function. The building block of deep learning.' },
+  { term: 'Deep learning', group: 'Core', viz: 'dl', def: 'Neural networks with many layers, which learn hierarchical features automatically from raw data.' },
+  { term: 'Foundation model', group: 'Core', viz: 'foundation', def: 'A large model trained on broad data that can be adapted to many tasks — GPT and Llama are the obvious examples.' },
+  { term: 'Large language model (LLM)', group: 'Core', viz: 'llm', def: 'A foundation model trained on text to predict the next token; with enough scale, this simple objective yields fluent reasoning.' },
+  { term: 'Transformer', group: 'Architecture', viz: 'transformer', def: 'The attention-based architecture behind modern LLMs. Its self-attention lets each token weigh every other token in context.' },
+  { term: 'Token', group: 'Architecture', viz: 'token', def: 'A chunk of text (a word or part of a word) that a model reads and writes. Billing and context windows are measured in tokens.' },
+  { term: 'Embedding', group: 'Architecture', viz: 'embedding', def: 'A dense vector that represents a word, image, or passage in a space where similar things sit close together.' },
+  { term: 'Context window', group: 'Architecture', viz: 'context', def: 'How much text a model can hold in working memory at once. Bigger windows mean more material in a single prompt.' },
+  { term: 'Training vs inference', group: 'Ops', viz: 'train', def: 'Training updates the model weights (expensive, rare). Inference runs the trained model to produce output (cheap, frequent).' },
+  { term: 'Fine-tuning', group: 'Ops', viz: 'finetune', def: 'Further training a base model on a smaller, targeted dataset to improve it on a specific task or style.' },
+  { term: 'RAG', group: 'Ops', viz: 'rag', def: 'Retrieval-augmented generation — look up relevant documents at query time and feed them to the model, grounding its answer in your data.' },
+  { term: 'Agent', group: 'Ops', viz: 'agent', def: 'An LLM given tools and a goal, allowed to plan and act over multiple steps instead of answering in one shot.' },
+  { term: 'Model Context Protocol (MCP)', group: 'Ops', viz: 'mcp', def: 'An open standard for connecting models to tools and data — a common plug so integrations are written once and work everywhere.' },
+  { term: 'Hallucination', group: 'Core', viz: 'hallucination', def: 'When a model produces fluent but false output. A reminder that LLMs predict text, not facts — which is why grounding matters.' },
+  { term: 'Multimodal', group: 'Core', viz: 'multimodal', def: 'Models that handle more than one medium — text, images, audio — in a single system.' },
 ];
