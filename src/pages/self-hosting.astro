@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 import { categories, statusLabel } from '../data/self-hosting';
+import MiniViz from '../components/MiniViz.astro';
 
 const domain = (url: string) => new URL(url).hostname.replace(/^www\./, '');
 ---
@@ -42,6 +43,7 @@ const domain = (url: string) => new URL(url).hostname.replace(/^www\./, '');
         {categories.map((cat, i) => (
           <section id={cat.id} class="dir-section" data-section={cat.id}>
             <h2 class="dir-section-title">
+              <MiniViz variant={cat.viz} class="cat-viz" />
               <span class="idx">{String(i + 1).padStart(2, '0')}</span> {cat.label}
             </h2>
             <p class="dir-section-blurb">{cat.blurb}</p>

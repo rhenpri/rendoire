@@ -4,6 +4,7 @@ import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 import { books, stages, glossary } from '../data/ai';
 import { withRef } from '../config';
+import MiniViz from '../components/MiniViz.astro';
 
 const bookByTitle = new Map(books.map((b) => [b.title, b]));
 const groups = ['Core', 'Architecture', 'Ops'];
@@ -134,6 +135,7 @@ const pubLabel = (p: string) => (p === 'oreilly' ? 'O\u2019Reilly' : p === 'mann
             <div class="glossary-grid">
               {glossary.filter((t) => t.group === group).map((term) => (
                 <div class="card reveal">
+                  <MiniViz variant={term.viz} class="term-viz" />
                   <div class="term-word">{term.term}</div>
                   <p class="term-def">{term.def}</p>
                 </div>

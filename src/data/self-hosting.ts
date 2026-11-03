@@ -14,6 +14,8 @@ export interface Category {
   id: string;
   label: string;
   blurb: string;
+  /** key into the MiniViz diagrams */
+  viz: string;
   items: Item[];
 }
 
@@ -24,6 +26,7 @@ export const categories: Category[] = [
     id: 'os',
     label: 'Operating systems',
     blurb: 'Take the OS back. Linux for the desktop, and a de-Googled Android for the pocket.',
+    viz: 'os',
     items: [
       {
         name: 'Linux Mint',
@@ -80,6 +83,7 @@ export const categories: Category[] = [
     id: 'cloud',
     label: 'Cloud & storage',
     blurb: 'Your own Dropbox, Photos, and sync — data stays on your hardware.',
+    viz: 'cloud',
     items: [
       {
         name: 'Nextcloud',
@@ -138,6 +142,7 @@ export const categories: Category[] = [
     id: 'media',
     label: 'Media & home',
     blurb: 'Your own Netflix and smart-home, without the subscription or the spying.',
+    viz: 'media',
     items: [
       {
         name: 'Jellyfin',
@@ -194,6 +199,7 @@ export const categories: Category[] = [
     id: 'security',
     label: 'Security & network',
     blurb: 'Passwords, DNS, VPN, and the reverse proxy that ties it together.',
+    viz: 'security',
     items: [
       {
         name: 'Vaultwarden',
@@ -278,6 +284,7 @@ export const categories: Category[] = [
     id: 'infra',
     label: 'Infrastructure',
     blurb: 'The boxes, containers, and dashboards that hold it all together.',
+    viz: 'infra',
     items: [
       {
         name: 'Docker',
@@ -362,6 +369,7 @@ export const categories: Category[] = [
     id: 'ai',
     label: 'Local AI',
     blurb: 'Run language and image models on your own hardware.',
+    viz: 'ai',
     items: [
       {
         name: 'Ollama',
@@ -397,6 +405,7 @@ export const categories: Category[] = [
     id: 'productivity',
     label: 'Productivity & automation',
     blurb: 'Documents, notes, tasks, and the glue that automates your life.',
+    viz: 'automation',
     items: [
       {
         name: 'n8n',
@@ -469,6 +478,7 @@ export const categories: Category[] = [
     id: 'social',
     label: 'Social & feeds',
     blurb: 'Own your timeline and your reading list instead of renting them.',
+    viz: 'graph',
     items: [
       {
         name: 'Mastodon',
