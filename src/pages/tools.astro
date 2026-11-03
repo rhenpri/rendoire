@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import { toolGroups } from '../data/tools';
+
+const domain = (url: string) => new URL(url).hostname.replace(/^www\./, '');
+---
+
+<BaseLayout
+  title="Tools I rate — rendoire"
+  description="A shortlist of the apps, services, and hardware worth reaching for — across privacy, AI, and self-hosting."
+  canonical="https://rendoire.com/tools/"
+>
+  <Navigation />
+
+  <main id="main" class="container section" style="padding-top: 4rem;">
+    <div class="section-label">The shortlist</div>
+    <h1 class="section-title">Tools I <em>rate</em></h1>
+    <p class="lead" style="margin-top:-1.25rem; margin-bottom:3rem;">
+      The apps, services, and hardware I'd point a friend toward — the shortlist across
+      everything, from privacy to AI to the boxes in the cupboard.
+    </p>
+
+    {toolGroups.map((group) => (
+      <section id={group.id} style="margin-bottom: 3.5rem;">
+        <h2 class="dir-section-title" style="margin-top:0;">
+          <span class="emoji" aria-hidden="true">{group.emoji}</span> {group.label}
+        </h2>
+        <div class="dir-grid">
+          {group.items.map((item) => (
+            <a href={item.link} target="_blank" rel="noopener" class="dir-card card-polished">
+              <h3 class="dir-name">{item.name}</h3>
+              <p class="dir-why">{item.note}</p>
+              <span class="dir-link">{domain(item.link)} ↗</span>
+            </a>
+          ))}
+        </div>
+      </section>
+    ))}
+
+    <p style="font-family:var(--fm); font-size:0.68rem; color:var(--mid); line-height:1.7;">
+      Just things worth using. No sponsors, no affiliate pressure — recommendations I'd give anyway.
+    </p>
+  </main>
+
+  <Footer />
+</BaseLayout>
