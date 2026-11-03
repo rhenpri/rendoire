@@ -57,6 +57,26 @@ export const toolGroups: ToolGroup[] = [
         note: 'Offline, privacy-respecting navigation built on OpenStreetMap. No accounts, no ads, no tracking.',
         link: 'https://organicmaps.app',
       },
+      {
+        name: 'LocalSend',
+        note: 'AirDrop-style file sharing across devices on your own network — no cloud, no accounts, cross-platform.',
+        link: 'https://localsend.org',
+      },
+      {
+        name: 'NewPipe',
+        note: 'A lightweight, private YouTube client for Android — no ads, no Google account. PipePipe is a popular fork.',
+        link: 'https://newpipe.net',
+      },
+      {
+        name: 'Obtainium',
+        note: 'Install and update Android apps straight from their source — GitHub, GitLab, or F-Droid — bypassing app stores.',
+        link: 'https://obtainium.imranr.dev',
+      },
+      {
+        name: 'Aurora Store',
+        note: 'Browse and install Google Play apps without a Google account, with a clean privacy-respecting client.',
+        link: 'https://auroraoss.com',
+      },
     ],
   },
   {
@@ -108,6 +128,11 @@ export const toolGroups: ToolGroup[] = [
         name: 'Raspberry Pi',
         note: 'The tiny computer that powers a huge slice of the homelab world. Cheap, quiet, endlessly useful.',
         link: 'https://www.raspberrypi.com',
+      },
+      {
+        name: 'Framework',
+        note: 'A repairable, upgradeable laptop built to be opened — the anti-landfill choice for portable computing.',
+        link: 'https://frame.work',
       },
     ],
   },
