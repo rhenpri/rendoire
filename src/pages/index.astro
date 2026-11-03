@@ -9,13 +9,28 @@ const posts = await getPosts();
 const featured = posts.find((p) => p.featured) ?? posts[0];
 const recent = posts.filter((p) => p.slug !== featured?.slug).slice(0, 6);
 
-const social = [
-  { label: 'Medium', href: 'https://rendoire.medium.com' },
-  { label: 'GitHub', href: 'https://github.com/rhenpri' },
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/rhenderson832/' },
-  { label: 'YouTube', href: 'https://www.youtube.com/@rendoire' },
-  { label: 'Instagram', href: 'https://instagram.com/rendoire' },
-  { label: 'RSS', href: '/feed.xml' },
+const pillars = [
+  {
+    glyph: '✍️',
+    title: 'Writing',
+    desc: 'Essays on AI, software, and the layer between the model and the real world.',
+    href: '/blog',
+    cta: 'Read the journal',
+  },
+  {
+    glyph: '🛠️',
+    title: 'Self-hosting',
+    desc: 'Tools I actually rate for owning your data — Linux, private cloud, and more.',
+    href: '/self-hosting',
+    cta: 'Browse recommendations',
+  },
+  {
+    glyph: '🧠',
+    title: 'AI knowledge',
+    desc: 'A practical learning path and the O\u2019Reilly books that actually earn their shelf space.',
+    href: '/ai',
+    cta: 'Start learning',
+  },
 ];
 
 const jsonLd = {
@@ -23,18 +38,7 @@ const jsonLd = {
   '@type': 'WebSite',
   name: 'rendoire',
   url: 'https://rendoire.com',
-  description: 'Essays on artificial intelligence, software engineering, and self-hosting.',
-  author: {
-    '@type': 'Person',
-    name: 'rendoire',
-    url: 'https://rendoire.com',
-    sameAs: [
-      'https://rendoire.medium.com',
-      'https://github.com/rhenpri',
-      'https://www.linkedin.com/in/rhenderson832/',
-      'https://www.youtube.com/@rendoire',
-    ],
-  },
+  description: 'Writing, AI knowledge, and self-hosting recommendations.',
 };
 ---
 
@@ -44,25 +48,40 @@ const jsonLd = {
   <main id="main">
     <!-- Hero -->
     <header class="hero container">
-      <p class="hero-eyebrow">writing · building · self-hosting</p>
+      <p class="hero-eyebrow"><span class="dot"></span> AI · software · owning your tools</p>
       <h1 class="hero-wordmark">ren<em class="accent">doire</em></h1>
       <p class="hero-tagline">
-        Essays on artificial intelligence, software engineering, and the quieter art of
-        building systems you actually own. No hype — just things I've figured out the hard way.
+        I write about artificial intelligence, build software, and keep my data on machines I
+        actually own. This is where I share what I've learned — and what I'd tell a friend to use.
       </p>
       <div class="hero-links">
-        {social.map((s) => (
-          <a href={s.href} target={s.href.startsWith('http') ? '_blank' : undefined} rel={s.href.startsWith('http') ? 'noopener' : undefined}>{s.label}</a>
-        ))}
+        <a href="/blog">Writing</a>
+        <a href="/self-hosting">Self-hosting</a>
+        <a href="/ai">AI resources</a>
+        <a href="/feed.xml">RSS</a>
       </div>
     </header>
 
+    <!-- Pillars -->
+    <section class="container" style="padding: 1rem 0 4rem;">
+      <div class="pillar-grid">
+        {pillars.map((p) => (
+          <a href={p.href} class="pillar-card card-polished">
+            <span class="pillar-glyph" aria-hidden="true">{p.glyph}</span>
+            <h2 class="pillar-title">{p.title}</h2>
+            <p class="pillar-desc">{p.desc}</p>
+            <span class="pillar-link">{p.cta} →</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
     <!-- Featured post -->
     {featured && (
-      <section class="container" style="padding-top: 1rem;">
+      <section class="container" style="padding: 0 0 1rem;">
         <a href={`/blog/${featured.slug}/`} class="featured-card card-polished">
           <div class="featured-body">
-            <span class="featured-kicker">Featured essay</span>
+            <span class="featured-kicker">Latest essay</span>
             <h2 class="featured-title">{featured.title}</h2>
             {featured.description && <p class="featured-desc">{featured.description}</p>}
             <div class="post-meta" style="margin-bottom:0;">
@@ -80,39 +99,14 @@ const jsonLd = {
     )}
 
     <!-- Recent posts -->
-    <section class="section container" style="border-top:none;">
-      <div class="section-label">Latest writing</div>
-      <h2 class="section-title">From the <em>journal</em></h2>
+    <section class="section container">
+      <div class="section-label">From the journal</div>
+      <h2 class="section-title">Recent <em>writing</em></h2>
       <div class="post-grid">
         {recent.map((post) => <PostCard post={post} />)}
       </div>
-      <div style="margin-top: 2.5rem;">
+      <div style="margin-top: 2.25rem;">
         <a href="/blog/" class="post-arrow" style="font-size:0.75rem;">All essays →</a>
-      </div>
-    </section>
-
-    <!-- Elsewhere teasers -->
-    <section class="section container">
-      <div class="section-label">More about me</div>
-      <div class="teaser-grid">
-        <a href="/about" class="teaser-card card-polished">
-          <span class="teaser-index">01</span>
-          <h3 class="teaser-title">About</h3>
-          <p class="teaser-desc">Who I am, what I've built, and where I focus.</p>
-          <span class="teaser-link">About me →</span>
-        </a>
-        <a href="/projects" class="teaser-card card-polished">
-          <span class="teaser-index">02</span>
-          <h3 class="teaser-title">Projects</h3>
-          <p class="teaser-desc">Recent work in AI systems, live service, and self-hosting.</p>
-          <span class="teaser-link">See work →</span>
-        </a>
-        <a href="/lab" class="teaser-card card-polished">
-          <span class="teaser-index">03</span>
-          <h3 class="teaser-title">Lab</h3>
-          <p class="teaser-desc">My homelab and the books I'm reading.</p>
-          <span class="teaser-link">Visit the lab →</span>
-        </a>
       </div>
     </section>
 

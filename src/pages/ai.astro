@@ -1,0 +1,213 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import { books, stages, glossary } from '../data/ai';
+import { withRef } from '../config';
+
+const bookByTitle = new Map(books.map((b) => [b.title, b]));
+const groups = ['Core', 'Architecture', 'Ops'];
+
+const pubLabel = (p: string) => (p === 'oreilly' ? 'O\u2019Reilly' : p === 'manning' ? 'Manning' : 'Independent');
+---
+
+<BaseLayout
+  title="AI knowledge — rendoire"
+  description="A practical learning path and the O'Reilly books that actually earn their shelf space."
+  canonical="https://rendoire.com/ai/"
+>
+  <Navigation />
+
+  <main id="main" class="container section" style="padding-top: 4rem;">
+    <div class="section-label">Learn</div>
+    <h1 class="section-title">AI <em>knowledge</em></h1>
+    <p class="lead" style="margin-top:-1.25rem; margin-bottom:2.5rem;">
+      A learning path built the way I wish I'd found it — fundamentals first, then the modern
+      stack — paired with the books that actually teach, not just sell.
+    </p>
+
+    <!-- Visualization -->
+    <div class="model-viz" aria-hidden="true">
+      <svg viewBox="0 0 840 150" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram of tokens flowing through a model">
+        <defs>
+          <linearGradient id="flowGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="var(--green)" stop-opacity="0.1" />
+            <stop offset="50%" stop-color="var(--purple)" />
+            <stop offset="100%" stop-color="var(--green)" stop-opacity="0.1" />
+          </linearGradient>
+        </defs>
+
+        <!-- input tokens -->
+        <g class="viz-token" style="animation-delay:0s">
+          <circle cx="50" cy="30" r="7" fill="var(--green)" />
+          <circle cx="50" cy="75" r="7" fill="var(--green)" />
+          <circle cx="50" cy="120" r="7" fill="var(--green)" />
+        </g>
+        <g class="viz-token" style="animation-delay:0.4s">
+          <circle cx="110" cy="30" r="7" fill="var(--green)" />
+          <circle cx="110" cy="75" r="7" fill="var(--green)" />
+          <circle cx="110" cy="120" r="7" fill="var(--green)" />
+        </g>
+
+        <!-- flow lines input -> model -->
+        <path d="M170 30 C 240 30, 280 75, 340 75" stroke="url(#flowGrad)" stroke-width="1.5" class="viz-flow" />
+        <path d="M170 120 C 240 120, 280 75, 340 75" stroke="url(#flowGrad)" stroke-width="1.5" class="viz-flow" style="animation-delay:0.3s" />
+        <path d="M170 75 L 340 75" stroke="url(#flowGrad)" stroke-width="1.5" class="viz-flow" style="animation-delay:0.15s" />
+
+        <!-- model block -->
+        <rect x="345" y="35" width="150" height="80" rx="14" stroke="var(--purple)" stroke-width="1.5" fill="var(--purple-dim)" />
+        <text x="420" y="80" text-anchor="middle" fill="var(--purple-soft)" font-family="var(--fm)" font-size="11" letter-spacing="2">MODEL</text>
+        <g class="viz-pulse">
+          <rect x="345" y="35" width="150" height="80" rx="14" stroke="var(--purple)" stroke-width="1.5" fill="none" />
+        </g>
+
+        <!-- flow lines model -> output -->
+        <path d="M495 75 C 560 75, 600 30, 670 30" stroke="url(#flowGrad)" stroke-width="1.5" class="viz-flow" style="animation-delay:0.45s" />
+        <path d="M495 75 C 560 75, 600 75, 670 75" stroke="url(#flowGrad)" stroke-width="1.5" class="viz-flow" style="animation-delay:0.15s" />
+        <path d="M495 75 C 560 75, 600 120, 670 120" stroke="url(#flowGrad)" stroke-width="1.5" class="viz-flow" style="animation-delay:0.6s" />
+
+        <!-- output tokens -->
+        <g class="viz-token" style="animation-delay:0.5s">
+          <circle cx="730" cy="30" r="7" fill="var(--purple-soft)" />
+          <circle cx="730" cy="75" r="7" fill="var(--purple-soft)" />
+          <circle cx="730" cy="120" r="7" fill="var(--purple-soft)" />
+        </g>
+        <g class="viz-token" style="animation-delay:0.8s">
+          <circle cx="790" cy="30" r="7" fill="var(--purple-soft)" />
+          <circle cx="790" cy="75" r="7" fill="var(--purple-soft)" />
+          <circle cx="790" cy="120" r="7" fill="var(--purple-soft)" />
+        </g>
+      </svg>
+    </div>
+
+    <!-- Learning path -->
+    <section style="margin-top: 4rem;">
+      <div class="section-label">Learning path</div>
+      <h2 class="section-title" style="font-size:2.2rem;">From zero to <em>agents</em></h2>
+      <div class="path-list">
+        {stages.map((stage) => (
+          <div class="path-stage card-polished reveal">
+            <div class="path-num">{stage.label}</div>
+            <div class="path-body">
+              <h3>{stage.title}</h3>
+              <p>{stage.why}</p>
+              <div class="path-books">
+                {stage.bookTitles.map((t) => {
+                  const b = bookByTitle.get(t);
+                  return b
+                    ? <a href={withRef(b.url)} target="_blank" rel="noopener" class="path-book">{t}</a>
+                    : <span class="path-book">{t}</span>;
+                })}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Books -->
+    <section style="margin-top: 4.5rem;">
+      <div class="section-label">The books</div>
+      <h2 class="section-title" style="font-size:2.2rem;">Worth the <em>shelf space</em></h2>
+      <div class="book-grid">
+        {books.map((book) => (
+          <a href={withRef(book.url)} target="_blank" rel="noopener" class="book-card card-polished">
+            <div class="book-top">
+              <span class={`book-publisher ${book.publisher === 'oreilly' ? 'pub-oreilly' : 'pub-other'}`}>{pubLabel(book.publisher)}</span>
+              <span class="book-author">{book.year}</span>
+            </div>
+            <h3 class="book-title">{book.title}</h3>
+            <span class="book-author">by {book.author}</span>
+            <p class="book-blurb">{book.blurb}</p>
+            <span class="book-link">View book ↗</span>
+          </a>
+        ))}
+      </div>
+      <p style="font-family:var(--fm); font-size:0.66rem; color:var(--mid); margin-top:1.5rem; line-height:1.7;">
+        Book links may include a referral tag that helps support this site — no extra cost to you.
+      </p>
+    </section>
+
+    <!-- Glossary -->
+    <section style="margin-top: 4.5rem;">
+      <div class="section-label">Glossary</div>
+      <h2 class="section-title" style="font-size:2.2rem;">Terms, in <em>plain English</em></h2>
+      <div class="glossary-groups">
+        {groups.map((group) => (
+          <div class="glossary-group">
+            <h3>{group}</h3>
+            <div class="glossary-grid">
+              {glossary.filter((t) => t.group === group).map((term) => (
+                <div class="term-card card-polished reveal">
+                  <div class="term-word">{term.term}</div>
+                  <p class="term-def">{term.def}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .model-viz {
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.015), transparent);
+    padding: 1rem;
+    overflow: hidden;
+  }
+  .model-viz svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .viz-token circle {
+    opacity: 0.45;
+    animation: vizPulse 2.6s ease-in-out infinite;
+  }
+  @keyframes vizPulse {
+    0%,
+    100% {
+      opacity: 0.25;
+    }
+    50% {
+      opacity: 0.95;
+    }
+  }
+  .viz-flow {
+    stroke-dasharray: 6 8;
+    animation: vizFlow 1.6s linear infinite;
+  }
+  @keyframes vizFlow {
+    to {
+      stroke-dashoffset: -28;
+    }
+  }
+  .viz-pulse {
+    animation: vizBox 2.6s ease-in-out infinite;
+    transform-origin: 420px 75px;
+  }
+  @keyframes vizBox {
+    0%,
+    100% {
+      opacity: 0.15;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.5;
+      transform: scale(1.02);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .viz-token circle,
+    .viz-flow,
+    .viz-pulse {
+      animation: none !important;
+    }
+  }
+</style>

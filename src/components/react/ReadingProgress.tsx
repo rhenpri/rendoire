@@ -8,7 +8,7 @@ export default function ReadingProgress() {
   return (
     <motion.div
       aria-hidden="true"
-      className="reading-progress bg-amber-400"
+      className="reading-progress bg-emerald-400"
       style={{ scaleX }}
     />
   );
