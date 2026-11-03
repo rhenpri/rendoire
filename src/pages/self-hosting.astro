@@ -56,7 +56,10 @@ const domain = (url: string) => new URL(url).hostname.replace(/^www\./, '');
                 >
                   <div class="dir-card-top">
                     <span class="dir-tagline">{item.tagline}</span>
-                    <span class={`status-badge status-${item.status}`}>{statusLabel[item.status]}</span>
+                    <span style="display:flex; gap:0.4rem; align-items:flex-start;">
+                      {item.eu && <span class="eu-badge" title="European project">EU</span>}
+                      <span class={`status-badge status-${item.status}`}>{statusLabel[item.status]}</span>
+                    </span>
                   </div>
                   <h3 class="dir-name">{item.name}</h3>
                   <p class="dir-why">{item.why}</p>

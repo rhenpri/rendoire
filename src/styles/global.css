@@ -689,6 +689,17 @@ a.card:hover {
   color: var(--mid);
   border: 1px solid var(--border);
 }
+.eu-badge {
+  font-family: var(--fm);
+  font-size: 0.52rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--green);
+  border: 1px solid rgba(62, 207, 142, 0.35);
+  border-radius: 3px;
+  padding: 0.1rem 0.4rem;
+  white-space: nowrap;
+}
 
 /* ------------------------------------------------------------------ */
 /*  Learning path & books (AI page)                                    */
@@ -969,6 +980,15 @@ a.card:hover {
   border-bottom-color: var(--green);
   color: var(--text);
 }
+/* Auto-linked tool/service references */
+.article-body a.tool-link {
+  border-bottom-style: dotted;
+}
+.article-body a.tool-link::after {
+  content: ' ↗';
+  font-size: 0.7em;
+  opacity: 0.6;
+}
 .article-body img {
   max-width: 100%;
   border-radius: var(--radius);
@@ -1084,6 +1104,14 @@ a.card:hover {
   line-height: 1.7;
   margin-top: 0.7rem;
   max-width: 22rem;
+}
+.footer-flag {
+  font-family: var(--fm);
+  font-size: 0.68rem;
+  letter-spacing: 0.03em;
+  color: var(--muted);
+  margin-top: 1rem;
+  line-height: 1.6;
 }
 .footer-col h4 {
   font-family: var(--fm);

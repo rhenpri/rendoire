@@ -30,7 +30,10 @@ const domain = (url: string) => new URL(url).hostname.replace(/^www\./, '');
         <div class="dir-grid">
           {group.items.map((item) => (
             <a href={item.link} target="_blank" rel="noopener" class="card dir-card">
-              <h3 class="dir-name">{item.name}</h3>
+              <div class="dir-card-top">
+                <h3 class="dir-name">{item.name}</h3>
+                {item.eu && <span class="eu-badge" title="European project">EU</span>}
+              </div>
               <p class="dir-why">{item.note}</p>
               <span class="dir-link">{domain(item.link)} ↗</span>
             </a>
