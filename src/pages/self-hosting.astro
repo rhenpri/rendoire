@@ -1,0 +1,122 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import { categories, statusLabel } from '../data/self-hosting';
+
+const domain = (url: string) => new URL(url).hostname.replace(/^www\./, '');
+---
+
+<BaseLayout
+  title="Self-hosting — rendoire"
+  description="A curated, opinionated list of tools for owning your data — Linux, private cloud, security, and local AI."
+  canonical="https://rendoire.com/self-hosting/"
+>
+  <Navigation />
+
+  <main id="main" class="container section" style="padding-top: 4rem;">
+    <div class="section-label">Recommendations</div>
+    <h1 class="section-title">Self-<em>hosting</em></h1>
+    <p class="lead" style="margin-top:-1.25rem; margin-bottom:1.5rem;">
+      A short, opinionated list of what I'd hand to a friend. Things I've actually used,
+      plus a few I'm keeping an eye on. Every link goes straight to the project.
+    </p>
+
+    <div class="dir-layout" style="margin-top: 1rem;">
+      <aside class="dir-sidebar" aria-label="Categories">
+        <input
+          type="search"
+          id="dir-search"
+          placeholder="Search tools…"
+          autocomplete="off"
+          style="font-family:var(--fm); font-size:0.78rem; color:var(--text); background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:0.6rem 0.8rem; margin-bottom:0.75rem;"
+        />
+        {categories.map((cat) => (
+          <button class="dir-nav-btn" data-target={cat.id} aria-pressed={cat.id === categories[0].id ? 'true' : 'false'}>
+            <span aria-hidden="true">{cat.emoji}</span> {cat.label}
+          </button>
+        ))}
+      </aside>
+
+      <div class="dir-content" id="dir-content">
+        {categories.map((cat) => (
+          <section id={cat.id} class="dir-section" data-section={cat.id}>
+            <h2 class="dir-section-title"><span class="emoji" aria-hidden="true">{cat.emoji}</span> {cat.label}</h2>
+            <p class="dir-section-blurb">{cat.blurb}</p>
+            <div class="dir-grid">
+              {cat.items.map((item) => (
+                <a
+                  href={item.link}
+                  target="_blank"
+                  rel="noopener"
+                  class="dir-card card-polished"
+                  data-search={`${item.name} ${item.tagline} ${item.why} ${cat.label}`.toLowerCase()}
+                >
+                  <div class="dir-card-top">
+                    <span class="dir-tagline">{item.tagline}</span>
+                    <span class={`status-badge status-${item.status}`}>{statusLabel[item.status]}</span>
+                  </div>
+                  <h3 class="dir-name">{item.name}</h3>
+                  <p class="dir-why">{item.why}</p>
+                  <span class="dir-link">{domain(item.link)} ↗</span>
+                </a>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+    </div>
+
+    <p style="font-family:var(--fm); font-size:0.68rem; color:var(--mid); margin-top:3rem; line-height:1.7;">
+      No affiliate links and no sponsors — these are just the tools I reach for. Your data, your rules.
+    </p>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<script is:inline>
+  (function () {
+    // Category jump nav + active highlighting
+    const buttons = document.querySelectorAll('.dir-nav-btn');
+    const sections = document.querySelectorAll('[data-section]');
+
+    const setActive = (id) => {
+      buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.target === id)));
+    };
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const el = document.getElementById(btn.dataset.target);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) setActive(e.target.id);
+        });
+      },
+      { rootMargin: '-20% 0px -70% 0px' },
+    );
+    sections.forEach((s) => io.observe(s));
+
+    // Search
+    const search = document.getElementById('dir-search');
+    if (search) {
+      search.addEventListener('input', () => {
+        const q = search.value.trim().toLowerCase();
+        document.querySelectorAll('[data-search]').forEach((card) => {
+          const match = !q || card.getAttribute('data-search').includes(q);
+          card.style.display = match ? '' : 'none';
+        });
+        document.querySelectorAll('[data-section]').forEach((section) => {
+          const visible = section.querySelectorAll('[data-search]');
+          const any = [...visible].some((c) => c.style.display !== 'none');
+          section.style.display = any ? '' : 'none';
+        });
+      });
+    }
+  })();
+</script>

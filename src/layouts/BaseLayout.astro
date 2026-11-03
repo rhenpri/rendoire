@@ -12,8 +12,8 @@ interface Props {
 }
 
 const {
-  title = 'rendoire — writing on AI, software & self-hosting',
-  description = 'Essays on artificial intelligence, software engineering, and reclaiming your digital autonomy through self-hosting.',
+  title = 'rendoire — AI, software & self-hosting',
+  description = 'Writing, AI knowledge, and self-hosting recommendations — building and owning your own tools.',
   canonical,
   image = 'https://rendoire.com/og-image.png',
   type = 'website',
@@ -68,10 +68,12 @@ const resolvedCanonical =
     <a href="#main" class="skip-link">Skip to content</a>
     <CustomCursor client:load />
 
-    <div class="ambient-bg" aria-hidden="true">
-      <div class="ambient-blob amb-p"></div>
-      <div class="ambient-blob amb-b"></div>
+    <div class="aurora" aria-hidden="true">
+      <div class="aurora-blob aur-g"></div>
+      <div class="aurora-blob aur-p"></div>
+      <div class="aurora-blob aur-p2"></div>
     </div>
+    <div class="grain" aria-hidden="true"></div>
 
     <slot />
 

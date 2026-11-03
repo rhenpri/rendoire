@@ -38,7 +38,7 @@ export default function CustomCursor() {
       <motion.div
         animate={{ scale: hovering ? 2.2 : 1, opacity: hovering ? 0.5 : 0.85 }}
         transition={{ type: "spring", stiffness: 300, damping: 20 }}
-        className="h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-amber-400/70 mix-blend-difference"
+        className="h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-400/80 shadow-[0_0_16px_rgba(62,207,142,0.55)]"
       />
     </motion.div>
   );

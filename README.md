@@ -1,16 +1,16 @@
 # rendoire
 
 The blog and digital home of **rendoire** — essays on artificial intelligence, software
-engineering, and self-hosting.
+engineering, and owning your own tools.
 
 [Visit rendoire.com →](https://rendoire.com)
 
 ## Stack
 
 - **Framework:** [Astro](https://astro.build) 7 — fully static output
-- **Styling:** Tailwind CSS 4 + a custom editorial design system
+- **Styling:** Tailwind CSS 4 + a custom editorial design system (white/black/grey + green/purple)
 - **Content:** Markdown in `src/content/blog/` (Astro content collections)
-- **Interactions:** React islands (reading progress, cursor, homelab monitor) + Framer Motion
+- **Interactions:** React islands (reading progress, cursor) + Framer Motion + pure-CSS/SVG animation
 - **Fonts:** Self-hosted via Fontsource (no third-party CDNs)
 - **Deploy:** GitHub Actions → GitHub Pages (domain fronted by an APISIX proxy)
 
@@ -18,16 +18,20 @@ engineering, and self-hosting.
 
 ```
 src/
+  config.ts                Site constants + O'Reilly referral tag
   content.config.ts        Content collection schema
   content/blog/*.md        Posts (frontmatter + Markdown)
+  data/
+    self-hosting.ts        Curated self-hosting recommendations
+    ai.ts                  Books, learning path, glossary
   lib/blog.ts              Post helpers (sorting, reading time, tags)
   pages/
-    index.astro            Home — featured + latest posts
+    index.astro            Home — pillars + featured + latest posts
     blog/index.astro       All posts (with tag filter)
     blog/[...slug].astro   Single post
-    about.astro            About / experience / focus
-    projects.astro         Projects
-    lab.astro              Homelab monitor + reading list
+    self-hosting.astro     Recommendations directory (search + categories)
+    ai.astro               Learning path, books, glossary + visualization
+    about.astro            About
     feed.xml.js            RSS (built from local content)
 scripts/
   import-medium.mjs        Import posts from a Medium RSS feed
@@ -77,6 +81,17 @@ node scripts/publish-medium.mjs example-post --public
 
 See `docs/SECURITY.md` for details on how the Medium canonical link keeps your site as
 the source of truth.
+
+## Self-hosting & AI recommendations
+
+Both pages are data-driven and easy to edit:
+
+- **Self-hosting** — `src/data/self-hosting.ts` (categories → items with links and a
+  `tried` / `recommended` / `explore` status).
+- **AI resources** — `src/data/ai.ts` (books, learning path, glossary).
+
+To add your O'Reilly **affiliate/referral** tag, set `referral.oreilly` in `src/config.ts` —
+every book link on `/ai` picks it up automatically.
 
 ## Deploy
 

@@ -3,19 +3,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 
-const focus = [
-  { tag: '[AI]', title: 'Intelligent systems', desc: 'Building reasoning systems where AI is part of the core logic — not just an API wrapper.' },
-  { tag: '[SWE]', title: 'Software delivery', desc: 'Seven years of shipping code that has to work, bridging AI research and production.' },
-  { tag: '[EDU]', title: 'AI training', desc: 'Hands-on training for people who actually want to build with AI, across multiple industries.' },
-  { tag: '[INF]', title: 'Self-hosted infra', desc: 'Proxmox, Ollama, open models, n8n. Running my own AI stack because it is useful — and fun.' },
-  { tag: '[OPS]', title: 'AI-native ops', desc: 'Runbooks, agentic workflows, and incident response where AI handles the heavy lifting.' },
-  { tag: '[CNT]', title: 'Writing', desc: 'Essays on AI, software, and infrastructure. No hype — just things worth writing down.' },
-];
-
-const experience = [
-  { period: '2024 →', role: 'Co-founder, AI Practitioner Programme', desc: 'Building hands-on training for people who actually want to build with AI. Designed the curriculum and ran cohort sessions.' },
-  { period: '2022 →', role: 'Founder, RENDOIRE', desc: 'Writing about AI and software. Medium for longer pieces, Instagram for shorter ones.' },
-  { period: '2019 →', role: 'Building software & AI systems', desc: 'Live service engineering, observability, and applied intelligence in production.' },
+const values = [
+  { title: 'Build things that work', desc: 'Software that has to survive contact with the real world, not just a demo.' },
+  { title: 'Own your tools', desc: 'Data and devices you control, because digital sovereignty is a practice, not a slogan.' },
+  { title: 'Learn in public', desc: 'I write to figure things out, and share the useful parts along the way.' },
 ];
 
 const social = [
@@ -23,66 +14,50 @@ const social = [
   { label: 'GitHub', handle: 'rhenpri', href: 'https://github.com/rhenpri' },
   { label: 'LinkedIn', handle: 'rhenderson832', href: 'https://www.linkedin.com/in/rhenderson832/' },
   { label: 'YouTube', handle: '@rendoire', href: 'https://www.youtube.com/@rendoire' },
-  { label: 'Instagram', handle: '@rendoire', href: 'https://instagram.com/rendoire' },
+  { label: 'RSS', handle: 'feed.xml', href: '/feed.xml' },
 ];
 ---
 
 <BaseLayout
   title="About — rendoire"
-  description="Software & AI engineer. Seven years of building systems that have to work."
+  description="Software and AI, and keeping my data on machines I own."
   canonical="https://rendoire.com/about/"
 >
   <Navigation />
 
   <main id="main" class="container section" style="padding-top: 4rem;">
     <div class="section-label">About</div>
-    <h1 class="section-title">Software & <em>AI</em>, built to work</h1>
-    <p style="color: var(--muted); max-width: 44rem; font-size: 1.05rem; line-height: 1.8;">
-      I'm a software and AI engineer who has spent the last seven years building systems that
-      have to keep working. I run my own AI stack at home, write about the layer between the
-      model and the business, and teach people how to build with AI for real.
+    <h1 class="section-title">Nice to <em>meet you</em></h1>
+    <p class="lead">
+      I'm rendoire. I write about artificial intelligence and software, and I keep my data on
+      machines I actually own. This site is the overlap of those three things — the writing,
+      the recommendations, and the tools.
     </p>
-  </main>
 
-  <section class="container" style="padding: 3rem 0 4rem;">
-    <div class="section-label">Focus</div>
-    <div class="teaser-grid">
-      {focus.map((f) => (
-        <div class="teaser-card card-polished" style="min-height:auto;">
-          <span class="teaser-index" style="color:var(--amber);">{f.tag}</span>
-          <h3 class="teaser-title" style="font-size:1.4rem;">{f.title}</h3>
-          <p class="teaser-desc">{f.desc}</p>
-        </div>
-      ))}
-    </div>
-  </section>
-
-  <section class="container" style="padding: 2rem 0 4rem;">
-    <div class="section-label">Background</div>
-    <div style="display:flex; flex-direction:column; gap:1rem;">
-      {experience.map((e) => (
-        <div class="card-polished" style="padding:2rem; display:grid; grid-template-columns: 120px 1fr; gap:1.5rem; align-items:start;">
-          <span style="font-family:var(--fm); font-size:0.72rem; color:var(--muted); letter-spacing:0.04em;">{e.period}</span>
-          <div>
-            <h3 style="font-weight:600; margin-bottom:0.4rem;">{e.role}</h3>
-            <p style="color:var(--mid); font-size:0.88rem; line-height:1.7;">{e.desc}</p>
+    <section style="margin-top: 4rem;">
+      <div class="section-label">What I care about</div>
+      <div class="post-grid">
+        {values.map((v) => (
+          <div class="post-card card-polished" style="padding: 1.75rem; min-height: 150px;">
+            <h3 class="post-title" style="font-size:1.3rem;">{v.title}</h3>
+            <p class="post-desc" style="-webkit-line-clamp: unset;">{v.desc}</p>
           </div>
-        </div>
-      ))}
-    </div>
-  </section>
+        ))}
+      </div>
+    </section>
 
-  <section class="container" style="padding: 2rem 0 3rem;">
-    <div class="section-label">Find me</div>
-    <div class="post-grid" style="grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));">
-      {social.map((s) => (
-        <a href={s.href} target="_blank" rel="noopener" class="teaser-card card-polished" style="min-height:auto; gap:0.4rem;">
-          <h3 class="teaser-title" style="font-size:1.25rem;">{s.label}</h3>
-          <span style="font-family:var(--fm); font-size:0.72rem; color:var(--mid);">{s.handle}</span>
-        </a>
-      ))}
-    </div>
-  </section>
+    <section style="margin-top: 4rem;">
+      <div class="section-label">Find me</div>
+      <div class="post-grid" style="grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));">
+        {social.map((s) => (
+          <a href={s.href} target={s.href.startsWith('http') ? '_blank' : undefined} rel={s.href.startsWith('http') ? 'noopener' : undefined} class="post-card card-polished" style="padding:1.5rem; gap:0.3rem;">
+            <h3 class="post-title" style="font-size:1.15rem;">{s.label}</h3>
+            <span style="font-family:var(--fm); font-size:0.72rem; color:var(--mid);">{s.handle}</span>
+          </a>
+        ))}
+      </div>
+    </section>
+  </main>
 
   <Footer />
 </BaseLayout>
