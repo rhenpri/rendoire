@@ -8,7 +8,7 @@
 //
 // Requires `turndown` (devDependency) for HTML -> Markdown conversion.
 
-import { writeFileSync, mkdirSync, rmSync } from 'node:fs';
+import { writeFileSync, mkdirSync, rmSync, readdirSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
 import TurndownService from 'turndown';
@@ -82,6 +82,25 @@ const xml = await res.text();
 const items = [...xml.matchAll(/<item>([\s\S]*?)<\/item>/gi)].map((m) => m[1]);
 console.log(`Found ${items.length} posts in feed.`);
 
+// Preserve manually-corrected titles for posts whose Medium RSS title is truncated.
+// Medium truncates long titles with an ellipsis and the og:title fallback is blocked
+// by Cloudflare, so we keep any non-truncated title already stored on disk.
+const existingTitles = new Map();
+try {
+  for (const f of readdirSync(OUT_DIR)) {
+    if (!f.endsWith('.md')) continue;
+    const slug = f.replace(/\.md$/, '');
+    const raw = readFileSync(join(OUT_DIR, f), 'utf8');
+    const m = raw.match(/^title:\s*(.+)$/m);
+    if (m) {
+      const t = m[1].trim().replace(/^"(.*)"$/, '$1').replace(/^'(.*)'$/, '$1');
+      if (t && !t.endsWith('…') && !t.endsWith('...')) existingTitles.set(slug, t);
+    }
+  }
+} catch {
+  /* first run or missing dir */
+}
+
 rmSync(OUT_DIR, { recursive: true, force: true });
 mkdirSync(OUT_DIR, { recursive: true });
 let count = 0;
@@ -121,6 +140,20 @@ for (const item of items) {
   const plain = stripHtml(html);
   const description = plain.length > 180 ? `${plain.slice(0, 177)}…` : plain;
   const slug = cleanSlug(link, title);
+
+  // Recover a full title when Medium truncated it in the RSS feed.
+  if ((title.endsWith('…') || title.endsWith('...')) ) {
+    const kept = existingTitles.get(slug);
+    if (kept) {
+      title = kept;
+    } else {
+      const fromSlug = slug
+        .split('-')
+        .map((w) => (w ? w[0].toUpperCase() + w.slice(1) : w))
+        .join(' ');
+      if (fromSlug && fromSlug.length > title.length) title = fromSlug;
+    }
+  }
 
   const frontmatter = [
     '---',
