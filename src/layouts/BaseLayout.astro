@@ -40,12 +40,13 @@ const resolvedImage = new URL(image, site.url).href;
     <meta name="theme-color" content="#0a0a0a" />
 
     <!-- Security: baseline content-security-policy + referrer policy.
-         Every asset is served from this origin, so nothing else is allowed.
+         Every asset is served from this origin, so nothing else is allowed,
+         and scripts are external files only (no inline script can run).
          Full HTTP headers (HSTS, frame-ancestors, etc.) belong at the edge —
          see docs/SECURITY.md for the proxy snippet. -->
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'"
     />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
 
@@ -74,8 +75,8 @@ const resolvedImage = new URL(image, site.url).href;
 
     {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
 
-    <!-- Lets CSS hide scroll-reveal content only when a script will reveal it. -->
-    <script is:inline>document.documentElement.classList.add('js');</script>
+    <!-- Scroll-reveal content starts hidden; without scripts, show it. -->
+    <noscript><style>.reveal { opacity: 1; transform: none; }</style></noscript>
 
     <slot name="head" />
   </head>
@@ -84,7 +85,7 @@ const resolvedImage = new URL(image, site.url).href;
 
     <slot />
 
-    <script is:inline>
+    <script>
       // Scroll reveal
       (function () {
         const els = document.querySelectorAll('.reveal');

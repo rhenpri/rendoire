@@ -11,18 +11,49 @@ untrusted uploads, etc.). On top of that, the following hardening is applied.
 | Self-hosted content | `src/content/blog/` | No third-party CMS or API; posts are Markdown built at deploy time. |
 | No third-party runtime calls | — | Removed the `api.rss2json.com` proxy and Google Fonts (both leaked reader data to third parties). |
 | Self-hosted fonts | `@fontsource/*` | Served from your own domain. |
-| Content Security Policy | `BaseLayout.astro` (meta) | Baseline CSP; see below for the edge-header version. |
+| Content Security Policy | `BaseLayout.astro` (meta) | This origin only; no inline scripts (`script-src 'self'`). See below for the edge-header version. |
+| Self-hosted images | `src/assets/blog/` | Post images are built from the repo; nothing loads from Medium's CDN, and its tracking pixel is stripped on import. |
 | Referrer policy | `BaseLayout.astro` (meta) | `strict-origin-when-cross-origin`. |
-| `security.txt` | `public/.well-known/security.txt` | Update the `Contact:` address below. |
+| `security.txt` | `public/.well-known/security.txt` | Served at `/.well-known/security.txt`. Renew `Expires:` before November 2027. |
+| Repository protections | GitHub settings | Secret scanning, push protection and Dependabot security updates on; `main` cannot be force-pushed or deleted. |
 | Least-privilege CI | `.github/workflows/deploy.yml` | `contents: read`, pinned action SHAs, `npm ci`. |
 | Dependency updates | `.github/dependabot.yml` | Weekly npm + monthly Actions updates. |
 | Locked Node | `.nvmrc` + `engines` | Node 24. |
-| Dependency audit | — | `npm audit` reports **0 vulnerabilities** as of the last change. |
+| Dependency audit | — | `npm audit` reports **0 vulnerabilities** as of 15 November 2026. |
 
-## Action needed: update your security contact
+## Open items (need the proxy or DNS, not this repo)
 
-`public/.well-known/security.txt` currently points to `security@rendoire.com`. Replace
-it with a real address you monitor (or remove `security.txt` if you don't want to publish one).
+Audited 15 November 2026. Everything that lives in this repository or in GitHub's
+settings is done. These four are outside it:
+
+1. **Send security headers from the proxy.** None are sent today (no HSTS, no
+   `X-Content-Type-Options`, no `X-Frame-Options`). The snippet is in the next section.
+2. **Fix the `www` redirect.** `https://www.rendoire.com` answers with a 301 to
+   `http://rendoire.com/`, a plain-HTTP hop. It should go straight to
+   `https://rendoire.com/`. See `docs/SELF-HOSTING.md`.
+3. **Remove `Access-Control-Allow-Origin: *`** from the proxy's responses.
+4. **Add DNS records** at the registrar (Namecheap):
+
+   | Type | Host | Value |
+   | --- | --- | --- |
+   | TXT | `_dmarc` | `v=DMARC1; p=quarantine; rua=mailto:security@rendoire.com` |
+   | CAA | `@` | `0 issue "sectigo.com"` |
+   | CAA | `@` | `0 iodef "mailto:security@rendoire.com"` |
+
+   Without DMARC anyone can send mail that appears to come from `@rendoire.com`. Move
+   to `p=reject` once a few weeks of reports look clean. The CAA value must name the CA
+   your proxy's certificate comes from (Sectigo today); change it if you switch CA, or
+   renewals will fail.
+
+Also confirm that mail to `security@rendoire.com` reaches you: send it a test message.
+
+To re-check after changing the proxy or DNS:
+
+```bash
+curl -sI https://rendoire.com | grep -iE 'strict-transport|x-content-type|x-frame|access-control'
+curl -sI https://www.rendoire.com | grep -i location     # expect https://rendoire.com/
+dig +short TXT _dmarc.rendoire.com; dig +short CAA rendoire.com
+```
 
 ## The one thing GitHub Pages can't do: HTTP headers
 
@@ -49,9 +80,9 @@ plugins:
         Referrer-Policy: "strict-origin-when-cross-origin"
         Permissions-Policy: "camera=(), microphone=(), geolocation=(), interest-cohort=()"
         Content-Security-Policy: >-
-          default-src 'self'; script-src 'self' 'unsafe-inline';
-          style-src 'self' 'unsafe-inline'; img-src 'self' data: https:;
-          font-src 'self' data:; connect-src 'self' https:;
+          default-src 'self'; script-src 'self';
+          style-src 'self' 'unsafe-inline'; img-src 'self' data:;
+          font-src 'self' data:; connect-src 'self';
           object-src 'none'; base-uri 'self'; form-action 'self';
           frame-ancestors 'none'
 ```
@@ -71,7 +102,7 @@ rendoire.com {
         X-Frame-Options "DENY"
         Referrer-Policy "strict-origin-when-cross-origin"
         Permissions-Policy "camera=(), microphone=(), geolocation=()"
-        Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
+        Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
         -Server
     }
 }

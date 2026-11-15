@@ -12,12 +12,6 @@ updates:
         patterns:
           - 'astro'
           - '@astrojs/*'
-      react:
-        patterns:
-          - 'react'
-          - 'react-dom'
-          - '@types/react'
-          - '@types/react-dom'
       fonts:
         patterns:
           - '@fontsource*'
