@@ -1,9 +1,9 @@
 ---
 title: "Built Different: The Structural Shift of Agentic AI"
-description: "“The real problem is not whether machines think but whether men do.” — B.F. Skinner We’ve built software that listens. We’ve built software that learns. But now, for the first t…"
+description: "We’ve built software that listens. We’ve built software that learns."
 pubDate: 2025-07-02
-tags: ["artificial-intelligence", "systems-thinking", "agentic-ai", "future-of-work", "tech-strategy"]
-cover: "https://cdn-images-1.medium.com/max/1200/1*JXZvEYdpBkfV5PoLNxOOtA.png"
+tags: ["ai", "software", "culture"]
+cover: "../../assets/blog/built-different-the-structural-shift-of-agentic-ai/cover.webp"
 medium: "https://rendoire.medium.com/built-different-the-structural-shift-of-agentic-ai-6ecf0b5cd478"
 draft: false
 ---
@@ -12,7 +12,7 @@ draft: false
 
 We’ve built software that listens. We’ve built software that learns. But now, for the first time, we’re building software that **does** — without waiting for us to tell it how.
 
-![](https://cdn-images-1.medium.com/max/1024/1*x0-aDl5xvX2coUCYoHOWIA.png)
+![](../../assets/blog/built-different-the-structural-shift-of-agentic-ai/b72a840c02.webp)
 
 _Evolution of Internet Capable Technologies_
 
@@ -24,7 +24,7 @@ Adding more agents to your business won’t fix your inefficiencies — it�
 
 Agentic AI doesn’t eliminate the need for design. **It intensifies it**. You’re now coordinating semi-autonomous tools with their own memory, feedback, and behavior. And unless you design for drift, you will get it.
 
-![](https://cdn-images-1.medium.com/max/690/1*i6xVMB3HVFZC0UCTxBZTwg.jpeg)
+![](../../assets/blog/built-different-the-structural-shift-of-agentic-ai/e827a3a381.webp)
 
 _The Fast and the Furious: Tokyo Drift (2006)_
 
@@ -43,7 +43,7 @@ Agents infer, plan, act — and replan. They loop.
 
 In systems thinking (as introduced by Donella Meadows), a loop is a structure that creates feedback. Agents live inside loops — and they *create* them. Every observation changes what they plan. Every action changes the state of the system.
 
-![](https://cdn-images-1.medium.com/max/1024/0*AGKdiNFyp4Ldqi5R.png)
+![](../../assets/blog/built-different-the-structural-shift-of-agentic-ai/67bfba3664.webp)
 
 _Agentic AI Logic Flow_
 
@@ -53,7 +53,7 @@ Unless monitored, these feedback loops introduce instability. This is the beginn
 
 **Delegation moves effort up the stack.**
 
-![](https://cdn-images-1.medium.com/max/1024/1*271OQ5BgGuXOLuvmLacnAw.png)
+![](../../assets/blog/built-different-the-structural-shift-of-agentic-ai/7b640e075f.webp)
 
 You spend less time doing the thing — but more time specifying what the thing is, how it should happen, and what to do when it doesn’t.
 
@@ -75,7 +75,7 @@ Think **DevOps + Product + Psychology**. Your team’s edge will not be model ac
 
 In 2008, the App Store let anyone ship. That era is gone.
 
-![](https://cdn-images-1.medium.com/max/1024/1*Zdn-l2cUkGp_1P4CxNWaXA.jpeg)
+![](../../assets/blog/built-different-the-structural-shift-of-agentic-ai/97c33414ea.webp)
 
 _Steve Jobs at WWDC (2008)_
 
@@ -114,5 +114,3 @@ But only if you own the design, the scaffolding, and the feedback loops.
 You’re not competing on intelligence anymore. You’re competing on *delegation clarity and systemic foresight*.
 
 > *Build accordingly — or be built around.*
-
-![](https://medium.com/_/stat?event=post.clientViewed&referrerSource=full_rss&postId=6ecf0b5cd478)

@@ -97,6 +97,11 @@ const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const pattern = new RegExp(`\\b(${sorted.map(([n]) => escapeRe(n)).join('|')})\\b`, 'gi');
 const urlByLower = new Map(sorted.map(([n, u]) => [n.toLowerCase(), u]));
 
+// Names already linked in the document being processed. Linking every mention
+// turns a post about one tool into a wall of identical links, so only the
+// first mention of each is linked.
+let seen = new Set();
+
 function replaceText(value) {
   pattern.lastIndex = 0;
   let match;
@@ -105,8 +110,10 @@ function replaceText(value) {
   let found = false;
 
   while ((match = pattern.exec(value)) !== null) {
-    const url = urlByLower.get(match[0].toLowerCase());
-    if (!url) continue;
+    const key = match[0].toLowerCase();
+    const url = urlByLower.get(key);
+    if (!url || seen.has(url)) continue;
+    seen.add(url);
     found = true;
     if (match.index > last) {
       nodes.push({ type: 'text', value: value.slice(last, match.index) });
@@ -138,7 +145,8 @@ function walk(node, inCode, inLink) {
   if (node.type === 'element') {
     const tag = String(node.tagName || '').toLowerCase();
     const nextCode = inCode || tag === 'code' || tag === 'pre' || tag === 'kbd';
-    const nextLink = inLink || tag === 'a';
+    // Headings stay plain text, same as existing links.
+    const nextLink = inLink || tag === 'a' || /^h[1-6]$/.test(tag);
     if (Array.isArray(node.children)) {
       const out = [];
       for (const child of node.children) {
@@ -155,6 +163,7 @@ function walk(node, inCode, inLink) {
 
 export default function autolinkTools() {
   return (tree) => {
+    seen = new Set();
     const out = [];
     for (const child of tree.children) {
       const r = walk(child, false, false);

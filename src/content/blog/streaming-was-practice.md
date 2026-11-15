@@ -1,9 +1,9 @@
 ---
 title: "Streaming Was Practice"
-description: "How we lost intentionality to algorithms, and why AI is the same trick with higher stakes. On October 23rd 2001, Steve Jobs held up a white rectangle and said 1,000 songs in you…"
+description: "How we lost intentionality to algorithms, and why AI is the same trick with higher stakes."
 pubDate: 2026-04-25
-tags: ["artificial-intelligence", "self-hosting", "digital-minimalism", "future-of-work", "technology"]
-cover: "https://cdn-images-1.medium.com/max/1200/0*qyaCRL5Tib_bR8IA"
+tags: ["ai", "self-hosting", "digital-minimalism", "culture"]
+cover: "../../assets/blog/streaming-was-practice/cover.webp"
 medium: "https://rendoire.medium.com/streaming-was-practice-5b1c1afdf7d5"
 draft: false
 ---
@@ -12,7 +12,7 @@ draft: false
 
 On October 23rd 2001, Steve Jobs held up a white rectangle and said *1,000 songs in your pocket*. That line aged better than most things from that keynote. The iPod held 5GB. Songs were 3 to 5MB. You got a thousand slots. The ceiling forced you to decide.
 
-![](https://cdn-images-1.medium.com/max/750/0*Y0QAYB1zVTG93l-L)
+![](../../assets/blog/streaming-was-practice/a31977499d.webp)
 
 Look at your Spotify home screen. How many of those playlists did you actually make?
 
@@ -22,7 +22,7 @@ Tim Wu calls this pattern *The Master Switch*. Every information industry follow
 
 ### The iPod was a philosophy, not a product
 
-![](https://cdn-images-1.medium.com/max/612/0*04-9GGa8I-BRfZfe)
+![](../../assets/blog/streaming-was-practice/67b2483d8d.webp)
 
 A caveat first. For nearly eighty years before the iPod, the dominant mode of music consumption was radio. Someone in a tower somewhere decided what played. The iPod was not the default. It was a brief anomaly in a century of feeds.
 
@@ -30,7 +30,7 @@ Which is why it mattered.
 
 Getting music onto an iPod was a ritual. You heard a song somewhere. You wrote it down. You went to iTunes and paid 99 cents, or you opened LimeWire and waited twelve minutes for a file that was a virus half the time. You tagged the ID3. You dragged it into a folder. You synced.
 
-![](https://cdn-images-1.medium.com/max/1024/1*BGVwDzYwk_dORaQ8dBn38A.png)
+![](../../assets/blog/streaming-was-practice/d8115f5934.webp)
 
 Then, because you only had a thousand slots, you deleted something.
 
@@ -46,7 +46,7 @@ That is gone. Most people under 25 have never owned a song.
 
 ### Napster was the bridge, not the enemy
 
-![](https://cdn-images-1.medium.com/max/860/0*9iXoD1a_Uw9iQCJE)
+![](../../assets/blog/streaming-was-practice/889d83607e.webp)
 
 The conventional story is that Napster killed the record industry. The honest story is that Napster taught the industry what it would become.
 
@@ -56,7 +56,7 @@ Napster did not just make music free. It normalised **infinite access**. Before 
 
 The record industry fought piracy for a decade and lost. Then in 2008, Daniel Ek and Martin Lorentzon pitched the labels a deal: *what if the thing Napster did, infinite access, was legal, and we gave you a cut?* The labels, bleeding out, agreed.
 
-![](https://cdn-images-1.medium.com/max/612/0*RnuWrmIRpYTfAyz7)
+![](../../assets/blog/streaming-was-practice/385685374b.webp)
 
 **Piracy did not lose. Piracy was legalised and sold back to us on a subscription.**
 
@@ -76,7 +76,7 @@ The architecture removed the forcing function of decision. You no longer had to 
 
 The standard defense is that the algorithm exposes you to things you would not find alone. Yes, and. **Engagement-optimised variance is not editorial taste.** Blogs, IRC, Pitchfork before it calcified, college radio, mixtapes from friends introduced more genuine novelty than any For You Page, because they optimised for *interesting*, not *sticky*. The algorithm does expose you to new things. It just narrows what *new* is allowed to mean.
 
-![](https://cdn-images-1.medium.com/max/1024/0*z2kaCqShpCYhUpIG.jpg)
+![](../../assets/blog/streaming-was-practice/473dc71f67.webp)
 
 If you want it in black and white, Meta publishes it. Their transparency page for Instagram Reels Chaining, updated November 2025, lists what the system is actually optimising for. Not *is this reel good*. Not *will you remember this in an hour*. The first prediction on the list is literally how likely you are to watch **less than three seconds** of a reel. The rest of the stack is the same shape: how likely you are to reshare, to use the audio in your own post, to follow the author, to click *Interested*, to watch longer than 95% of users who saw a reel of the same length. The system is not trying to help you find things worth your attention. It is modelling your attention as a probability distribution and optimising for continuation. A Pitchfork editor was trying to tell you what was interesting. Instagram is trying to predict whether you will click off in the next three seconds. Those are not the same goal and they do not produce the same output.
 
@@ -84,7 +84,7 @@ This is not nostalgia, modern streaming has better ergonomics in every measurabl
 
 ### You are what you repeat
 
-![](https://cdn-images-1.medium.com/max/792/1*oQTrCaXXHWtBmsw3hShbeg.png)
+![](../../assets/blog/streaming-was-practice/8d643c3741.webp)
 
 “You are what you eat” is the lazy version. The serious version is that cognition is built from inputs. What you attend to, repeatedly, rewires you.
 
@@ -98,7 +98,7 @@ The algorithm’s job is to convince you otherwise. Sometimes it is right. The p
 
 ### Now the same story, faster
 
-![](https://cdn-images-1.medium.com/max/1024/1*GUqCsEnJgxPyvEOFzavvJw.png)
+![](../../assets/blog/streaming-was-practice/3ef55790e3.webp)
 
 Streaming ate your taste. If the algorithm picks your music, the worst case is you become culturally boring. Bad, but survivable.
 
@@ -110,7 +110,7 @@ Previously LLMs were not at a utility to consumers, outside of researchers and u
 
 I am not anti-AI. I run small models on my own hardware. I build agents, utilise AI Workflows and architecture. The capability is real. The question is **what the use is doing to you.**
 
-![](https://cdn-images-1.medium.com/max/672/1*1oS6p3Kn7u5UyYD8fUy2Dw.png)
+![](../../assets/blog/streaming-was-practice/0990a7d8db.webp)
 
 The obvious objection is the calculator. Nobody thinks we got dumber when we stopped doing long division. The calculator replaced arithmetic and we moved up a layer. Why is AI different?
 
@@ -140,11 +140,11 @@ The distinction compounds when you zoom out.
 
 **Agentic AI.** An agent reads your email, files your tickets, ships your PRs. Every action is a moment of trust. Do you want the agent that runs your life to be a rented process subject to policy changes you do not see? Or running locally, auditable, with weights you can control. Take the plug out & control your data.
 
-![](https://cdn-images-1.medium.com/max/860/0*xAo5UUm2W7JpeIOX)
+![](../../assets/blog/streaming-was-practice/f7fdcfbfb2.webp)
 
 **Robotics and action models.** Google DeepMind’s RT-2, NVIDIA’s Project GR00T, the broader vision-language-action push. These are AIs that move things in the physical world. A humanoid robot that cannot act without a datacentre roundtrip is a paperweight. On-device models are not a niche. They are the foundation of physical AI.
 
-![](https://cdn-images-1.medium.com/max/860/0*67vlfKu_ssXuEek_)
+![](../../assets/blog/streaming-was-practice/1aea401786.webp)
 
 **Enterprise.** Every serious enterprise in the last year ends the same way. Frontier models win demos. Fine-tuned open models in your VPC win production. Data sovereignty, compliance, cost. All push the same direction.
 
@@ -152,7 +152,7 @@ The distinction compounds when you zoom out.
 
 Donella Meadows’ *Thinking in Systems* names the move. **Leverage points**. You do not change a system by fighting its outputs. You change it by finding the structural lever where a small shift produces a disproportionate effect. The leverage point here is not *use less AI*. It is **own the stack beneath the AI**.
 
-![](https://cdn-images-1.medium.com/max/1024/1*SFRNZUzhZ8c3iN_gKckHjA.png)
+![](../../assets/blog/streaming-was-practice/9238a3c97b.webp)
 
 ### The Graveyard of Convenience
 
@@ -187,5 +187,3 @@ Stewart Brand said it at the 1984 Hackers Conference:
 > “Information wants to be free.”
 
 The full quote, less often cited, continues: *“Information also wants to be expensive. That tension will not go away.”* We are living in the expensive half. The way out is the same as it was in 1984. Build your own tools. Own your own data. Be suspicious of anyone who tells you the convenient thing is also the free thing.
-
-![](https://medium.com/_/stat?event=post.clientViewed&referrerSource=full_rss&postId=5b1c1afdf7d5)

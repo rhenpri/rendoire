@@ -1,33 +1,40 @@
 ---
-import type { PostSummary } from '../../lib/blog';
+import { Image } from 'astro:assets';
+import { topicLabel, type PostSummary } from '../../lib/blog';
 
 interface Props {
   post: PostSummary;
+  /** Heading level for the title; cards under an h2 use h3. */
+  level?: 'h2' | 'h3';
 }
 
-const { post } = Astro.props;
+const { post, level: Title = 'h3' } = Astro.props;
 ---
 
 <a href={`/blog/${post.slug}/`} class="card post-card" data-tags={post.tags.join(',')}>
   {post.cover && (
     <div class="post-card-media">
-      <img src={post.cover} alt="" loading="lazy" decoding="async" />
+      <Image
+        src={post.cover}
+        alt={post.coverAlt}
+        widths={[400, 640, 800]}
+        sizes="(max-width: 720px) 100vw, (max-width: 960px) 50vw, 360px"
+        loading="lazy"
+        decoding="async"
+      />
     </div>
   )}
 
   <div class="post-meta">
-    <span>{post.dateLabel}</span>
+    <span>{post.tags.slice(0, 1).map(topicLabel)}</span>
     <span>{post.readingTime}</span>
   </div>
 
-  <h3 class="post-title">{post.title}</h3>
+  <Title class="post-title">{post.title}</Title>
   {post.description && <p class="post-desc">{post.description}</p>}
 
-  {post.tags.length > 0 && (
-    <div class="post-tags">
-      {post.tags.slice(0, 3).map((tag) => <span class="tag">#{tag}</span>)}
-    </div>
-  )}
-
-  <span class="post-arrow">Read →</span>
+  <div class="post-card-foot">
+    <time datetime={post.pubDate.toISOString()}>{post.dateLabel}</time>
+    <span class="post-arrow" aria-hidden="true">Read →</span>
+  </div>
 </a>

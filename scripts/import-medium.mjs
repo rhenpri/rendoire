@@ -7,15 +7,27 @@
 // Default feed: https://medium.com/feed/@rendoire
 //
 // Requires `turndown` (devDependency) for HTML -> Markdown conversion.
+//
+// The import is additive and respects local edits:
+//   - posts that are not in the feed (written here, or older than the feed's
+//     window) are left alone;
+//   - for a post that already exists, the title, description, tags and
+//     coverAlt you have on disk win over what Medium sends;
+//   - images are downloaded into src/assets/blog/<slug>/ and Medium's
+//     tracking pixel is stripped (see scripts/lib/posts.mjs).
 
-import { writeFileSync, mkdirSync, rmSync, readdirSync, readFileSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
-import { dirname, join, resolve } from 'node:path';
+import { writeFileSync, mkdirSync, existsSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import TurndownService from 'turndown';
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const ROOT = resolve(__dirname, '..');
-const OUT_DIR = join(ROOT, 'src', 'content', 'blog');
+import {
+  BLOG_DIR as OUT_DIR,
+  cleanBody,
+  describe,
+  localizeImages,
+  normalizeTags,
+  parsePost,
+  serializePost,
+} from './lib/posts.mjs';
 
 const FEED_URL = process.argv[2] || 'https://medium.com/feed/@rendoire';
 const UA = 'rendoire-import/1.0 (+https://rendoire.com)';
@@ -38,8 +50,6 @@ const cdata = (xml, tag) => {
     .trim();
 };
 
-const stripHtml = (html) => html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
-
 const slugify = (s) =>
   s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
 
@@ -49,9 +59,6 @@ const cleanSlug = (link, title) => {
   const last = link.split('/').pop() || '';
   return slugify(last.replace(/-[0-9a-f]{8,16}$/i, '')) || slugify(title);
 };
-
-// Bump Medium CDN image resolution.
-const upscale = (url) => url.replace(/\/max\/\d+\//, '/max/1200/');
 
 // --- turndown configuration ---------------------------------------------
 
@@ -82,27 +89,8 @@ const xml = await res.text();
 const items = [...xml.matchAll(/<item>([\s\S]*?)<\/item>/gi)].map((m) => m[1]);
 console.log(`Found ${items.length} posts in feed.`);
 
-// Preserve manually-corrected titles for posts whose Medium RSS title is truncated.
-// Medium truncates long titles with an ellipsis and the og:title fallback is blocked
-// by Cloudflare, so we keep any non-truncated title already stored on disk.
-const existingTitles = new Map();
-try {
-  for (const f of readdirSync(OUT_DIR)) {
-    if (!f.endsWith('.md')) continue;
-    const slug = f.replace(/\.md$/, '');
-    const raw = readFileSync(join(OUT_DIR, f), 'utf8');
-    const m = raw.match(/^title:\s*(.+)$/m);
-    if (m) {
-      const t = m[1].trim().replace(/^"(.*)"$/, '$1').replace(/^'(.*)'$/, '$1');
-      if (t && !t.endsWith('…') && !t.endsWith('...')) existingTitles.set(slug, t);
-    }
-  }
-} catch {
-  /* first run or missing dir */
-}
-
-rmSync(OUT_DIR, { recursive: true, force: true });
 mkdirSync(OUT_DIR, { recursive: true });
+const problems = [];
 let count = 0;
 
 for (const item of items) {
@@ -133,48 +121,47 @@ for (const item of items) {
 
   // Extract hero image and drop it from the body to avoid duplication.
   const coverMatch = html.match(/<img[^>]*src="([^"]+)"[^>]*>/i);
-  let cover = coverMatch ? upscale(coverMatch[1]) : '';
+  let cover = coverMatch ? coverMatch[1] : '';
   if (coverMatch) html = html.replace(coverMatch[0], '');
 
-  const body = turndown.turndown(html).replace(/\n{3,}/g, '\n\n').trim();
-  const plain = stripHtml(html);
-  const description = plain.length > 180 ? `${plain.slice(0, 177)}…` : plain;
   const slug = cleanSlug(link, title);
+  const path = join(OUT_DIR, `${slug}.md`);
+  const existing = existsSync(path) ? parsePost(readFileSync(path, 'utf8')).data : {};
 
-  // Recover a full title when Medium truncated it in the RSS feed.
-  if ((title.endsWith('…') || title.endsWith('...')) ) {
-    const kept = existingTitles.get(slug);
-    if (kept) {
-      title = kept;
-    } else {
-      const fromSlug = slug
-        .split('-')
-        .map((w) => (w ? w[0].toUpperCase() + w.slice(1) : w))
-        .join(' ');
-      if (fromSlug && fromSlug.length > title.length) title = fromSlug;
-    }
+  // Recover a full title when Medium truncated it and og:title was blocked.
+  if (title.endsWith('…') || title.endsWith('...')) {
+    const fromSlug = slug
+      .split('-')
+      .map((w) => (w ? w[0].toUpperCase() + w.slice(1) : w))
+      .join(' ');
+    if (fromSlug.length > title.length) title = fromSlug;
   }
 
-  const frontmatter = [
-    '---',
-    `title: ${JSON.stringify(title)}`,
-    `description: ${JSON.stringify(description)}`,
-    `pubDate: ${toYmd(pubDate)}`,
-    `tags: [${categories.map((c) => JSON.stringify(c)).join(', ')}]`,
-    cover ? `cover: ${JSON.stringify(cover)}` : null,
-    link ? `medium: ${JSON.stringify(link)}` : null,
-    'draft: false',
-    '---',
-    '',
-    body,
-    '',
-  ]
-    .filter((l) => l !== null)
-    .join('\n');
+  let body = cleanBody(turndown.turndown(html));
+  const localized = await localizeImages({ slug, cover, body });
+  ({ cover, body } = localized);
+  for (const f of localized.failures) problems.push(`${slug}: ${f}`);
 
-  writeFileSync(join(OUT_DIR, `${slug}.md`), frontmatter, 'utf8');
-  console.log(`  ✓ ${slug}.md  (${title})`);
+  const data = {
+    title: existing.title ?? title,
+    description: existing.description ?? describe(body, title),
+    pubDate: toYmd(pubDate),
+    updatedDate: existing.updatedDate,
+    tags: existing.tags ?? normalizeTags(categories),
+    cover: cover || undefined,
+    coverAlt: existing.coverAlt,
+    medium: link || undefined,
+    draft: existing.draft ?? false,
+    featured: existing.featured || undefined,
+  };
+
+  writeFileSync(path, serializePost(data, body), 'utf8');
+  console.log(`  ${existing.title ? '↻' : '✓'} ${slug}.md  (${data.title})`);
   count++;
 }
 
 console.log(`\nImported ${count} posts into src/content/blog/.`);
+if (problems.length) {
+  console.log(`\n${problems.length} image(s) could not be downloaded and still point at the remote URL:`);
+  for (const p of problems) console.log(`  - ${p}`);
+}

@@ -1,9 +1,9 @@
 ---
 title: "The Models Were the Easy Part"
-description: "Ninety two and ninety five In September 2023 I submitted a dissertation on how AI would reshape cognitive productivity in consulting. ChatGPT was ten months old. I surveyed acro…"
+description: "In September 2023 I submitted a dissertation on how AI would reshape cognitive productivity in consulting. ChatGPT was ten months old."
 pubDate: 2026-07-01
-tags: ["ai-development", "artificial-intelligence", "future-technology", "ai-engineering", "business-technology"]
-cover: "https://cdn-images-1.medium.com/max/1200/1*-WWKDoyOyVftUIqUTDrLig.jpeg"
+tags: ["ai"]
+cover: "../../assets/blog/the-models-were-the-easy-part/cover.webp"
 medium: "https://rendoire.medium.com/the-models-were-the-easy-part-e3ad0f90a988"
 draft: false
 ---
@@ -117,5 +117,3 @@ The protocol layer settled faster than anyone expected. The compute is already m
 Ninety two percent of orgs were investing before the technology had even matured. Powered by marketing. Ninety five percent of pilots returned nothing. The gap between those numbers is not a technology gap.
 
 The models were the easy part. Agreement is the product.
-
-![](https://medium.com/_/stat?event=post.clientViewed&referrerSource=full_rss&postId=e3ad0f90a988)

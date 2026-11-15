@@ -1,27 +1,31 @@
 ---
 import '../styles/global.css';
+import { site } from '../config';
 
 interface Props {
   title?: string;
   description?: string;
   canonical?: string;
+  /** Absolute URL, or a site-relative path such as /og-image.png */
   image?: string;
   type?: 'website' | 'article';
   jsonLd?: Record<string, unknown>;
+  /** Keep the page out of search results (404 and the like). */
+  noindex?: boolean;
 }
 
 const {
   title = 'rendoire — AI, software & self-hosting',
-  description = 'Writing, AI knowledge, and self-hosting recommendations — building and owning your own tools.',
+  description = site.description,
   canonical,
-  image = 'https://rendoire.com/og-image.png',
+  image = '/og-image.png',
   type = 'website',
   jsonLd,
+  noindex = false,
 } = Astro.props;
 
-const resolvedCanonical =
-  canonical ??
-  (Astro.url.pathname === '/' ? 'https://rendoire.com/' : `https://rendoire.com${Astro.url.pathname}`);
+const resolvedCanonical = canonical ?? new URL(Astro.url.pathname, site.url).href;
+const resolvedImage = new URL(image, site.url).href;
 ---
 
 <!DOCTYPE html>
@@ -31,13 +35,17 @@ const resolvedCanonical =
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0a0a0a" />
 
     <!-- Security: baseline content-security-policy + referrer policy.
+         Every asset is served from this origin, so nothing else is allowed.
          Full HTTP headers (HSTS, frame-ancestors, etc.) belong at the edge —
          see docs/SECURITY.md for the proxy snippet. -->
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https:; object-src 'none'; base-uri 'self'; form-action 'self'"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'"
     />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
 
@@ -47,22 +55,27 @@ const resolvedCanonical =
     <link rel="canonical" href={resolvedCanonical} />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="alternate" type="application/rss+xml" title="rendoire" href="/feed.xml" />
-    <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/favicon.png" sizes="48x48" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
     <meta property="og:type" content={type} />
     <meta property="og:site_name" content="rendoire" />
     <meta property="og:url" content={resolvedCanonical} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={image} />
+    <meta property="og:image" content={resolvedImage} />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content={resolvedCanonical} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={image} />
+    <meta name="twitter:image" content={resolvedImage} />
 
     {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+
+    <!-- Lets CSS hide scroll-reveal content only when a script will reveal it. -->
+    <script is:inline>document.documentElement.classList.add('js');</script>
 
     <slot name="head" />
   </head>
@@ -73,11 +86,23 @@ const resolvedCanonical =
 
     <script is:inline>
       // Scroll reveal
-      const io = new IntersectionObserver(
-        (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add('visible')),
-        { threshold: 0.1, rootMargin: '0px 0px -40px 0px' },
-      );
-      document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+      (function () {
+        const els = document.querySelectorAll('.reveal');
+        if (!('IntersectionObserver' in window)) {
+          els.forEach((el) => el.classList.add('visible'));
+          return;
+        }
+        const io = new IntersectionObserver(
+          (entries) =>
+            entries.forEach((e) => {
+              if (!e.isIntersecting) return;
+              e.target.classList.add('visible');
+              io.unobserve(e.target);
+            }),
+          { threshold: 0.1, rootMargin: '0px 0px -40px 0px' },
+        );
+        els.forEach((el) => io.observe(el));
+      })();
     </script>
   </body>
 </html>

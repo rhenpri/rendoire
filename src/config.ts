@@ -4,6 +4,8 @@ export const site = {
   url: 'https://rendoire.com',
   name: 'rendoire',
   tagline: 'Writing on AI, software, and owning your own tools.',
+  description:
+    'Writing, AI knowledge, and self-hosting recommendations — building and owning your own tools.',
   medium: 'https://rendoire.medium.com',
   github: 'https://github.com/rhenpri',
   linkedin: 'https://www.linkedin.com/in/rhenderson832/',
@@ -17,6 +19,20 @@ export const site = {
 export const referral = {
   // e.g. '?ref=rendoire' or '?utm_source=rendoire&utm_medium=referral'
   oreilly: '',
+};
+
+/** True once a referral tag is configured, i.e. book links earn a commission. */
+export const hasReferral = Boolean(referral.oreilly);
+
+/** `rel` for a book link: paid links must be marked as sponsored. */
+export const bookRel = hasReferral ? 'sponsored noopener' : 'noopener';
+
+/** schema.org description of the author, shared by every page's JSON-LD. */
+export const person = {
+  '@type': 'Person',
+  name: site.name,
+  url: site.url,
+  sameAs: [site.medium, site.github, site.linkedin],
 };
 
 export const withRef = (url: string): string =>

@@ -1,9 +1,9 @@
 ---
 title: "Attention vs. Intention: How We Lost the Plot"
-description: "Look at the apps on your home screen right now. Ask yourself if this tool is waiting for you to use it or if it is begging you to look at it. There has been a massive shift in h…"
+description: "Look at the apps on your home screen right now. Ask yourself if this tool is waiting for you to use it or if it is begging you to look at it."
 pubDate: 2026-01-04
-tags: ["entrepeneurship", "innovation", "software", "technology", "business"]
-cover: "https://cdn-images-1.medium.com/max/1200/1*ewhPggFDz3ZY8nwSftz4PQ.png"
+tags: ["software"]
+cover: "../../assets/blog/attention-vs-intention-how-we-lost-the-plot/cover.webp"
 medium: "https://rendoire.medium.com/attention-vs-intention-how-we-lost-the-plot-c581046e8c02"
 draft: false
 ---
@@ -12,11 +12,11 @@ Look at the apps on your home screen right now. Ask yourself if this tool is wai
 
 There has been a massive shift in how technology is built. We went from an era of **Intention**, where tech was a bicycle for the mind, to an era of **Attention**, where your focus is a natural resource to be mined and sold.
 
-![](https://cdn-images-1.medium.com/max/1024/1*t5aYxBP7gM9g6B7QzKUFvg.png)
+![](../../assets/blog/attention-vs-intention-how-we-lost-the-plot/1a3deaa4b2.webp)
 
 Here is how we got here, why every app feels the same, and why the “shiny object” diet is killing actual innovation.
 
-![](https://cdn-images-1.medium.com/max/600/0*jhae1GHMA74bRaIy.png)
+![](../../assets/blog/attention-vs-intention-how-we-lost-the-plot/5649f986e5.webp)
 
 _***“The computer is the most remarkable tool that we’ve ever come up with. It’s the equivalent of a bicycle for our minds.” — Steve Jobs (1990)***_
 
@@ -24,13 +24,13 @@ _***“The computer is the most remarkable tool that we’ve ever come up with. 
 
 In the beginning, computers didn’t care if you liked them.
 
-![](https://cdn-images-1.medium.com/max/860/0*vY5hY5Ur4PnAzEqZ)
+![](../../assets/blog/attention-vs-intention-how-we-lost-the-plot/b903c3d2fd.webp)
 
 The early days from the mainframes to the 90s were about **utility**. You used a computer to crunch numbers, write a paper, or organise a database. You didn’t hang out in a spreadsheet just for fun. You had a specific goal, you used the tool to achieve it, and then you walked away.
 
 Even the counter-culture boom of the 70s and 80s was driven by a desire to empower people. This was the era of the Homebrew Computer Club and the garage days of Steve Jobs. It was hippie idealism meets soldering irons.
 
-![](https://cdn-images-1.medium.com/max/860/0*sflZeHqbC1ihv5Pq)
+![](../../assets/blog/attention-vs-intention-how-we-lost-the-plot/959d8b4fb2.webp)
 
 The vibe was simple. Here is a superpower you didn’t have before. **Go build something.**
 
@@ -40,11 +40,11 @@ Somewhere along the line, the business model changed. Companies had to figure ou
 
 They borrowed the answer from TV. **Ads.**
 
-![](https://cdn-images-1.medium.com/max/600/0*B6k2qdY7QylTGUDE.jpg)
+![](../../assets/blog/attention-vs-intention-how-we-lost-the-plot/508032c5aa.webp)
 
 By the mid-2000s, platforms like Facebook realised that a user who logs in, does a task, and leaves is worthless. But a user who stays for 4 hours is a goldmine.
 
-![](https://cdn-images-1.medium.com/max/1024/0*fO2YLw4juJFHvwnw)
+![](../../assets/blog/attention-vs-intention-how-we-lost-the-plot/f0546e90f7.webp)
 
 The metric for success switched from User Utility to Time on Device.
 
@@ -59,21 +59,21 @@ Have you noticed that every app is morphing into the same thing?
 
 Instagram used to be for photos, but now it is TikTok. YouTube used to be for long videos, but now it is TikTok Shorts. LinkedIn is somehow also becoming Facebook.
 
-![](https://cdn-images-1.medium.com/max/1024/0*ruNO0GgJhvcXcMHs)
+![](../../assets/blog/attention-vs-intention-how-we-lost-the-plot/54e84a4855.webp)
 
 **Every app is just a vertical feed with an algorithm designed to keep you scrolling.**
 
 We have processors in our pockets that would have been supercomputers in the 90s. We could be using that power to solve energy crises or cure diseases. Instead, we use that silicon to render high-def ads and filter our faces in real-time.
 
-![](https://cdn-images-1.medium.com/max/612/0*mER6QsmLo0k14yLt)
+![](../../assets/blog/attention-vs-intention-how-we-lost-the-plot/d659b5f88a.webp)
 
 There is no risk anymore. In the Dot Com boom, people tried weird stuff. The iPod changed music. Online gaming created new worlds. Now we just get a slightly faster iPhone every September and a chatbot that regurgitates data.
 
-![](https://cdn-images-1.medium.com/max/1024/0*W3mDaXihkZMuFJgb.jpg)
+![](../../assets/blog/attention-vs-intention-how-we-lost-the-plot/4b97405022.webp)
 
 It is a monopoly problem too. Apple and Samsung basically own the hardware. Amazon and Microsoft own the servers. When a few giants own the board, nobody wants to flip the table.
 
-![](https://cdn-images-1.medium.com/max/760/0*gEsJiMSe_DokOLA5.png)
+![](../../assets/blog/attention-vs-intention-how-we-lost-the-plot/04b32c4b68.webp)
 
 ### 4\. The Shiny Object Trap
 
@@ -83,7 +83,7 @@ Right now, the smartest 22-year-old engineers are being trained to think that in
 
 If we feed young inventors a diet of shiny objects and dopamine hits, they won’t grow up wanting to solve hard problems like logistics, healthcare, or education. They will grow up wanting to build a better ad algorithm.
 
-![](https://cdn-images-1.medium.com/max/1024/1*A--Tj__tXa-aVmfWYi25pQ.png)
+![](../../assets/blog/attention-vs-intention-how-we-lost-the-plot/86d596d1c8.webp)
 
 We are teaching them that **Marketing Tricks** are more important than **Real Solutions**.
 
@@ -95,8 +95,6 @@ The 90s tech counter-culture thought the internet would free us from corporate c
 
 To get back to an era of **Intention**, we need to stop measuring success by how long we stare at a screen. We need to measure it by what we achieve when we put the phone down.
 
-![](https://cdn-images-1.medium.com/max/736/0*UO58zFgr4eIoeEwH.jpg)
+![](../../assets/blog/attention-vs-intention-how-we-lost-the-plot/e4e71dc8f9.webp)
 
 Real innovation isn’t a better feed, automating everything or a chat bot. **Real innovation is building a tool so good that you can finish your work and go outside.**
-
-![](https://medium.com/_/stat?event=post.clientViewed&referrerSource=full_rss&postId=c581046e8c02)

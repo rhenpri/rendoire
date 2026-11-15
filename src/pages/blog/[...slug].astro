@@ -1,49 +1,30 @@
 ---
-import { getCollection, render } from 'astro:content';
+import { getImage, Image } from 'astro:assets';
+import { render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Navigation from '../../components/Navigation.astro';
 import Footer from '../../components/Footer.astro';
-import ReadingProgress from '../../components/react/ReadingProgress.tsx';
+import { formatDate, getEntries, relatedPosts, summarize, topicLabel } from '../../lib/blog';
+import { person, site } from '../../config';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog', ({ data }) => !data.draft);
-  posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-
-  return Promise.all(
-    posts.map(async (post, i) => {
-      const { Content } = await render(post);
-      const words = (post.body ?? '').split(/\s+/).filter(Boolean).length;
-      return {
-        params: { slug: post.id },
-        props: {
-          post: {
-            title: post.data.title,
-            description: post.data.description,
-            pubDate: post.data.pubDate,
-            updatedDate: post.data.updatedDate,
-            dateLabel: post.data.pubDate.toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            }),
-            readingTime: `${Math.max(1, Math.ceil(words / 200))} min read`,
-            tags: post.data.tags ?? [],
-            cover: post.data.cover,
-            medium: post.data.medium,
-            slug: post.id,
-          },
-          Content,
-          prev: i < posts.length - 1 ? { slug: posts[i + 1].id, title: posts[i + 1].data.title } : null,
-          next: i > 0 ? { slug: posts[i - 1].id, title: posts[i - 1].data.title } : null,
-        },
-      };
-    }),
-  );
+  const entries = await getEntries();
+  const all = entries.map(summarize);
+  return entries.map((entry, i) => ({
+    params: { slug: entry.id },
+    props: { entry, post: all[i], related: relatedPosts(all[i], all) },
+  }));
 }
 
-const { post, Content, prev, next } = Astro.props;
+const { entry, post, related } = Astro.props;
+const { Content } = await render(entry);
 
-const url = `https://rendoire.com/blog/${post.slug}/`;
+const url = `${site.url}/blog/${post.slug}/`;
+
+// Social cards want a fixed-size JPEG, not the responsive WebP the page uses.
+const ogImage = post.cover
+  ? (await getImage({ src: post.cover, width: 1200, height: 630, fit: 'cover', format: 'jpg' })).src
+  : '/og-image.png';
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -53,10 +34,10 @@ const jsonLd = {
   datePublished: post.pubDate.toISOString(),
   dateModified: (post.updatedDate ?? post.pubDate).toISOString(),
   url,
-  image: post.cover ?? 'https://rendoire.com/og-image.png',
-  author: { '@type': 'Person', name: 'rendoire', url: 'https://rendoire.com' },
-  publisher: { '@type': 'Person', name: 'rendoire', url: 'https://rendoire.com' },
-  keywords: post.tags.join(', '),
+  image: new URL(ogImage, site.url).href,
+  author: person,
+  publisher: person,
+  keywords: post.tags.map(topicLabel).join(', '),
   mainEntityOfPage: url,
 };
 ---
@@ -65,34 +46,49 @@ const jsonLd = {
   title={`${post.title} — rendoire`}
   description={post.description ?? post.title}
   canonical={url}
-  image={post.cover ?? 'https://rendoire.com/og-image.png'}
+  image={ogImage}
   type="article"
   jsonLd={jsonLd}
 >
   <Navigation />
-  <ReadingProgress client:load />
+  <div class="reading-progress" aria-hidden="true"></div>
 
-  <main id="main" class="container" style="padding-top: 4rem; padding-bottom: 2rem;">
-    <div class="article-wrap">
+  <main id="main" class="container page-top">
+    <article class="article-wrap">
       <a href="/blog/" class="article-back">← All essays</a>
 
       <header class="article-header">
         <div class="article-meta">
-          <time datetime={post.pubDate.toISOString()}>{post.dateLabel}</time>
+          <time datetime={post.pubDate.toISOString()}>{formatDate(post.pubDate, 'long')}</time>
           <span aria-hidden="true">·</span>
           <span>{post.readingTime}</span>
+          {post.updatedDate && (
+            <>
+              <span aria-hidden="true">·</span>
+              <span>Updated <time datetime={post.updatedDate.toISOString()}>{formatDate(post.updatedDate, 'long')}</time></span>
+            </>
+          )}
         </div>
         <h1 class="article-title">{post.title}</h1>
         {post.tags.length > 0 && (
-          <div class="post-tags">
-            {post.tags.map((tag: string) => <a href={`/blog/?tag=${encodeURIComponent(tag)}`} class="tag" style="transition:color .2s,border-color .2s">#{tag}</a>)}
-          </div>
+          <ul class="post-tags" aria-label="Topics">
+            {post.tags.map((tag) => (
+              <li><a href={`/blog/?tag=${encodeURIComponent(tag)}`} class="tag">{topicLabel(tag)}</a></li>
+            ))}
+          </ul>
         )}
       </header>
 
       {post.cover && (
         <div class="article-cover">
-          <img src={post.cover} alt="" loading="eager" decoding="async" />
+          <Image
+            src={post.cover}
+            alt={post.coverAlt}
+            widths={[640, 960, 1408]}
+            sizes="(max-width: 760px) 100vw, 704px"
+            loading="eager"
+            fetchpriority="high"
+          />
         </div>
       )}
 
@@ -100,27 +96,33 @@ const jsonLd = {
         <Content />
       </div>
 
-      <div class="article-foot">
-        {post.medium ? (
-          <a href={post.medium} target="_blank" rel="noopener" class="article-medium">
-            Also published on Medium ↗
-          </a>
-        ) : (
-          <span />
-        )}
+      <footer class="article-foot">
+        <p>
+          Thanks for reading. New essays arrive by <a href="/feed.xml">RSS</a>{post.medium && (
+            <>, and this one is <a href={post.medium} target="_blank" rel="noopener">also on Medium ↗</a></>
+          )}.
+        </p>
+      </footer>
+    </article>
 
-        <div style="display:flex; gap:1.5rem;">
-          {next && <a href={`/blog/${next.slug}/`} style="font-family:var(--fm);font-size:0.72rem;color:var(--muted);transition:color .2s">← {next.title}</a>}
-          {prev && <a href={`/blog/${prev.slug}/`} style="font-family:var(--fm);font-size:0.72rem;color:var(--muted);text-align:right;transition:color .2s">{prev.title} →</a>}
+    {related.length > 0 && (
+      <aside class="article-wrap keep-reading" aria-labelledby="keep-reading">
+        <h2 class="section-label" id="keep-reading">Keep reading</h2>
+        <div class="keep-reading-grid">
+          {related.map((p) => (
+            <a href={`/blog/${p.slug}/`} class="card keep-reading-card">
+              <span class="post-meta">
+                <span>{p.tags.slice(0, 1).map(topicLabel)}</span>
+                <span>{p.readingTime}</span>
+              </span>
+              <h3 class="post-title">{p.title}</h3>
+              {p.description && <p class="post-desc">{p.description}</p>}
+            </a>
+          ))}
         </div>
-      </div>
-    </div>
+      </aside>
+    )}
   </main>
 
   <Footer />
 </BaseLayout>
-
-<style>
-  .article-foot a:hover { color: var(--green); }
-  .article-header .tag:hover { color: var(--text); border-color: var(--border-strong); }
-</style>

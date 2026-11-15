@@ -66,7 +66,33 @@ function parseFrontmatter(md) {
   return { body: m[2].trim(), data };
 }
 
-const { body, data } = parseFrontmatter(source);
+const parsed = parseFrontmatter(source);
+const { data } = parsed;
+let { body } = parsed;
+
+// Post images live in src/assets/ and only get a public URL once the site is
+// built and deployed. Medium fetches images by URL, so swap each local image
+// for the one on the live page (same order). Deploy the post before
+// cross-posting it; if the live page is missing or out of step, stop instead
+// of sending Medium a post with broken images.
+const localImage = /!\[([^\]]*)\]\((\.{1,2}\/[^)\s]+)\)/g;
+const localImages = [...body.matchAll(localImage)];
+if (localImages.length > 0) {
+  const pageUrl = `${SITE}/blog/${slugArg.replace(/\.md$/, '')}/`;
+  const page = await fetch(pageUrl);
+  const pageHtml = page.ok ? await page.text() : '';
+  const article = pageHtml.split('class="article-body"')[1]?.split('</article>')[0] ?? '';
+  const live = [...article.matchAll(/<img[^>]*\ssrc="([^"]+)"/g)].map((m) => new URL(m[1], SITE).href);
+  if (live.length !== localImages.length) {
+    console.error(
+      `This post has ${localImages.length} local image(s) but ${pageUrl} shows ${live.length}.\n` +
+        'Deploy the post first, then run this again.',
+    );
+    process.exit(1);
+  }
+  let i = 0;
+  body = body.replace(localImage, (_, alt) => `![${alt}](${live[i++]})`);
+}
 
 marked.setOptions({ gfm: true, breaks: false });
 let html = marked.parse(body);

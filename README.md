@@ -60,17 +60,32 @@ title: "Example post"
 description: "A short summary for cards and SEO."
 pubDate: 2026-11-03
 tags: ["ai", "self-hosting"]
-cover: "https://..."
-medium: "https://rendoire.medium.com/..."   # optional, links "Also on Medium"
+cover: "../../assets/blog/example-post/cover.webp"   # optional, relative to the post
+coverAlt: "What the cover shows"                     # optional; omit if decorative
+medium: "https://rendoire.medium.com/..."            # optional, links "also on Medium"
 draft: false
 ---
 ```
+
+`description` is what cards, search results and link previews show, so write one sentence
+that says what the post is about. `tags` are the site's topics (`ai`, `self-hosting`,
+`privacy`, `digital-minimalism`, `software`, `neurodiversity`, `culture`); display names
+live in `src/lib/blog.ts`.
+
+Images go in `src/assets/blog/<slug>/` and are referenced with a relative path. The build
+resizes them and serves WebP, so nothing on the site loads from a third party.
 
 ### Importing from Medium
 
 ```bash
 npm run import:medium          # pulls the @rendoire RSS feed into src/content/blog/
+npm run posts:tidy             # re-run the cleanup on every post already on disk
 ```
+
+The import downloads each post's images into `src/assets/blog/<slug>/`, strips Medium's
+tracking pixel, and maps Medium tags onto the site's topics (`scripts/lib/posts.mjs`). It
+never deletes a post, and for a post that already exists your local `title`,
+`description`, `tags` and `coverAlt` are kept.
 
 ### Cross-posting to Medium
 
@@ -78,6 +93,9 @@ npm run import:medium          # pulls the @rendoire RSS feed into src/content/b
 export MEDIUM_TOKEN=<integration token>
 node scripts/publish-medium.mjs example-post --public
 ```
+
+Deploy the post before cross-posting it: Medium fetches images by URL, so the script takes
+them from the live page.
 
 See `docs/SECURITY.md` for details on how the Medium canonical link keeps your site as
 the source of truth.
