@@ -5,6 +5,8 @@ import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 import PostCard from '../components/blog/PostCard.astro';
 import Subscribe from '../components/Subscribe.astro';
+import OwnershipViz from '../components/OwnershipViz.astro';
+import MiniViz from '../components/MiniViz.astro';
 import { getPosts } from '../lib/blog';
 import { site, person } from '../config';
 
@@ -18,6 +20,7 @@ const pillars = [
     title: 'Writing',
     desc: 'Essays on AI, software, and the layer between the model and the real world.',
     href: '/blog/',
+    viz: 'token',
     cta: 'Read the journal',
   },
   {
@@ -25,6 +28,7 @@ const pillars = [
     title: 'Self-hosting',
     desc: 'Tools for owning your data — Linux, private cloud, and the boxes to run them.',
     href: '/self-hosting/',
+    viz: 'infra',
     cta: 'Browse the list',
   },
   {
@@ -32,6 +36,7 @@ const pillars = [
     title: 'AI knowledge',
     desc: 'A practical learning path and the O’Reilly books that earn their shelf space.',
     href: '/ai/',
+    viz: 'nn',
     cta: 'Start learning',
   },
   {
@@ -39,6 +44,7 @@ const pillars = [
     title: 'Tools I rate',
     desc: 'The apps, services, and hardware I use and recommend.',
     href: '/tools/',
+    viz: 'automation',
     cta: 'See the shortlist',
   },
 ];
@@ -58,17 +64,23 @@ const jsonLd = {
 
   <main id="main">
     <header class="hero container">
-      <h1 class="hero-title">ren<em>doire</em></h1>
-      <p class="hero-tagline">
-        Essays on AI and software, and a list of the self-hosted tools I run.
-      </p>
+      <div class="hero-text">
+        <h1 class="hero-title">ren<em>doire</em></h1>
+        <p class="hero-tagline">
+          Essays on AI and software, and a list of the self-hosted tools I run.
+        </p>
+      </div>
+      <OwnershipViz class="hero-viz" />
     </header>
 
     <nav class="container" aria-label="Sections">
       <div class="pillar-grid">
         {pillars.map((p) => (
           <a href={p.href} class="pillar-card">
-            <span class="pillar-index" aria-hidden="true">{p.index}</span>
+            <span class="pillar-top" aria-hidden="true">
+              <span class="pillar-index">{p.index}</span>
+              <MiniViz variant={p.viz} class="pillar-viz" />
+            </span>
             <h2 class="pillar-title">{p.title}</h2>
             <p class="pillar-desc">{p.desc}</p>
             <span class="pillar-link" aria-hidden="true">{p.cta} →</span>
@@ -76,6 +88,22 @@ const jsonLd = {
         ))}
       </div>
     </nav>
+
+    <section class="container home-savings">
+      <a href="/savings/" class="savings-teaser">
+        <svg viewBox="0 0 160 56" class="savings-spark" fill="none" aria-hidden="true">
+          <path d="M4 50 H156" class="spark-axis" />
+          <path d="M4 50 L156 6" class="spark-subs" pathLength="1" />
+          <path d="M4 30 L156 22" class="spark-own" pathLength="1" />
+          <circle cx="88.4" cy="25.6" r="3.5" class="spark-dot" />
+        </svg>
+        <span class="savings-teaser-text">
+          <strong>Renting vs owning</strong>
+          <span>Put in what your subscriptions cost and see where the two lines cross.</span>
+        </span>
+        <span class="pillar-link" aria-hidden="true">Open the calculator →</span>
+      </a>
+    </section>
 
     {featured && (
       <section class="container home-featured" aria-label="Latest essay">

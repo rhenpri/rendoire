@@ -439,6 +439,128 @@ a {
 .pillar-card:hover .pillar-link {
   color: var(--green);
 }
+.pillar-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.pillar-viz {
+  width: 54px;
+  height: auto;
+  opacity: 0.85;
+}
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 27rem);
+  gap: 3rem;
+  align-items: center;
+}
+.hero-viz {
+  max-width: 27rem;
+  justify-self: end;
+}
+
+/* Savings teaser: the chart in miniature, drawing itself on a loop. */
+.home-savings {
+  padding-top: 1rem;
+}
+.savings-teaser {
+  display: grid;
+  grid-template-columns: 160px minmax(0, 1fr) auto;
+  gap: 1.75rem;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.6rem;
+  transition: border-color 0.2s, background 0.2s;
+}
+.savings-teaser:hover {
+  border-color: var(--border-strong);
+  background: var(--surface);
+}
+.savings-teaser:hover .pillar-link {
+  color: var(--green);
+}
+.savings-teaser-text strong {
+  display: block;
+  font-family: var(--fd);
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+.savings-teaser-text span {
+  display: block;
+  font-size: 0.88rem;
+  color: var(--muted);
+  margin-top: 0.3rem;
+}
+.savings-spark {
+  width: 160px;
+  height: auto;
+}
+.spark-axis {
+  stroke: var(--border-strong);
+}
+.spark-subs,
+.spark-own {
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  animation: spark-draw 5s ease-in-out infinite;
+}
+.spark-subs {
+  stroke: #9480ea;
+}
+.spark-own {
+  stroke: #2aa871;
+}
+.spark-dot {
+  fill: var(--text);
+  stroke: var(--bg);
+  stroke-width: 2;
+  animation: spark-dot 5s ease-in-out infinite;
+}
+@keyframes spark-draw {
+  0% {
+    stroke-dashoffset: 1;
+  }
+  45%,
+  88% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+}
+@keyframes spark-dot {
+  0%,
+  22% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  32%,
+  88% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+.spark-dot {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+@media (prefers-reduced-motion: reduce) {
+  .spark-subs,
+  .spark-own,
+  .spark-dot {
+    animation: none;
+  }
+}
 .home-featured {
   padding-top: 3rem;
   padding-bottom: 1rem;
@@ -1402,6 +1524,13 @@ a.tag:hover {
   .pillar-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .hero-viz {
+    justify-self: start;
+  }
   .featured-card {
     grid-template-columns: 1fr;
   }
@@ -1438,6 +1567,14 @@ a.tag:hover {
   .pillar-card {
     min-height: 0;
     padding: 1.25rem;
+  }
+  .savings-teaser {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1.25rem;
+  }
+  .pillar-viz {
+    width: 44px;
   }
   .not-found-latest li {
     flex-direction: column;
