@@ -5,7 +5,6 @@ import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 import PostCard from '../components/blog/PostCard.astro';
 import Subscribe from '../components/Subscribe.astro';
-import OwnershipViz from '../components/OwnershipViz.astro';
 import MiniViz from '../components/MiniViz.astro';
 import { getPosts } from '../lib/blog';
 import { site, person } from '../config';
@@ -70,7 +69,7 @@ const jsonLd = {
           Essays on AI and software, and a guide to self-hosting.
         </p>
       </div>
-      <OwnershipViz class="hero-viz" />
+      <canvas class="hero-field" id="hero-field" aria-hidden="true"></canvas>
     </header>
 
     <nav class="container" aria-label="Sections">
@@ -91,17 +90,15 @@ const jsonLd = {
 
     <section class="container home-savings">
       <a href="/savings/" class="savings-teaser">
-        <svg viewBox="0 0 160 56" class="savings-spark" fill="none" aria-hidden="true">
-          <path d="M4 50 H156" class="spark-axis" />
-          <path d="M4 50 L156 6" class="spark-subs" pathLength="1" />
-          <path d="M4 30 L156 22" class="spark-own" pathLength="1" />
-          <circle cx="88.4" cy="25.6" r="3.5" class="spark-dot" />
-        </svg>
+        <span class="savings-spark" aria-hidden="true">
+          <i class="spark-bar spark-subs"></i>
+          <i class="spark-bar spark-own"></i>
+        </span>
         <span class="savings-teaser-text">
           <strong>Renting vs owning</strong>
-          <span>Put in what your subscriptions cost and see where the two lines cross.</span>
+          <span>What subscriptions add up to over the years, against running the same things yourself.</span>
         </span>
-        <span class="pillar-link" aria-hidden="true">Open the calculator →</span>
+        <span class="pillar-link" aria-hidden="true">Work it out →</span>
       </a>
     </section>
 
@@ -153,3 +150,7 @@ const jsonLd = {
 
   <Footer />
 </BaseLayout>
+
+<script>
+  import '../scripts/hero-field.ts';
+</script>
