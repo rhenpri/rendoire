@@ -14,5 +14,8 @@ export default defineConfig({
 
   vite: {
     plugins: [tailwindcss()],
+    // Never inline a script into the HTML: the CSP only allows script files
+    // from this origin, so an inlined one would be blocked.
+    build: { assetsInlineLimit: 0 },
   },
 });
