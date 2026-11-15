@@ -2,22 +2,34 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
+import { getPosts } from '../lib/blog';
+
+const latest = (await getPosts()).slice(0, 3);
 ---
 
-<BaseLayout
-  title="404 — rendoire"
-  description="Page not found."
-  canonical="https://rendoire.com/404"
->
+<BaseLayout title="Page not found — rendoire" description="Page not found." noindex>
   <Navigation />
 
-  <main id="main" class="container" style="min-height: 72vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding: 6rem 2rem;">
-    <p class="section-label" style="justify-content:center;">Error 404</p>
-    <h1 class="hero-wordmark" style="font-size: clamp(3rem, 10vw, 7rem);">Off<em class="accent">_</em>Grid</h1>
-    <p style="color: var(--muted); max-width: 30rem; line-height: 1.7; margin-bottom: 2.5rem;">
-      The route you requested can't be resolved. The page never existed — or the edge node dropped it.
+  <main id="main" class="container not-found">
+    <p class="section-label">Error 404</p>
+    <h1 class="hero-title">Off<em>_</em>grid</h1>
+    <p class="lead">
+      There's nothing at this address. The page may have moved, or the link that brought you here
+      was mistyped.
     </p>
-    <a href="/" class="newsletter-cta" style="font-size:0.75rem;">Return home ↗</a>
+    <div class="not-found-links">
+      <a href="/" class="newsletter-cta">Go to the homepage</a>
+      <a href="/blog/" class="newsletter-alt">or browse all essays</a>
+    </div>
+
+    <div class="not-found-latest">
+      <h2 class="section-label">Latest essays</h2>
+      <ul>
+        {latest.map((p) => (
+          <li><a href={`/blog/${p.slug}/`}>{p.title}</a> <span>{p.dateLabel}</span></li>
+        ))}
+      </ul>
+    </div>
   </main>
 
   <Footer />

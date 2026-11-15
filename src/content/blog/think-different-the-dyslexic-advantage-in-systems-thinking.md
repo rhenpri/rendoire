@@ -1,9 +1,9 @@
 ---
 title: "Think Different: The Dyslexic Advantage in Systems Thinking"
-description: "Apple told us to “Think Different.” For dyslexic engineers, thinking differently isn’t a choice. It’s how their brains are wired. And in complex systems work, that difference is…"
+description: "Apple told us to “Think Different.” For dyslexic engineers, thinking differently isn’t a choice. It’s how their brains are wired."
 pubDate: 2025-09-16
-tags: ["dyslexia", "systems-thinking", "neurodiversity", "business", "technology"]
-cover: "https://cdn-images-1.medium.com/max/1200/1*4giwBz5b0Lw2p7isuIEC5w.png"
+tags: ["neurodiversity", "software"]
+cover: "../../assets/blog/think-different-the-dyslexic-advantage-in-systems-thinking/cover.webp"
 medium: "https://rendoire.medium.com/think-different-the-dyslexic-advantage-in-systems-thinking-e52becce7e75"
 draft: false
 ---
@@ -16,7 +16,7 @@ What if thinking differently isn’t just a marketing slogan but an actual cogni
 
 ### The Pattern Spotters
 
-![](https://cdn-images-1.medium.com/max/643/1*mvp20zTY47V6i1_xy0QsIg.png)
+![](../../assets/blog/think-different-the-dyslexic-advantage-in-systems-thinking/efdd9982b7.webp)
 
 Working in software systems, I’ve noticed something curious. When it breaks, you may find that one engineer who spots the pattern everyone else misses. An issue in service A connects to latency in service B, which links to database exhaustion from that deployment three days ago.
 
@@ -32,7 +32,7 @@ Brain imaging shows these advantages come from fundamental neural differences pr
 
 Traditional analysis breaks problems into parts. Dyslexic cognition naturally grasps how parts interact as wholes. Researchers call it “*global exploratory learning.*” Understanding complexity through interconnections rather than components.
 
-![](https://cdn-images-1.medium.com/max/620/1*sm0J3YAfzTKwKYzeBCV0KA.png)
+![](../../assets/blog/think-different-the-dyslexic-advantage-in-systems-thinking/a7589f03c1.webp)
 
 Dyslexic engineers often excel at:
 
@@ -47,13 +47,13 @@ A 2003 study found that **40% of successful entrepreneurs are dyslexic**. That�
 
 Richard Branson: “*My dyslexia became my massive advantage. It helped me think creatively and laterally, and see solutions where others saw problems.*”
 
-![](https://cdn-images-1.medium.com/max/860/1*r3taULLFRn7soamqoVJd3w.png)
+![](../../assets/blog/think-different-the-dyslexic-advantage-in-systems-thinking/530c2f5a5b.webp)
 
 Entrepreneurship is systems design. Identifying market gaps, orchestrating resources, creating value networks. The same cognitive traits that make reading difficult make systems thinking natural.
 
 ### Building Better Teams
 
-![](https://cdn-images-1.medium.com/max/660/1*3yB-dSfL1-Iar5XbzQW8vA.png)
+![](../../assets/blog/think-different-the-dyslexic-advantage-in-systems-thinking/ea7bb69c71.webp)
 
 The best engineering teams combine different cognitive styles. Detail-oriented linear thinkers ensure correct implementation. Big-picture systems thinkers ensure architectural coherence.
 
@@ -61,7 +61,7 @@ Cognitive diversity reduces single points of failure in problem-solving.
 
 ### Changing the Story
 
-![](https://cdn-images-1.medium.com/max/730/1*fa4tZef3aH78Ej9J5BpuwQ.png)
+![](../../assets/blog/think-different-the-dyslexic-advantage-in-systems-thinking/c8cc5a54d1.webp)
 
 We’ve spent decades focused on what dyslexic people can’t do. Reading difficulties. Spelling problems. Processing delays.
 
@@ -90,5 +90,3 @@ References:
 [Developmental dyslexia essential to human adaptive success, study argues](https://www.cam.ac.uk/research/news/developmental-dyslexia-essential-to-human-adaptive-success-study-argues)
 
 [https://onlinelibrary.wiley.com/doi/10.1002/dys.388](https://onlinelibrary.wiley.com/doi/10.1002/dys.388)
-
-![](https://medium.com/_/stat?event=post.clientViewed&referrerSource=full_rss&postId=e52becce7e75)

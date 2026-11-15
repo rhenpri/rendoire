@@ -1,9 +1,9 @@
 ---
 title: "I Used a Dumb Phone for a Month — With a Modern Twist"
-description: "📵 I Used a Dumb Phone for a Month — With a Modern Twist “Clutter is costly, and its cost is often measured in terms of reduced autonomy.” — Cal Newport, Digital Minimalism As a…"
+description: "As a software engineer, technology is central to everything I do. It’s my tool, my craft, and the foundation of how I build and create."
 pubDate: 2025-07-02
-tags: ["software", "unihertz", "dumbphone", "digital-minimalism", "technology"]
-cover: "https://cdn-images-1.medium.com/max/1200/1*tzQwfwUbNbIJa6y_kEo6hA.png"
+tags: ["software", "digital-minimalism"]
+cover: "../../assets/blog/i-used-a-dumb-phone-for-a-month-with-a-modern-twist/cover.webp"
 medium: "https://rendoire.medium.com/i-used-a-dumb-phone-for-a-month-with-a-modern-twist-2c2779ece7a0"
 draft: false
 ---
@@ -130,5 +130,3 @@ You don’t need to go full caveman. But you *do* need to be hyperaware of how t
 -   👍 **Recommendation:** Yes, especially if you’re feeling digitally burned out
 
 Would you try something like this? Or have questions about setting one up yourself? I’m thinking of writing a guide on creating your own “distraction-free device” — let me know.
-
-![](https://medium.com/_/stat?event=post.clientViewed&referrerSource=full_rss&postId=2c2779ece7a0)

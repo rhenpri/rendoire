@@ -1,9 +1,9 @@
 ---
 title: "Token-Maxxing Pandemic"
-description: "Just recently, there was a leaderboard at Meta that ranked engineers by how many AI tokens they burned. Some people climbed it doing real work. Others left agents looping overni…"
+description: "Just recently, there was a leaderboard at Meta that ranked engineers by how many AI tokens they burned. Some people climbed it doing real work."
 pubDate: 2026-06-02
-tags: ["ai-agent", "software-engineering", "ai-engineering", "ai", "token"]
-cover: "https://cdn-images-1.medium.com/max/1200/1*hRnAH_U9RtLzn9nO0dheAA.png"
+tags: ["ai", "software"]
+cover: "../../assets/blog/token-maxxing-pandemic/cover.webp"
 medium: "https://rendoire.medium.com/token-maxxing-pandemic-078214e10f2d"
 draft: false
 ---
@@ -14,7 +14,7 @@ Scroll **LinkedIn** for ten minutes and you get the retail version. The same fiv
 
 Andy Grove ran Intel on the opposite rule. Measure output, not activity. A token leaderboard measures activity. It is busy-ness wearing a medal.
 
-![](https://cdn-images-1.medium.com/max/1024/1*DL6TeIOXwU5zWLI1BzaKuQ.png)
+![](../../assets/blog/token-maxxing-pandemic/f6e9816ee1.webp)
 
 ### We have measured this before
 
@@ -24,7 +24,7 @@ Bill Atkinson, who wrote QuickDraw and most of the interface, had just rewritten
 
 They stopped asking him to fill in the form.
 
-![](https://cdn-images-1.medium.com/max/700/0*csHfekEHsZdcfxU4)
+![](../../assets/blog/token-maxxing-pandemic/6840e785cf.webp)
 
 _*The Lisa operating system comprising approximately 90,000 lines of code*_
 
@@ -40,7 +40,7 @@ None of it is free. Tokens cost money, they cost energy, and the hardware behind
 
 Here is the tell. Earlier this year Anthropic called its Mythos model too dangerous to release widely, too good at finding security flaws. When Daniel Stenberg, who maintains curl, finally got a scan, it claimed five confirmed vulnerabilities. His team checked. One held up, low severity. The rest were false positives or a minor bug. His verdict was blunt: mostly marketing. His [write-up](https://daniel.haxx.se/blog/2026/05/11/mythos-finds-a-curl-vulnerability/) is worth your time.
 
-![](https://cdn-images-1.medium.com/max/1024/1*QLtgveE4f0ZhtM0-j0kqXQ.png)
+![](../../assets/blog/token-maxxing-pandemic/da960ce525.webp)
 
 The part the hype skips is the honest one. AI code analysis is genuinely good now. It is just not the revolution each press cycle sells, and treating every increment as a breakthrough is how you end up gaming a leaderboard instead of shipping.
 
@@ -48,12 +48,10 @@ The part the hype skips is the honest one. AI code analysis is genuinely good no
 
 None of this means stop. Explore the frontier models. Run the tooling. Build the swarms. Adoption comes from creative use, from making things you actually care about, not from chasing a usage chart.
 
-![](https://cdn-images-1.medium.com/max/1024/1*MDi6ljqN6mnMfEpPDlMs6Q.jpeg)
+![](../../assets/blog/token-maxxing-pandemic/839b04a99d.webp)
 
 But spend your effort where it compounds. Learn the fundamentals properly. The model. Tooling. Memory. Infrastructure. Fine tuning. Harnessing. Hardware. AI assisted coding. Then learn to do more with less. Sharpen the prompt. Reach for the smaller model first. Configure it well. Ignore the noise selling each point release as the future arriving early.
 
 The people topping the leaderboard are rarely the ones building anything that lasts.
 
 **Burning the most tokens is not the skill**. Knowing which ones you actually needed is.
-
-![](https://medium.com/_/stat?event=post.clientViewed&referrerSource=full_rss&postId=078214e10f2d)

@@ -1,9 +1,12 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 import PostCard from '../components/blog/PostCard.astro';
+import Subscribe from '../components/Subscribe.astro';
 import { getPosts } from '../lib/blog';
+import { site, person } from '../config';
 
 const posts = await getPosts();
 const featured = posts.find((p) => p.featured) ?? posts[0];
@@ -14,31 +17,39 @@ const pillars = [
     index: '01',
     title: 'Writing',
     desc: 'Essays on AI, software, and the layer between the model and the real world.',
-    href: '/blog',
+    href: '/blog/',
     cta: 'Read the journal',
   },
   {
     index: '02',
     title: 'Self-hosting',
     desc: 'Tools for owning your data — Linux, private cloud, and the boxes to run them.',
-    href: '/self-hosting',
+    href: '/self-hosting/',
     cta: 'Browse the list',
   },
   {
     index: '03',
     title: 'AI knowledge',
-    desc: 'A practical learning path and the O\u2019Reilly books that earn their shelf space.',
-    href: '/ai',
+    desc: 'A practical learning path and the O’Reilly books that earn their shelf space.',
+    href: '/ai/',
     cta: 'Start learning',
+  },
+  {
+    index: '04',
+    title: 'Tools I rate',
+    desc: 'The apps, services, and hardware I use and recommend.',
+    href: '/tools/',
+    cta: 'See the shortlist',
   },
 ];
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  name: 'rendoire',
-  url: 'https://rendoire.com',
+  name: site.name,
+  url: site.url,
   description: 'Writing, AI knowledge, and self-hosting recommendations.',
+  author: person,
 };
 ---
 
@@ -47,48 +58,47 @@ const jsonLd = {
 
   <main id="main">
     <header class="hero container">
-      <p class="hero-eyebrow">writing · building · owning my tools<span class="cursor"></span></p>
       <h1 class="hero-title">ren<em>doire</em></h1>
       <p class="hero-tagline">
-        I write about artificial intelligence, build software, and keep my data on machines I
-        actually own. This is where I share what I've learned — and what I'd hand to a friend.
+        Essays on AI and software, and a list of the self-hosted tools I run.
       </p>
-      <div class="hero-links">
-        <a href="/blog">Writing</a>
-        <a href="/self-hosting">Self-hosting</a>
-        <a href="/ai">AI resources</a>
-        <a href="/tools">Tools I rate</a>
-      </div>
     </header>
 
-    <section class="container" style="padding: 1rem 0 4rem;">
+    <nav class="container" aria-label="Sections">
       <div class="pillar-grid">
         {pillars.map((p) => (
           <a href={p.href} class="pillar-card">
-            <span class="pillar-index">{p.index}</span>
+            <span class="pillar-index" aria-hidden="true">{p.index}</span>
             <h2 class="pillar-title">{p.title}</h2>
             <p class="pillar-desc">{p.desc}</p>
-            <span class="pillar-link">{p.cta} →</span>
+            <span class="pillar-link" aria-hidden="true">{p.cta} →</span>
           </a>
         ))}
       </div>
-    </section>
+    </nav>
 
     {featured && (
-      <section class="container" style="padding: 0 0 1rem;">
+      <section class="container home-featured" aria-label="Latest essay">
         <a href={`/blog/${featured.slug}/`} class="featured-card">
           <div class="featured-body">
             <span class="featured-kicker">Latest essay</span>
             <h2 class="featured-title">{featured.title}</h2>
             {featured.description && <p class="featured-desc">{featured.description}</p>}
             <div class="post-meta" style="margin-bottom:0;">
-              <span>{featured.dateLabel}</span>
+              <time datetime={featured.pubDate.toISOString()}>{featured.dateLabel}</time>
               <span>{featured.readingTime}</span>
             </div>
           </div>
           {featured.cover && (
             <div class="featured-media">
-              <img src={featured.cover} alt="" loading="eager" decoding="async" />
+              <Image
+                src={featured.cover}
+                alt={featured.coverAlt}
+                widths={[480, 800, 1200]}
+                sizes="(max-width: 960px) 100vw, 520px"
+                loading="eager"
+                fetchpriority="high"
+              />
             </div>
           )}
         </a>
@@ -96,22 +106,20 @@ const jsonLd = {
     )}
 
     <section class="section container">
-      <div class="section-label">Journal</div>
-      <h2 class="section-title">Recent <em>writing</em></h2>
+      <div class="section-head">
+        <div>
+          <div class="section-label">Journal</div>
+          <h2 class="section-title">Recent <em>writing</em></h2>
+        </div>
+        <a href="/blog/" class="section-more">All {posts.length} essays →</a>
+      </div>
       <div class="post-grid">
         {recent.map((post) => <PostCard post={post} />)}
-      </div>
-      <div style="margin-top: 2.25rem;">
-        <a href="/blog/" class="post-arrow" style="font-size:0.75rem;">All essays →</a>
       </div>
     </section>
 
     <section class="container">
-      <div class="newsletter reveal">
-        <h3>New essays, occasionally</h3>
-        <p>Considered writing on AI and building. No spam, unsubscribe any time.</p>
-        <a href="https://rendoire.medium.com/subscribe" target="_blank" rel="noopener" class="newsletter-cta">Subscribe on Medium ↗</a>
-      </div>
+      <Subscribe />
     </section>
   </main>
 

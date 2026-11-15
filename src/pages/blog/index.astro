@@ -3,16 +3,17 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Navigation from '../../components/Navigation.astro';
 import Footer from '../../components/Footer.astro';
 import PostCard from '../../components/blog/PostCard.astro';
-import { getPosts, allTags } from '../../lib/blog';
+import { getPosts, topicCounts, topicLabel } from '../../lib/blog';
+import { site } from '../../config';
 
 const posts = await getPosts();
-const tags = allTags(posts);
+const topics = topicCounts(posts);
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Blog',
-  name: 'rendoire',
-  url: 'https://rendoire.com/blog',
+  name: site.name,
+  url: `${site.url}/blog/`,
   description: 'Essays on artificial intelligence, software engineering, and self-hosting.',
 };
 ---
@@ -20,32 +21,28 @@ const jsonLd = {
 <BaseLayout
   title="Writing — rendoire"
   description="All essays on artificial intelligence, software engineering, and self-hosting."
-  canonical="https://rendoire.com/blog/"
+  canonical={`${site.url}/blog/`}
   jsonLd={jsonLd}
 >
   <Navigation />
 
-  <main id="main" class="container section" style="padding-top: 4rem;">
+  <main id="main" class="container section page-top">
     <div class="section-label">All essays</div>
     <h1 class="section-title">The <em>journal</em></h1>
-    <p style="color: var(--muted); max-width: 40rem; margin-top: -1.5rem; margin-bottom: 2.5rem;">
-      {posts.length} essays and counting. Filter by topic below.
-    </p>
+    <p class="lead page-lead">{posts.length} essays and counting. Filter by topic below.</p>
 
     <div class="filter-bar" id="filter-bar" role="group" aria-label="Filter by topic">
-      <button class="filter-chip" aria-pressed="true" data-filter="all">All</button>
-      {tags.map((tag) => (
-        <button class="filter-chip" aria-pressed="false" data-filter={tag}>#{tag}</button>
+      <button class="filter-chip" aria-pressed="true" data-filter="all">All <span class="chip-count">{posts.length}</span></button>
+      {topics.map(({ tag, count }) => (
+        <button class="filter-chip" aria-pressed="false" data-filter={tag}>{topicLabel(tag)} <span class="chip-count">{count}</span></button>
       ))}
     </div>
 
     <div class="post-grid" id="post-grid">
-      {posts.map((post) => <PostCard post={post} />)}
+      {posts.map((post) => <PostCard post={post} level="h2" />)}
     </div>
 
-    <p id="no-results" style="display:none; color:var(--muted); font-family:var(--fm); font-size:0.8rem; padding:2rem 0;">
-      No essays match that topic.
-    </p>
+    <p id="filter-status" class="visually-hidden" role="status"></p>
   </main>
 
   <Footer />
@@ -55,24 +52,42 @@ const jsonLd = {
   (function () {
     const bar = document.getElementById('filter-bar');
     const grid = document.getElementById('post-grid');
-    const noResults = document.getElementById('no-results');
+    const status = document.getElementById('filter-status');
     if (!bar || !grid) return;
+
+    const chips = [...bar.querySelectorAll('.filter-chip')];
+    const cards = [...grid.querySelectorAll('[data-tags]')];
+    const known = new Set(chips.map((c) => c.dataset.filter));
+
+    // The topic lives in the URL (/blog/?tag=ai) so a filtered view can be
+    // linked to, and the tags on a post lead somewhere.
+    const fromUrl = () => {
+      const tag = new URLSearchParams(location.search).get('tag');
+      return tag && known.has(tag) ? tag : 'all';
+    };
+
+    const apply = (filter, announce) => {
+      chips.forEach((c) => c.setAttribute('aria-pressed', String(c.dataset.filter === filter)));
+      let visible = 0;
+      cards.forEach((card) => {
+        const show = filter === 'all' || card.dataset.tags.split(',').includes(filter);
+        card.hidden = !show;
+        if (show) visible++;
+      });
+      if (announce && status) status.textContent = `Showing ${visible} of ${cards.length} essays.`;
+    };
 
     bar.addEventListener('click', (e) => {
       const chip = e.target.closest('.filter-chip');
       if (!chip) return;
       const filter = chip.dataset.filter;
-
-      bar.querySelectorAll('.filter-chip').forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
-      const cards = grid.querySelectorAll('[data-tags]');
-      let visible = 0;
-      cards.forEach((card) => {
-        const tags = (card.getAttribute('data-tags') || '').split(',');
-        const show = filter === 'all' || tags.includes(filter);
-        card.style.display = show ? '' : 'none';
-        if (show) visible++;
-      });
-      noResults.style.display = visible === 0 ? '' : 'none';
+      const url = new URL(location.href);
+      if (filter === 'all') url.searchParams.delete('tag');
+      else url.searchParams.set('tag', filter);
+      history.replaceState(null, '', url);
+      apply(filter, true);
     });
+
+    apply(fromUrl(), false);
   })();
 </script>

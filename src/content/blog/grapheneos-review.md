@@ -1,9 +1,9 @@
 ---
 title: "GrapheneOS Review"
-description: "“Mistrust authority. Promote decentralization.” Steven Levy, Hackers I am a software engineer, so I should have known better than to install a new operating system on my phone. …"
+description: "I am a software engineer, so I should have known better than to install a new operating system on my phone. Instead I did it on purpose."
 pubDate: 2026-11-03
-tags: ["security", "grapheneos", "technology", "review", "android"]
-cover: "https://cdn-images-1.medium.com/max/1200/1*bRLh1tHs2_hawBwE7Ica8A.jpeg"
+tags: ["privacy"]
+cover: "../../assets/blog/grapheneos-review/cover.webp"
 medium: "https://rendoire.medium.com/grapheneos-review-e3ceed6f53cf"
 draft: false
 ---
@@ -23,7 +23,7 @@ GrapheneOS is fast and quiet. No carrier bloat, no preinstalled games, no app de
 
 ### The hard parts
 
-Then there are the hard parts. Notifications arrive late because they no longer ride Google’s push channel, so I get messages when the app checks rather than the instant a server pings me. A few banking apps refuse to run, because they check for a Google signature and treat its absence as proof the phone is compromised*(This can be bypassed by using a google play exploit)*. It is not. It is just not Google.
+Then there are the hard parts. Notifications arrive late because they no longer ride Google’s push channel, so I get messages when the app checks rather than the instant a server pings me. A few banking apps refuse to run, because they check for a Google signature and treat its absence as proof the phone is compromised *(This can be bypassed by using a google play exploit)*. It is not. It is just not Google.
 
 And then there is the big one: paying for things.
 
@@ -80,5 +80,3 @@ Bring Your Own Services sounds like a burden. It is. But it is the same burden a
 -   It is not a purity test. You pick the sacrifices that make sense, and keep RCS for the person you love.
 
 Would you try a de-Googled phone? What is the one app you could not leave behind?
-
-![](https://medium.com/_/stat?event=post.clientViewed&referrerSource=full_rss&postId=e3ceed6f53cf)

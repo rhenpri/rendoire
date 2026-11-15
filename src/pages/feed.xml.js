@@ -1,5 +1,5 @@
 import rss from '@astrojs/rss';
-import { getPosts } from '../lib/blog';
+import { getPosts, topicLabel } from '../lib/blog';
 
 export async function GET(context) {
   const posts = await getPosts();
@@ -13,6 +13,7 @@ export async function GET(context) {
       pubDate: post.pubDate,
       description: post.description ?? '',
       link: `/blog/${post.slug}/`,
+      categories: post.tags.map(topicLabel),
     })),
     customData: `<language>en-us</language>`,
   });

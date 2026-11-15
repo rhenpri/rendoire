@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 import { books, stages, glossary } from '../data/ai';
-import { withRef } from '../config';
+import { withRef, bookRel, hasReferral } from '../config';
 import MiniViz from '../components/MiniViz.astro';
 
 const bookByTitle = new Map(books.map((b) => [b.title, b]));
@@ -91,7 +91,7 @@ const pubLabel = (p: string) => (p === 'oreilly' ? 'O\u2019Reilly' : p === 'mann
                 {stage.bookTitles.map((t) => {
                   const b = bookByTitle.get(t);
                   return b
-                    ? <a href={withRef(b.url)} target="_blank" rel="noopener" class="path-book">{t}</a>
+                    ? <a href={withRef(b.url)} target="_blank" rel={bookRel} class="path-book">{t}</a>
                     : <span class="path-book">{t}</span>;
                 })}
               </div>
@@ -107,7 +107,7 @@ const pubLabel = (p: string) => (p === 'oreilly' ? 'O\u2019Reilly' : p === 'mann
       <h2 class="section-title" style="font-size:2.2rem;">Worth the <em>shelf space</em></h2>
       <div class="book-grid">
         {books.map((book) => (
-          <a href={withRef(book.url)} target="_blank" rel="noopener" class="card book-card">
+          <a href={withRef(book.url)} target="_blank" rel={bookRel} class="card book-card">
             <div class="book-top">
               <span class={`book-publisher ${book.publisher === 'oreilly' ? 'pub-oreilly' : 'pub-other'}`}>{pubLabel(book.publisher)}</span>
               <span class="book-year">{book.year}</span>
@@ -119,9 +119,12 @@ const pubLabel = (p: string) => (p === 'oreilly' ? 'O\u2019Reilly' : p === 'mann
           </a>
         ))}
       </div>
-      <p style="font-family:var(--fm); font-size:0.64rem; color:var(--mid); margin-top:1.5rem; line-height:1.7;">
-        Book links may include a referral tag that helps support this site — no extra cost to you.
-      </p>
+      {hasReferral && (
+        <p class="fine-print" style="margin-top:1.5rem;">
+          Book links include a referral tag: if you buy through one, I earn a small commission at
+          no extra cost to you.
+        </p>
+      )}
     </section>
 
     <!-- Glossary -->

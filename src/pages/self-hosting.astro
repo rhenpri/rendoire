@@ -5,7 +5,19 @@ import Footer from '../components/Footer.astro';
 import { categories, statusLabel } from '../data/self-hosting';
 import MiniViz from '../components/MiniViz.astro';
 
+import { execSync } from 'node:child_process';
+
 const domain = (url: string) => new URL(url).hostname.replace(/^www\./, '');
+const total = categories.reduce((n, c) => n + c.items.length, 0);
+
+// A list of recommendations is only as good as it is current, so say when the
+// data last changed. Falls back to nothing outside a git checkout.
+let updated: Date | null = null;
+try {
+  const iso = execSync('git log -1 --format=%cI -- src/data/self-hosting.ts').toString().trim();
+  if (iso) updated = new Date(iso);
+} catch {}
+const updatedLabel = updated?.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
 
 <BaseLayout
@@ -19,8 +31,13 @@ const domain = (url: string) => new URL(url).hostname.replace(/^www\./, '');
     <div class="section-label">Recommendations</div>
     <h1 class="section-title">Self-<em>hosting</em></h1>
     <p class="lead" style="margin-top:-1.25rem; margin-bottom:1.5rem;">
-      A short, opinionated list of what I'd hand to a friend. Things I've actually used, plus a
-      few I'm keeping an eye on. Every link goes straight to the project.
+      A short, opinionated list: things I've used, plus a few I'm keeping an eye on. Every link
+      goes straight to the project.
+    </p>
+    <p class="fine-print">
+      {total} tools in {categories.length} categories{updated && (
+        <> · last updated <time datetime={updated.toISOString()}>{updatedLabel}</time></>
+      )}
     </p>
 
     <div class="dir-layout" style="margin-top: 1rem;">
@@ -28,9 +45,10 @@ const domain = (url: string) => new URL(url).hostname.replace(/^www\./, '');
         <input
           type="search"
           id="dir-search"
-          placeholder="Search…"
+          class="dir-search"
+          placeholder="Search tools…"
+          aria-label="Search tools"
           autocomplete="off"
-          style="font-family:var(--fm); font-size:0.76rem; color:var(--text); background:var(--surface); border:1px solid var(--border); border-radius:4px; padding:0.55rem 0.75rem; margin-bottom:0.9rem;"
         />
         {categories.map((cat, i) => (
           <button class="dir-nav-btn" data-target={cat.id} aria-pressed={i === 0 ? 'true' : 'false'}>
@@ -71,6 +89,11 @@ const domain = (url: string) => new URL(url).hostname.replace(/^www\./, '');
             </div>
           </section>
         ))}
+        <p id="dir-empty" class="dir-empty" hidden>
+          Nothing matches “<span id="dir-empty-term"></span>”.
+          <button type="button" id="dir-clear">Clear search</button>
+        </p>
+        <p id="dir-status" class="visually-hidden" role="status"></p>
       </div>
     </div>
 
@@ -105,17 +128,39 @@ const domain = (url: string) => new URL(url).hostname.replace(/^www\./, '');
     sections.forEach((s) => io.observe(s));
 
     const search = document.getElementById('dir-search');
-    if (search) {
-      search.addEventListener('input', () => {
-        const q = search.value.trim().toLowerCase();
-        document.querySelectorAll('[data-search]').forEach((card) => {
-          card.style.display = !q || card.getAttribute('data-search').includes(q) ? '' : 'none';
-        });
-        document.querySelectorAll('[data-section]').forEach((section) => {
-          const cards = [...section.querySelectorAll('[data-search]')];
-          section.style.display = cards.some((c) => c.style.display !== 'none') ? '' : 'none';
-        });
+    const empty = document.getElementById('dir-empty');
+    const emptyTerm = document.getElementById('dir-empty-term');
+    const status = document.getElementById('dir-status');
+    const cards = [...document.querySelectorAll('[data-search]')];
+    if (!search) return;
+
+    const filter = () => {
+      const q = search.value.trim().toLowerCase();
+      let visible = 0;
+      cards.forEach((card) => {
+        const show = !q || card.dataset.search.includes(q);
+        card.hidden = !show;
+        if (show) visible++;
       });
-    }
+      sections.forEach((section) => {
+        section.hidden = !section.querySelector('[data-search]:not([hidden])');
+      });
+      empty.hidden = visible > 0;
+      emptyTerm.textContent = search.value.trim();
+      status.textContent = q ? `${visible} of ${cards.length} tools match.` : '';
+    };
+
+    search.addEventListener('input', filter);
+    search.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && search.value) {
+        search.value = '';
+        filter();
+      }
+    });
+    document.getElementById('dir-clear').addEventListener('click', () => {
+      search.value = '';
+      filter();
+      search.focus();
+    });
   })();
 </script>

@@ -1,9 +1,9 @@
 ---
 title: "Reclaiming Your Digital Autonomy: Practical Self-Hosting in an Age of Surveillance and Gamification"
-description: "Reclaiming Your Digital Autonomy: Practical Self-Hosting in an Age of Data Gathering and Gamification Our daily lives are increasingly shaped by digital services that promise co…"
+description: "Our daily lives are increasingly shaped by digital services that promise convenience at the hidden cost of our privacy and autonomy."
 pubDate: 2025-07-30
-tags: ["mixture-of-experts", "ai", "gamification", "self-hosting", "privacy"]
-cover: "https://cdn-images-1.medium.com/max/1200/1*6tDQC-S9GWZQ2HMQdkaU3g.png"
+tags: ["ai", "digital-minimalism", "self-hosting", "privacy"]
+cover: "../../assets/blog/reclaiming-your-digital-autonomy-practical-self-hosting-in-an-age-of-surveillance-and-gamification/cover.webp"
 medium: "https://rendoire.medium.com/reclaiming-your-digital-autonomy-practical-self-hosting-in-an-age-of-surveillance-and-gamification-0455e1140933"
 draft: false
 ---
@@ -12,7 +12,7 @@ draft: false
 
 Our daily lives are increasingly shaped by digital services that promise convenience at the hidden cost of our privacy and autonomy. Each notification, like, and tap is carefully engineered to capture our attention, turning everyday interactions into a relentless pursuit of engagement. Cal Newport, author of *Digital Minimalism*, reveals how digital platforms exploit psychological vulnerabilities to monopolise attention and transform users into data sources:
 
-![](https://cdn-images-1.medium.com/max/1024/0*TjaNczb1LGN6PYPA.png)
+![](../../assets/blog/reclaiming-your-digital-autonomy-practical-self-hosting-in-an-age-of-surveillance-and-gamification/aeb745f71c.webp)
 
 > *“You cannot expect an app that was built to hijack your attention to help you reclaim your focus.”*
 
@@ -53,7 +53,7 @@ Opt for self-hosted alternatives:
 
 ### Repurposing Old Hardware
 
-![](https://cdn-images-1.medium.com/max/860/0*9qIOUap65mTg086N)
+![](../../assets/blog/reclaiming-your-digital-autonomy-practical-self-hosting-in-an-age-of-surveillance-and-gamification/3de42c4f96.webp)
 
 Repurpose older desktops or laptops as home servers to cut costs and reduce e-waste. These machines can efficiently run essential services such as storage, media streaming, and even AI models.
 
@@ -61,7 +61,7 @@ Repurpose older desktops or laptops as home servers to cut costs and reduce e-wa
 
 As consumer hardware evolves, it can either empower or limit access to independent AI capabilities. Frameworks like Mixture of Experts (MoE) will eventually enable high-performance AI with significantly lower computational demands, allowing individuals to achieve near-corporate-grade AI performance without needing massive infrastructure, thus democratising access.
 
-![](https://cdn-images-1.medium.com/max/1024/1*Dk44GL6BWNKOdNGYdV2dHA.png)
+![](../../assets/blog/reclaiming-your-digital-autonomy-practical-self-hosting-in-an-age-of-surveillance-and-gamification/f930237f3e.webp)
 
 ### Advantages
 
@@ -74,7 +74,7 @@ The mixture of Expert (MoE) architecture offers several advantages over traditio
 
 ### The Hidden Costs of Convenience
 
-![](https://cdn-images-1.medium.com/max/600/0*qEz1RQax3jMeC2N8.jpg)
+![](../../assets/blog/reclaiming-your-digital-autonomy-practical-self-hosting-in-an-age-of-surveillance-and-gamification/cc4ba3ec09.webp)
 
 Thomas Thwaites, in *The Toaster Project*, reveals how seemingly simple products depend on vast, hidden layers of complexity and extraction. Digital services are no different; **beneath their ease of use lie serious costs**: privacy erosion, data commodification, and diminished autonomy.
 
@@ -91,5 +91,3 @@ Reclaiming your digital sovereignty through self-hosting is more than a technica
 As Cory Doctorow encourages:
 
 > *“****Build the world you want****,” rather than accept the one handed to you.*
-
-![](https://medium.com/_/stat?event=post.clientViewed&referrerSource=full_rss&postId=0455e1140933)
