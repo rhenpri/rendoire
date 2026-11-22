@@ -1,0 +1,42 @@
+---
+// "Buy me a pint": a link to the Buy Me a Coffee page, dressed as a pint of stout.
+// `compact` is the smaller footer variant.
+import { site } from '../config';
+interface Props {
+  compact?: boolean;
+}
+const { compact = false } = Astro.props;
+---
+
+<a
+  class:list={['pint-btn', { 'pint-btn--compact': compact }]}
+  href={site.support}
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <svg class="pint" viewBox="0 0 40 58" width="30" height="44" aria-hidden="true" focusable="false">
+    <defs>
+      <clipPath id="pint-glass"><path d="M5 5h30l-4.2 46.6a3 3 0 0 1-3 2.4H12.2a3 3 0 0 1-3-2.4z" /></clipPath>
+      <linearGradient id="pint-stout" x1="0" x2="0" y1="0" y2="1">
+        <stop offset="0" stop-color="#2b1610" />
+        <stop offset="1" stop-color="#0d0605" />
+      </linearGradient>
+    </defs>
+    <g clip-path="url(#pint-glass)">
+      <rect x="0" y="12" width="40" height="46" fill="url(#pint-stout)" />
+      <g class="pint-bubbles" fill="#d9c8a6">
+        <circle cx="16" cy="46" r="1" />
+        <circle cx="22" cy="40" r="0.9" />
+        <circle cx="26" cy="48" r="0.8" />
+        <circle cx="19" cy="32" r="0.8" />
+      </g>
+      <path class="pint-head" d="M0 0h40v14.5c-3 2.4-6 .6-9.5 1.5s-5.5 2.4-9 1.2-6.2-1.8-9.4-.4S4 17.5 0 15z" fill="#f4ecd8" />
+    </g>
+    <path d="M5 5h30l-4.2 46.6a3 3 0 0 1-3 2.4H12.2a3 3 0 0 1-3-2.4z" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="1.4" stroke-linejoin="round" />
+    <path d="M11 22l1.6 24" stroke="rgba(255,255,255,.18)" stroke-width="1.6" stroke-linecap="round" fill="none" />
+  </svg>
+  <span class="pint-text">
+    <span class="pint-title">Buy me a pint</span>
+    <span class="pint-sub">of stout, via Buy Me a Coffee</span>
+  </span>
+</a>

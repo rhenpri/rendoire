@@ -1,5 +1,6 @@
 ---
 import { execSync } from 'child_process';
+import PintButton from './PintButton.astro';
 
 let buildHash = 'dev';
 try {
@@ -21,6 +22,7 @@ const year = new Date().getFullYear();
         <p class="footer-flag">
           Developed in 🇮🇪 Ireland · Championing 🇪🇺 European technology &amp; open source
         </p>
+        <PintButton compact />
       </div>
 
       <div class="footer-col">

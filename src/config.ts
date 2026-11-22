@@ -11,6 +11,8 @@ export const site = {
   linkedin: 'https://www.linkedin.com/in/rhenderson832/',
   youtube: 'https://www.youtube.com/@rendoire',
   instagram: 'https://instagram.com/rendoire',
+  // Tip jar. Branded as a pint of stout; hosted on Buy Me a Coffee.
+  support: 'https://buymeacoffee.com/rendoire',
 };
 
 // Affiliate / referral links.
