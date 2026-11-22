@@ -4,6 +4,16 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      ig_slug:
+        description: 'Instagram: generate (and, if enabled, publish) a carousel + reel for this post slug'
+        required: false
+        type: string
+      ig_publish:
+        description: 'Instagram: publish even if the IG_AUTOPUBLISH variable is not "true"'
+        required: false
+        type: boolean
+        default: false
 
 # Least-privilege permissions for Pages deployment.
 permissions:
@@ -19,10 +29,13 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 25
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # Full history so we can see which posts this push added (Instagram step below).
+          fetch-depth: 0
 
       - name: Setup Node
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
@@ -32,6 +45,58 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      # Instagram: every NEW post gets a carousel and a reel in the site's style.
+      # The files ship with the site (public/ig/<slug>/) so Instagram can fetch them
+      # from rendoire.com. Nothing here can break the deploy: errors are tolerated.
+      - name: Find new posts for Instagram
+        id: ig
+        env:
+          IG_SLUG: ${{ inputs.ig_slug }}
+          BEFORE: ${{ github.event.before }}
+          SHA: ${{ github.sha }}
+          IG_ENABLED: ${{ vars.IG_ENABLED }}
+        run: |
+          slugs="$IG_SLUG"
+          if [ -z "$slugs" ] && [ "${GITHUB_EVENT_NAME}" = "push" ] && [ -n "$BEFORE" ] && ! echo "$BEFORE" | grep -qE '^0+$'; then
+            slugs=$(git diff --name-only --diff-filter=A "$BEFORE" "$SHA" -- 'src/content/blog/*.md' 'src/content/blog/*.mdx' 2>/dev/null \
+              | xargs -r -n1 basename | sed -E 's/\.mdx?$//' || true)
+          fi
+          slugs=$(echo "$slugs" | tr ' ' '\n' | grep -E '^[a-z0-9-]+$' | tr '\n' ' ' || true)
+          [ "$IG_ENABLED" = "false" ] && slugs=""
+          echo "slugs=$slugs" >> "$GITHUB_OUTPUT"
+          echo "Instagram posts to generate: ${slugs:-none}"
+
+      - name: Generate Instagram assets
+        if: steps.ig.outputs.slugs != ''
+        continue-on-error: true
+        env:
+          SLUGS: ${{ steps.ig.outputs.slugs }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          FORCE_PUBLISH: ${{ inputs.ig_publish }}
+        run: |
+          npx playwright-core install --with-deps chromium
+          mkdir -p .instagram
+          : > .instagram/slugs.txt
+          for s in $SLUGS; do
+            if npm run ig -- "$s"; then
+              mkdir -p "public/ig/$s"
+              cp ".instagram/$s"/slide-*.jpg ".instagram/$s"/reel.mp4 "public/ig/$s/" 2>/dev/null || true
+              rm -rf ".instagram/$s/.build"
+              echo "$s" >> .instagram/slugs.txt
+            fi
+          done
+          if [ "$FORCE_PUBLISH" = "true" ]; then echo force > .instagram/mode.txt; else echo auto > .instagram/mode.txt; fi
+
+      - name: Keep Instagram drafts and captions
+        if: steps.ig.outputs.slugs != ''
+        continue-on-error: true
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: ig-out
+          path: .instagram
+          include-hidden-files: true
+          retention-days: 14
 
       - name: Build Astro site
         run: npm run build

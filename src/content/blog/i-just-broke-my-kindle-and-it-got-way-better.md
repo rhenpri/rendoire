@@ -6,6 +6,73 @@ tags: ["kindle", "self-hosting", "digital-minimalism", "reading"]
 cover: "../../assets/blog/i-just-broke-my-kindle-and-it-got-way-better/cover.webp"
 coverAlt: "A Kindle Paperwhite showing a page of Alice in Wonderland, beside the title I just broke my Kindle and it got way better"
 draft: false
+instagram:
+  coverImage: "../../assets/blog/i-just-broke-my-kindle-and-it-got-way-better/reader.webp"
+  kicker: "Kindle hacking"
+  emphasis: "It Got Way Better"
+  slides:
+    - type: text
+      heading: A great screen on an average shop
+      body: "The e-ink is superb and the battery lasts weeks. The **store, the ads and the one-door library** are the problem."
+    - type: list
+      heading: What you get
+      items:
+        - { lead: Any format, text: "EPUB opens as EPUB. No conversion." }
+        - { lead: A library you own, text: "Books live on your own server." }
+        - { lead: Software that respects you, text: "Proper typography, offline dictionaries." }
+        - { lead: No account, text: "It never had to know who I am." }
+        - { lead: Longevity, text: "A 2013 model, better than it was new." }
+    - type: steps
+      heading: Before you touch anything
+      items:
+        - { n: 1, title: Check the firmware, text: "Newer versions have patched the exploits." }
+        - { n: 2, title: Know your model, text: "The wiki's wizard picks the method." }
+        - { n: 3, title: Accept the risk, text: "Bricking is rare. Rare is not never." }
+    - type: steps
+      heading: The jailbreak
+      items:
+        - { n: 1, title: Check and back up, text: "Copy the whole drive first." }
+        - { n: 2, title: Run the exploit, text: "Mostly waiting for progress messages." }
+        - { n: 3, title: Install the hotfix, text: "So it survives a reboot." }
+        - { n: 4, title: Block updates, text: "Then install KOReader." }
+    - type: list
+      heading: What it does every day
+      items:
+        - { lead: Morning edition at 06:00, text: "Weather, my calendar, the news." }
+        - { lead: Full articles at midday, text: "No ads, no social buttons." }
+        - { lead: Saved links from my phone, text: "Waiting when I sit down." }
+        - { lead: Highlights sent home, text: "Straight into my notes." }
+        - { lead: An AI that argues back, text: "From my own books." }
+    - type: text
+      heading: The home screen
+      body: "My library, what I am reading now, and one-tap actions. **Nothing here talks to Amazon.**"
+      image: "../../assets/blog/i-just-broke-my-kindle-and-it-got-way-better/home-screen.webp"
+    - type: list
+      heading: Where it went wrong
+      items:
+        - { lead: Flaky Wi-Fi, text: "Every remote job needs retries." }
+        - { lead: Blocking Amazon too hard, text: "It broke the Wi-Fi check." }
+        - { lead: A silent startup bug, text: "A service vanished on every reboot." }
+    - type: text
+      heading: Should you do it
+      body: "Yes, if you read a lot and enjoy an evening of tinkering. No, if you want it effortless. **It is a small project you maintain.**"
+  caption: |
+    I broke my Kindle on purpose and it is now the best reading device I own.
+
+    A 2013 Paperwhite, no Amazon account, and a library that lives on my own server. No store, no ads, no tracking.
+
+    Swipe for why I did it, the jailbreak in a few steps, and what it does for me every day.
+
+    Full post: rendoire.com/blog/i-just-broke-my-kindle-and-it-got-way-better (link in bio)
+    Save it for when you fancy an evening project.
+
+    #kindle #koreader #selfhosting #ereader #digitalminimalism #rendoire
+  reelCaption: |
+    I broke my Kindle on purpose and it is now the best reading device I own. No store, no ads, no account.
+
+    Full post: rendoire.com/blog/i-just-broke-my-kindle-and-it-got-way-better (link in bio)
+
+    #kindle #koreader #selfhosting #ereader #rendoire
 ---
 
 *A 2013 Paperwhite, no Amazon account, and a reading life on my own terms. Why I did it, how, and what it does for me every day.*

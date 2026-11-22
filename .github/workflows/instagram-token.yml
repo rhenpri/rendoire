@@ -1,0 +1,38 @@
+name: Instagram token refresh
+
+# Instagram long-lived tokens last 60 days. This extends it every month.
+# Needs a fine-grained personal access token with "Secrets: read and write" on this repo,
+# saved as the secret IG_SECRETS_PAT. Without it the job only warns.
+
+on:
+  schedule:
+    - cron: '17 6 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Setup Node
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+
+      - name: Refresh token
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          GH_TOKEN: ${{ secrets.IG_SECRETS_PAT }}
+        run: |
+          if [ -z "$IG_ACCESS_TOKEN" ]; then echo "No IG_ACCESS_TOKEN yet, nothing to refresh."; exit 0; fi
+          if [ -z "$GH_TOKEN" ]; then
+            echo "::warning::IG_SECRETS_PAT is not set, so the refreshed token cannot be saved. Refresh by hand before the token expires (every 60 days)."
+            exit 0
+          fi
+          node scripts/instagram/refresh-token.mjs --set-secret
