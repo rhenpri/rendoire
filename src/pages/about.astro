@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
+import PintButton from '../components/PintButton.astro';
 
 const values = [
   { title: 'Build things that work', desc: 'Software that has to survive contact with the real world, not just a demo.' },
@@ -92,6 +93,14 @@ const domain = (url: string) => new URL(url).hostname.replace(/^www\./, '');
           </a>
         ))}
       </div>
+    </section>
+
+    <section style="margin-top: 4rem;">
+      <div class="section-label">Support the writing</div>
+      <p style="color:var(--muted); max-width:36rem; line-height:1.75; margin-bottom:1.25rem;">
+        Everything here is free to read. If something helped, you can buy me a pint.
+      </p>
+      <PintButton />
     </section>
   </main>
 
