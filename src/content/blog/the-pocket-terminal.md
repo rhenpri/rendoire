@@ -25,6 +25,8 @@ Working with a coding agent is different. I describe what I want. The agent read
 
 None of those need a big keyboard. Explaining can be done by voice. Reading needs a decent screen, which the Deck has. Approving needs a button. **The work moved from my fingers to my judgement, and judgement fits in your hands.**
 
+![How the work changed. Before: typing, which needs a big keyboard, a big screen and a tuned environment. Now, with an agent: describe by voice, read on a seven-inch screen, approve with a button. Each new job is mapped to a part of the Steam Deck.](../../assets/blog/the-pocket-terminal/the-job-changed.webp)
+
 Eden Marco's *Agentic Coding with Claude Code* describes a habit that suits this perfectly. Start in plan mode, where the agent can only read and research. Write down what you want in a short spec. Only then let it change anything. Read first, write second. On a seven-inch screen that stops being good practice and becomes the only sensible way to work.
 
 ## A VT100 for an agent
@@ -42,6 +44,8 @@ I wanted it to feel like an appliance, not a project. So the goal was to launch 
 The agent appears as its own tile next to the games, with proper artwork, so starting a coding session is the same gesture as starting anything else. It runs inside a terminal multiplexer, a program that keeps a session alive in the background, and the system itself looks after that session. Put the Deck to sleep, close the window, pick it up tomorrow: the agent is exactly where you left it.
 
 Voice goes in through a small script that turns speech into text and types it into the session. Describing a change means holding a button and talking. And the controller is mapped to what a terminal actually needs: enter, escape, scroll, approve, plus the on-screen keyboard for the rare moments I really do need to type.
+
+![A stylised handheld console with a terminal on its screen and labels around it: hold to talk sends voice to the session, A is enter and approve, B is escape, the right stick scrolls, a back button opens the on-screen keyboard, and the session survives sleep.](../../assets/blog/the-pocket-terminal/controller-map.webp)
 
 Getting there took some fiddling. Steam rewrites its own config files while it is running, so changing the games menu or the controller layouts means preparing the new files, shutting Steam down and swapping them in at exactly the right moment. An evening to work out. Five seconds once you know how.
 

@@ -39,6 +39,8 @@ The original internet was a mesh. Then, as Tim Wu shows in *The Master Switch*, 
 
 A mesh network goes back to the original shape. Devices connect directly to each other. Your phone talks to your laptop. Your laptop talks to a small home server. Every connection is encrypted end to end and takes the shortest path.
 
+![Two network shapes. Left, the wheel: six devices all connected to one central server in red, labelled single point of failure. Right, the mesh: the same six devices connected directly to each other in green, with no centre.](../../assets/blog/your-network-has-a-landlord/wheel-and-mesh.webp)
+
 The benefits fall out of the shape. No single point of failure in the middle. Less lag, because traffic does not fly to a distant server and back. It grows naturally: add a device and you add connections, not load on a central box. And there is nothing to expose. Your devices can reach each other from anywhere without you opening ports to the whole internet.
 
 That last one changes how you build things. A service only reachable on your private mesh does not need to face the public internet at all. **The safest door is the one that is not there.**
@@ -48,6 +50,8 @@ That last one changes how you build things. A service only reachable on your pri
 There is always a catch. Here it is.
 
 Your data travels directly between your devices, but something still has to introduce them. Something hands out the keys, tells each device where the others are, and keeps that up to date as your phone hops between Wi-Fi and mobile data. That is the control plane. In the convenient products, the company runs it.
+
+![How a managed mesh VPN works. A coordination server at the top, drawn in lavender, hands out keys and tells devices where each other are, shown with dashed lines. Below, the devices send their actual traffic directly to each other over encrypted WireGuard links, shown in green, without passing through the coordinator.](../../assets/blog/your-network-has-a-landlord/who-does-the-introductions.webp)
 
 Tailscale is the best-known example, and I recommend it on this site for good reason. It is excellent and it gets the hard parts right. Underneath, it uses WireGuard, a small, modern, well-audited encryption protocol, for the connections. But the coordination server belongs to Tailscale. Your traffic does not go through it. Your network does depend on it.
 

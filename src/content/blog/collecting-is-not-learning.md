@@ -27,6 +27,8 @@ Everyone has a version. The reading list that grows faster than it shrinks. The 
 
 Even the books that sell note-taking admit it. Tiago Forte opens *Building a Second Brain* by calling most of us "information hoarders". His own method ends with a step called Express: turning what you saved into something you share, early and in small pieces. It is the step almost everyone skips. **Capturing is the fun part. Expressing is the work.**
 
+![A narrowing funnel of what happens to saved ideas: hundreds of highlights captured, far fewer read again, fewer still actually used, and only a handful expressed in my own words. The last stage, Express, is outlined in green as the step almost everyone skips.](../../assets/blog/collecting-is-not-learning/the-funnel.webp)
+
 ## Why it feels so good
 
 Collecting fires the same small rewards as learning. Something new. The sense of keeping up. The satisfaction of ticking something off.
@@ -66,6 +68,8 @@ Connect it. The ideas that stick are the ones that suddenly explain something in
 ## Forgetting is a filter
 
 Hermann Ebbinghaus showed in the 1880s that we forget most new information within days unless we come back to it. We treat that as a flaw to be fixed with better systems.
+
+![Two forgetting curves. A red curve drops steeply within days when an idea is saved and never revisited. A green curve drops more slowly and is lifted back up each time the idea is used, written about or taught, staying high.](../../assets/blog/collecting-is-not-learning/forgetting-curve.webp)
 
 I have come to think it is a filter. You do not need every detail of every book. You need the principles and the thinking tools, and to know where to look up the rest. Trying to keep everything is how you end up with thirteen hundred files and no conclusions.
 

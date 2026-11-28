@@ -28,7 +28,11 @@ Most productivity advice ignores that cost entirely. It assumes any improvement 
 
 Cal Newport, in *Digital Minimalism*, borrows a line from Thoreau's *Walden* that I now hold every new tool up against: "The cost of a thing is the amount of what I will call life which is required to be exchanged for it, immediately or in the long run." Thoreau meant farmland. It works just as well for a to-do app. The price is not the subscription. It is the hours of your life it quietly asks for.
 
+![A quote card: “The cost of a thing is the amount of what I will call life which is required to be exchanged for it, immediately or in the long run.” Henry David Thoreau, Walden, 1854.](../../assets/blog/the-system-is-not-the-work/thoreau.webp)
+
 Larry Tesler, the computer scientist who gave us cut and paste, had a law for this too: every system has a certain amount of complexity that cannot be removed, only moved. Your elaborate setup does not make the complexity of your work disappear. It moves some of it into the setup. Where you now have to look after it.
+
+![Before and after a productivity system. Before: the work holds all of its complexity. After: the work looks simpler, but a new box called the system now holds the complexity that moved into it, and needs looking after. Larry Tesler’s law of conservation of complexity.](../../assets/blog/the-system-is-not-the-work/complexity-moves.webp)
 
 ## The flexibility trap
 

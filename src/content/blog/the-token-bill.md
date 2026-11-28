@@ -50,7 +50,11 @@ Say a page of operational documentation is about 1,200 tokens and you have 120 p
 
 **Filter, then three pages:** narrow the index by service and symptom before the model sees it. About 4,300 tokens, and it barely moves however much you add.
 
+![Horizontal bar chart of tokens per question for 120 pages of documentation. Send everything: about 144,000 tokens. Index then three pages: about 10,800. Filter then three pages: about 4,300. The last bar is over thirty times shorter than the first.](../../assets/blog/the-token-bill/tokens-per-question.webp)
+
 That is more than thirty times cheaper, and the gap widens every time someone documents something. **Retrieval is not an optimisation you add later. It is what makes the whole thing work.**
+
+![Line chart of tokens per question as documentation grows from 0 to 250 pages. Sending everything rises in a straight line and crosses a 200,000-token context window limit at about 167 pages, where it stops working. Index-then-three-pages and filter-then-three-pages stay close to the bottom of the chart.](../../assets/blog/the-token-bill/when-it-breaks.webp)
 
 ## Less is better, not just cheaper
 

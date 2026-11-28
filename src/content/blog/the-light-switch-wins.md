@@ -28,6 +28,8 @@ Don Norman, whose *The Design of Everyday Things* should be compulsory for anyon
 
 A patchwork smart home widens the gulf with every gadget. You want light, so you open the app, check you are in the right home, find the right room and hope the hub is awake. None of that is in the advert. It shows up as a low, constant hum of thinking about your house instead of living in it.
 
+![Two flows from wanting light to getting it. The light switch takes one step: press the switch. The smart home takes five: unlock the phone, open the app, check it is the right home, find the room, and hope the hub is awake. The second flow is drawn with a dashed red border.](../../assets/blog/the-light-switch-wins/the-gulf.webp)
+
 ## Almost reliable
 
 A switch works essentially every time. A smart bulb works most of the time.
@@ -63,6 +65,8 @@ And keep the switch. Whatever you automate, the physical control should still do
 ## The Lindy test
 
 Nassim Nicholas Taleb popularised a rule of thumb in *Antifragile* called the Lindy effect: the longer something has already lasted, the longer it is likely to keep lasting. The wall switch is more than a century old and will probably outlive every hub on the market. Voice assistants are still proving themselves. A touchscreen that is now the only way to turn on your kitchen lights is a bet against a hundred years of evidence.
+
+![A timeline from 1880 to 2026. The wall light switch runs the whole way and is still working. The Revolv smart home hub runs from 2013 to 2016, when its servers were switched off. Insteon runs from 2005 to 2022, when it shut down with almost no warning.](../../assets/blog/the-light-switch-wins/what-lasts.webp)
 
 I am not against clever houses. I broke my Kindle free and made it smarter, after all. But that worked because it runs on my terms, and it still turns pages when everything else is down.
 

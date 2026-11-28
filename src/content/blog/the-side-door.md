@@ -29,6 +29,8 @@ It was not the easy option. Full-time work plus a degree is hard, and there was 
 
 My dissertation surveyed people across the consulting industry about how AI would change their work. ChatGPT was ten months old. It turned out to be the subject of my career.
 
+![Two routes into tech. The front door, drawn faintly: A-levels, university and debt, then a graduate job. The side door, in green, with years: leaving school at 16 in 2016 for a BTEC at North West Regional College, a degree apprenticeship from 2019 working four days and studying one, a 2:1 with no debt in 2023, live services, AI, and technology manager in 2025.](../../assets/blog/the-side-door/two-routes.webp)
+
 ## The oldest route there is
 
 We call apprenticeships the alternative route. Historically, they are the original one.
@@ -44,6 +46,8 @@ Somewhere in the last fifty years we flipped it. University became the front doo
 David Epstein's *Range* gave me words for why my route worked.
 
 He splits fields into kind and wicked. Kind fields have clear rules and instant feedback, like chess or golf, and starting early and narrow pays off. Wicked fields have fuzzy rules and slow feedback, like most careers, and there the people who sample widely and find work that fits them tend to win.
+
+![Two cards comparing kind and wicked fields from David Epstein’s Range. Kind fields like chess and golf have clear rules and instant feedback, so specialising early pays. Wicked fields like most careers and technology have fuzzy rules and slow feedback, so sampling widely and finding a good fit wins.](../../assets/blog/the-side-door/kind-and-wicked.webp)
 
 Technology is about as wicked as it gets. Nobody at 16 knows what the job will look like at 26. I certainly did not. The job I do now barely existed when I picked my course.
 

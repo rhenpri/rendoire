@@ -30,6 +30,8 @@ To do that you have to hold a lot at once. What the model is likely to take from
 
 That is not step-by-step reasoning. It is whole-system thinking, under uncertainty, about something that gives a different answer every time you ask.
 
+![Two ways to write a prompt. Top, the linear way: write what you want, see what comes back, tweak the wording, repeat. Bottom, the other end: design the answer’s shape, plan the exit for when it does not know, and hold three framings at once, all feeding into the prompt, which is written last.](../../assets/blog/the-prompt-whisperer/two-ways-in.webp)
+
 ## Built for exploring
 
 Dr Helen Taylor at the University of Cambridge has argued that dyslexia is better understood as a specialisation in exploration than as a disorder. Her 2022 paper with Martin Vestergaard makes the case that dyslexic minds are tuned for searching the unknown: spotting patterns, seeing the big picture, working in conditions that keep changing. Not for rapidly processing predictable, rule-bound things. Like text.
@@ -45,6 +47,8 @@ Large language models are about as far from predictable and rule-bound as softwa
 **Plan for failure first.** Before anything else, I ask what happens when the model does not know. Left alone, it invents a plausible answer, which in operations means a confident runbook step that does not exist. So one of the first lines I write is the exit: if nothing matches, say "not covered" and point to who to ask. It is the most important line in any operational prompt. It comes from always thinking about the edge of a system before its middle.
 
 **Keep several answers alive.** I do not ask a model for *the* cause of a problem. I ask for up to three likely causes, ranked, with the evidence that would prove or rule out each one. It is a better prompt, because it turns a guess into a plan an engineer can work through. But it is also just how I think. Several explanations at once. Models, it turns out, do better work when you ask them to think that way too.
+
+![An output contract written before the instruction, shown as a card of fields: summary in one plain line, up to three likely causes ranked with the evidence that would confirm each, first checks cheapest first, the fix with its source, and a not covered flag with who to ask when nothing matches.](../../assets/blog/the-prompt-whisperer/answer-first.webp)
 
 None of these are secret techniques. Other people get there by trial and error. **I got there before the errors.**
 

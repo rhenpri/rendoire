@@ -32,6 +32,8 @@ That is the job I would give the first AI agent in any operations team. Read the
 
 Then stop. Close nothing. Decide nothing. Touch nothing in production. **Fill the blank page and hand it to a human.**
 
+![A vague ticket reading “users are being logged out since lunchtime” turned by the triage assistant into a structured first look with illustrative values: likely pattern session cookie at 71 percent confidence, suggested severity medium with evidence, owner identity team, three first checks cheapest first, a linked runbook, and a recent change. A note says it closes nothing and decides nothing.](../../assets/blog/ai-on-call/first-look.webp)
+
 ## Google got there first
 
 I take some comfort from the fact that Google's SRE teams started in the same place.
@@ -47,6 +49,8 @@ If you write code with AI and run it without, operations becomes the bottleneck.
 Do not switch it on and hope. For the first few weeks, run it in shadow mode. The assistant writes its analysis somewhere private. The engineers triage exactly as they always have. Afterwards, you compare.
 
 Then let it suggest on the real ticket, and watch two numbers: how long it takes to reach the first correct action, and how often people edit the suggestion. Once a field has agreed with the engineers for long enough, it can become the default. "Which known problem is this" usually gets there first. Severity and ownership stay with a human for a long time, and they should.
+
+![A four-stage rollout timeline. Shadow: the assistant writes privately while engineers triage as usual, and the two are compared. Suggest: suggestions appear on the real ticket and edits are measured. Trusted fields: fields that keep agreeing become defaults, while severity and owner stay human. Propose fixes: later, with evidence, the assistant proposes actions from an approved catalogue.](../../assets/blog/ai-on-call/rollout.webp)
 
 One detail matters more than the rest. Track severity under-calls and over-calls separately. An assistant that says "medium" when it was "high" is far more dangerous than one that panics now and then. An average will hide that from you.
 

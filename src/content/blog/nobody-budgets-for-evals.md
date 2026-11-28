@@ -38,6 +38,8 @@ When teams do measure, they usually measure whatever is easiest to reach.
 
 There are three layers. Components: does retrieval find the right document, is the answer faithful to it, is the format right? Operations: what does each run cost, how many steps does it take, how often does a human step in? Outcomes: is the service actually better? Faster fixes, fewer repeat problems, less soul-destroying work.
 
+![Three stacked layers of AI evaluation, widening downwards: Components (retrieval, faithfulness, format), Operations (cost per run, steps, human interventions) and Outcomes (faster fixes, fewer repeat problems, less toil). The outcomes layer is outlined in green and labelled as the one leadership pays for.](../../assets/blog/nobody-budgets-for-evals/three-layers.webp)
+
 Engineers measure the first because it is interesting. Platform teams measure the second because it is on a dashboard. Leadership only ever pays for the third. **If your evaluation stops at "the answers look good", you have measured a component and called it a result.**
 
 Watch for the vanity numbers. "Suggestions accepted": accepted, and then what? "Tickets touched by AI": touching is not helping. "Tokens saved": against what? And the satisfaction survey taken three weeks after launch, which mostly measures whether people like new things.
@@ -65,6 +67,8 @@ Shankar and Husain add two rules I now treat as non-negotiable. Test the judge a
 ## One page, one rule
 
 All of this should fit on one page per feature, once a month. The outcomes against the baseline. The quality trend from the human samples. The cost per problem solved, not per call. Any change in what the AI is trusted to do, with the evidence.
+
+![A mock one-page monthly scorecard for an AI feature, with illustrative numbers: time to first correct action down from 25 to 9 minutes against baseline, human-sampled quality at 94 percent, cost per problem solved 18 pence, incidents caused by the AI zero, and one autonomy change with evidence.](../../assets/blog/nobody-budgets-for-evals/one-page-scorecard.webp)
 
 And one line that makes the whole page honest: **incidents the AI caused or made worse.** It should say zero, or explain why not. A scorecard that only reports wins is a brochure. Put the harms next to the wins and people start believing both.
 

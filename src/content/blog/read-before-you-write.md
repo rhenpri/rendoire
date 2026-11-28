@@ -20,6 +20,8 @@ But somewhere in the code, an empty list was a special value. It meant *everythi
 
 Within minutes, almost every machine in Google's content delivery network around the world had its disks wiped. Users barely noticed, thanks to good capacity planning. The team spent the best part of two days reinstalling machines, then weeks adding sanity checks and rate limits.
 
+![Two panels. Left: one rack whose remaining machines to wipe is an empty list. Right: the same empty list read as everything, with every machine in the content network marked for wiping in red.](../../assets/blog/read-before-you-write/empty-means-everything.webp)
+
 The story is in Google's *Site Reliability Engineering* book, under a heading that should be on a poster in every AI team's office: "Automation: Enabling Failure at Scale".
 
 Nothing in it was malicious. A reasonable system did exactly what it was told, at machine speed, with nothing to stop it doing too much. **Swap the script for an AI agent with tools and you have the whole risk in one paragraph.**
@@ -51,6 +53,8 @@ The vocabulary I use has five rungs:
 3. **Prepare.** Write the exact change and dry-run it. A human presses the button.
 4. **Act with approval.** Do it after sign-off on that one action, then report.
 5. **Act alone.** Do it within agreed limits and report afterwards. A human can revoke it.
+
+![A five-step staircase rising left to right: Observe, Recommend, Prepare, Act with approval, Act alone. Each step shows what the agent does and what the human still does. The top step is outlined in green.](../../assets/blog/read-before-you-write/the-ladder.webp)
 
 The ladder attaches to a task, not to the agent. The same agent can rerun a failed overnight job on its own and still need a human to drain a queue, because one is easy to undo and the other is not. A new driver is not a restricted person. They are a person with restrictions, on certain roads, for now.
 
