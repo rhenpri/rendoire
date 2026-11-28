@@ -11,6 +11,10 @@ export interface PostSummary {
   tags: string[];
   cover?: ImageMetadata;
   coverAlt: string;
+  coverCredit?: string;
+  seoTitle?: string;
+  summary?: string;
+  series?: string;
   readingTime: string;
   featured: boolean;
   medium?: string;
@@ -22,6 +26,8 @@ const TOPIC_LABELS: Record<string, string> = {
   'self-hosting': 'Self-hosting',
   privacy: 'Privacy',
   'digital-minimalism': 'Digital minimalism',
+  kindle: 'Kindle',
+  reading: 'Reading',
   software: 'Software',
   neurodiversity: 'Neurodiversity',
   culture: 'Culture',
@@ -48,6 +54,10 @@ export function summarize(post: CollectionEntry<'blog'>): PostSummary {
     tags: post.data.tags ?? [],
     cover: post.data.cover,
     coverAlt: post.data.coverAlt ?? '',
+    coverCredit: post.data.coverCredit,
+    seoTitle: post.data.seoTitle,
+    summary: post.data.summary,
+    series: post.data.series,
     readingTime: toReadingTime(post.body ?? ''),
     featured: post.data.featured ?? false,
     medium: post.data.medium,
@@ -73,6 +83,11 @@ export function topicCounts(posts: PostSummary[]): { tag: string; count: number 
   return [...counts.entries()]
     .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
     .map(([tag, count]) => ({ tag, count }));
+}
+
+/** Published posts in a series, oldest first, so they read in order. */
+export function seriesPosts(series: string, all: PostSummary[]): PostSummary[] {
+  return all.filter((p) => p.series === series).sort((a, b) => a.pubDate.valueOf() - b.pubDate.valueOf());
 }
 
 /**

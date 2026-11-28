@@ -1,7 +1,7 @@
 // Savings page: every row is its own bar. Reads the form, sizes the bars on
 // one shared scale and tweens numbers and widths together.
 
-const STORE = 'savings-inputs-v2';
+const STORE = 'savings-inputs-v3';
 
 interface Model {
   years: number;
@@ -31,13 +31,17 @@ if (root && form) {
     const saved = JSON.parse(localStorage.getItem(STORE) ?? 'null');
     if (saved && typeof saved === 'object') {
       for (const el of inputs) {
-        if (el.type === 'radio') el.checked = saved.years === el.value;
+        if (el.type === 'radio') {
+          if (el.name in saved) el.checked = saved[el.name] === el.value;
+        }
         else if (!(el.name in saved)) continue;
         else if (el.type === 'checkbox') el.checked = Boolean(saved[el.name]);
         else el.value = String(saved[el.name]);
       }
-      if (!form.querySelector('input[name=years]:checked')) {
-        form.querySelector<HTMLInputElement>('input[name=years][data-default]')!.checked = true;
+      for (const group of ['years', 'currency']) {
+        if (!form.querySelector(`input[name=${group}]:checked`)) {
+          form.querySelector<HTMLInputElement>(`input[name=${group}][data-default]`)!.checked = true;
+        }
       }
     }
   } catch {}
@@ -46,7 +50,7 @@ if (root && form) {
       const data: Record<string, unknown> = {};
       for (const el of inputs) {
         if (el.type === 'radio') {
-          if (el.checked) data.years = el.value;
+          if (el.checked) data[el.name] = el.value;
         } else data[el.name] = el.type === 'checkbox' ? el.checked : el.value;
       }
       localStorage.setItem(STORE, JSON.stringify(data));
@@ -69,8 +73,10 @@ if (root && form) {
   const bar = (el: Element, share: number) => {
     (el.querySelector('.sv-bar') as HTMLElement).style.width = `${Math.max(0, Math.min(1, share)) * 100}%`;
   };
+  const symbol = () => form.querySelector<HTMLInputElement>('input[name=currency]:checked')?.dataset.symbol ?? '';
+  const money = (v: number) => `${symbol()}${fmt.format(v)}`;
   const val = (el: Element, v: number) => {
-    el.querySelector('.sv-val')!.textContent = fmt.format(v);
+    el.querySelector('.sv-val')!.textContent = money(v);
   };
 
   let grow = 0; // 0..1: bars grow from nothing the first time they are seen
@@ -103,7 +109,8 @@ if (root && form) {
     const years = Math.round(m.years);
     const span = `${years} year${years === 1 ? '' : 's'}`;
 
-    $('sv-saved').textContent = `${saved < 0 ? '−' : ''}${fmt.format(Math.abs(saved))}`;
+    $('sv-saved').textContent = `${saved < 0 ? '−' : ''}${money(Math.abs(saved))}`;
+    document.querySelectorAll('.sv-years-word').forEach((el) => (el.textContent = span));
     $('sv-result').classList.toggle('is-loss', saved < 0);
     $('sv-saved-label').textContent = saved < 0 ? `Extra cost over ${span}` : `Saved over ${span}`;
 

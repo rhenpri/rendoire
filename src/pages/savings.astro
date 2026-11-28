@@ -2,13 +2,14 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
-import { subscriptions, owning, horizons, defaultHorizon } from '../data/savings';
+import { subscriptions, owning, horizons, defaultHorizon, currencies, defaultCurrency } from '../data/savings';
 import { site } from '../config';
 ---
 
 <BaseLayout
+  image="/og/savings.png"
   title="Savings — rendoire"
-  description="See what your subscriptions add up to over the years, against running the same things yourself. No currency: you enter the prices."
+  description="See what your subscriptions add up to over the years, against running the same things yourself. Enter your own prices."
   canonical={`${site.url}/savings/`}
 >
   <Navigation />
@@ -17,8 +18,9 @@ import { site } from '../config';
     <div class="section-label">Savings</div>
     <h1 class="section-title">Renting vs <em>owning</em></h1>
     <p class="lead page-lead">
-      What subscriptions add up to, against running the same things yourself. The prices are
-      examples in no particular currency. Change them to yours.
+      What subscriptions add up to, against running the same things yourself. Only the
+      like-for-like swaps are ticked to start with. The prices are examples: change them to
+      yours, and tick anything else you would really replace.
     </p>
 
     <section class="sv" id="savings" aria-label="Savings calculator">
@@ -33,13 +35,22 @@ import { site } from '../config';
               </label>
             ))}
           </div>
+          <span class="sv-group" id="sv-cur-label">Currency</span>
+          <div class="sv-years" role="radiogroup" aria-labelledby="sv-cur-label">
+            {currencies.map((c) => (
+              <label>
+                <input type="radio" name="currency" value={c.id} data-symbol={c.symbol} checked={c.id === defaultCurrency} data-default={c.id === defaultCurrency ? '' : undefined} />
+                <span>{c.symbol || c.label}</span>
+              </label>
+            ))}
+          </div>
         </div>
 
-        <div class="sv-group sv-group-row"><span>Subscriptions</span><span>per month</span></div>
+        <div class="sv-group sv-group-row"><span>Subscriptions</span><span>per month</span><span class="sv-col-total" aria-hidden="true">over <span class="sv-years-word">5 years</span></span></div>
         {subscriptions.map((s) => (
           <div class="sv-row" data-sub={s.id}>
             <label class="sv-check">
-              <input type="checkbox" name={`on-${s.id}`} checked />
+              <input type="checkbox" name={`on-${s.id}`} checked={s.on} />
               <span>
                 <span class="sv-name">{s.label}</span>
                 <span class="sv-hint">{s.hint}</span>
@@ -51,7 +62,7 @@ import { site } from '../config';
           </div>
         ))}
 
-        <div class="sv-group sv-group-row"><span>Owning instead</span></div>
+        <div class="sv-group sv-group-row"><span>Owning instead</span><span></span><span class="sv-col-total" aria-hidden="true">over <span class="sv-years-word">5 years</span></span></div>
         {owning.map((c) => (
           <div class="sv-row" id={`sv-row-${c.id}`}>
             <label class="sv-check" for={`sv-${c.id}`}>
@@ -98,7 +109,8 @@ import { site } from '../config';
         <li>Your time. Setting up takes a weekend or two, and something needs attention a few times a year.</li>
         <li>Price rises. Every price here stays flat, which flatters the subscriptions.</li>
         <li>Wear. Drives last roughly five years, so over ten the hardware is bought twice.</li>
-        <li>What does not carry over: family plans, day-one releases, and the largest hosted AI models. Models you run yourself are smaller and want stronger hardware.</li>
+        <li>What does not carry over: family plans, day-one releases, and the largest hosted AI models. Models you run yourself are smaller and want stronger hardware, which is why the AI row starts unticked.</li>
+        <li>Streaming. A media server only replaces a streaming service if you buy the films and music you would otherwise stream, so add that to the running costs before you tick those rows.</li>
       </ul>
       <p>
         What to run in place of each one is on the <a href="/self-hosting/">self-hosting list</a>.
@@ -140,13 +152,18 @@ import { site } from '../config';
   }
   .sv-group-row {
     display: grid;
-    grid-template-columns: minmax(0, 15rem) 5rem;
+    grid-template-columns: minmax(0, 15rem) 5rem minmax(0, 1fr) 4.5rem;
     gap: 1.25rem;
     padding: 1.1rem 0 0.35rem;
     border-top: 1px solid var(--border);
   }
   .sv-group-row span:nth-child(2) {
     text-align: right;
+  }
+  .sv-group-row .sv-col-total {
+    grid-column: 3 / 5;
+    text-align: right;
+    white-space: nowrap;
   }
   .sv-years {
     display: inline-flex;
@@ -371,6 +388,9 @@ import { site } from '../config';
     .sv-group-row {
       grid-template-columns: minmax(0, 1fr) 4.75rem;
       gap: 0.9rem;
+    }
+    .sv-group-row .sv-col-total {
+      display: none;
     }
     .sv-total {
       grid-template-columns: minmax(0, 1fr) 4.75rem;

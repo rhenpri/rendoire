@@ -20,7 +20,7 @@ Here is how we got here, why every app feels the same, and why the “shiny obje
 
 _***“The computer is the most remarkable tool that we’ve ever come up with. It’s the equivalent of a bicycle for our minds.” — Steve Jobs (1990)***_
 
-### 1\. The Era of Intention (When Tech Was Boring but Useful)
+## 1\. The Era of Intention (When Tech Was Boring but Useful)
 
 In the beginning, computers didn’t care if you liked them.
 
@@ -34,7 +34,7 @@ Even the counter-culture boom of the 70s and 80s was driven by a desire to empow
 
 The vibe was simple. Here is a superpower you didn’t have before. **Go build something.**
 
-### 2\. The Shift: When You Became the Product
+## 2\. The Shift: When You Became the Product
 
 Somewhere along the line, the business model changed. Companies had to figure out how to pay the bills if they gave software away for free.
 
@@ -53,7 +53,7 @@ The metric for success switched from User Utility to Time on Device.
 
 We aren’t using the tools anymore. The tools are using us.
 
-### 3\. Why Everything Looks the Same
+## 3\. Why Everything Looks the Same
 
 Have you noticed that every app is morphing into the same thing?
 
@@ -75,7 +75,7 @@ It is a monopoly problem too. Apple and Samsung basically own the hardware. Amaz
 
 ![](../../assets/blog/attention-vs-intention-how-we-lost-the-plot/04b32c4b68.webp)
 
-### 4\. The Shiny Object Trap
+## 4\. The Shiny Object Trap
 
 The biggest loss isn’t our attention span. It is the **next generation of builders.**
 
@@ -87,7 +87,7 @@ If we feed young inventors a diet of shiny objects and dopamine hits, they won�
 
 We are teaching them that **Marketing Tricks** are more important than **Real Solutions**.
 
-### The Conclusion: Let the Pendulum Swing
+## The Conclusion: Let the Pendulum Swing
 
 We are overdue for a correction.
 

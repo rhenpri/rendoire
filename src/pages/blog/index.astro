@@ -3,11 +3,15 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Navigation from '../../components/Navigation.astro';
 import Footer from '../../components/Footer.astro';
 import PostCard from '../../components/blog/PostCard.astro';
-import { getPosts, topicCounts, topicLabel } from '../../lib/blog';
-import { site } from '../../config';
+import { getPosts, seriesPosts, topicCounts, topicLabel } from '../../lib/blog';
+import { person, site } from '../../config';
+import { series } from '../../data/series';
 
 const posts = await getPosts();
 const topics = topicCounts(posts);
+const seriesList = Object.values(series)
+  .map((s) => ({ ...s, posts: seriesPosts(s.id, posts) }))
+  .filter((s) => s.posts.length > 0);
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -15,10 +19,12 @@ const jsonLd = {
   name: site.name,
   url: `${site.url}/blog/`,
   description: 'Essays on artificial intelligence, software engineering, and self-hosting.',
+  author: person,
 };
 ---
 
 <BaseLayout
+  image="/og/blog.png"
   title="Writing — rendoire"
   description="All essays on artificial intelligence, software engineering, and self-hosting."
   canonical={`${site.url}/blog/`}
@@ -29,7 +35,24 @@ const jsonLd = {
   <main id="main" class="container section page-top">
     <div class="section-label">All essays</div>
     <h1 class="section-title">The <em>journal</em></h1>
-    <p class="lead page-lead">{posts.length} essays and counting. Filter by topic below.</p>
+    <p class="lead page-lead">{posts.length} essays and counting. Start with a series, or filter by topic below.</p>
+
+    {seriesList.length > 0 && (
+      <div class="series-grid">
+        {seriesList.map((s) => (
+          <nav class="series-box" aria-label={`Series: ${s.title}`}>
+            <span class="series-kicker">Series · {s.posts.length} essays</span>
+            <h2 class="series-title">{s.title}</h2>
+            <p class="series-blurb">{s.blurb}</p>
+            <ol>
+              {s.posts.map((p) => (
+                <li><a href={`/blog/${p.slug}/`}>{p.title}</a></li>
+              ))}
+            </ol>
+          </nav>
+        ))}
+      </div>
+    )}
 
     <div class="filter-bar" id="filter-bar" role="group" aria-label="Filter by topic">
       <button class="filter-chip" aria-pressed="true" data-filter="all">All <span class="chip-count">{posts.length}</span></button>

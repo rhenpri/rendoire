@@ -3,11 +3,29 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 import PintButton from '../components/PintButton.astro';
+import { author, person } from '../config';
+import { series } from '../data/series';
 
-const values = [
-  { title: 'Build things that work', desc: 'Software that has to survive contact with the real world, not just a demo.' },
-  { title: 'Own your tools', desc: 'Data and devices you control, because digital sovereignty is a practice, not a slogan.' },
-  { title: 'Learn in public', desc: 'I write to figure things out, and share the useful parts along the way.' },
+const projects = [
+  {
+    name: 'cadé.golf',
+    desc: 'A social golf app for you and your mates: track rounds, share moments, and improve your game.',
+    href: 'https://cade.golf',
+  },
+  {
+    name: 'A Kindle that answers to me',
+    desc: 'A 2013 Paperwhite with no Amazon account, a library I own and a morning edition every day.',
+    href: '/blog/i-just-broke-my-kindle-and-it-got-way-better/',
+  },
+  {
+    name: 'Teaching generative AI',
+    desc: 'Sessions that take non-technical colleagues from first principles to using AI safely at work.',
+  },
+  {
+    name: 'This site',
+    desc: 'Static, no trackers, no third-party requests, and a strict content security policy. The source is public.',
+    href: 'https://github.com/rhenpri/rendoire',
+  },
 ];
 
 const social = [
@@ -18,26 +36,15 @@ const social = [
   { label: 'RSS', handle: 'feed.xml', href: '/feed.xml' },
 ];
 
-const euResources = [
-  { name: 'Free Software Foundation Europe', desc: 'The leading European voice for software freedom and open standards.', href: 'https://fsfe.org', eu: true },
-  { name: 'European Commission · Digital Strategy', desc: 'The EU\u2019s policy hub for open source, data, and digital sovereignty.', href: 'https://digital-strategy.ec.europa.eu', eu: true },
-  { name: 'EU Open Source Observatory', desc: 'Tracks open source policy and adoption across EU public services.', href: 'https://joinup.ec.europa.eu/collection/open-source-observatory-osor', eu: true },
-  { name: 'Next Generation Internet', desc: 'EU-funded programme building an open, human-centric internet.', href: 'https://www.ngi.eu', eu: true },
-  { name: 'Linux Foundation Europe', desc: 'The European hub for open source industry and standards.', href: 'https://linuxfoundation.eu', eu: true },
-  { name: 'European Digital Rights (EDRi)', desc: 'The network defending digital rights and freedoms across Europe.', href: 'https://edri.org', eu: true },
-  { name: 'Gaia-X', desc: 'European initiative for sovereign, federated data infrastructure.', href: 'https://gaia-x.eu', eu: true },
-  { name: 'European Data Protection Board', desc: 'Independent GDPR guidance and enforcement across the EU.', href: 'https://www.edpb.europa.eu', eu: true },
-  { name: 'Open Source Initiative', desc: 'Stewards the Open Source Definition and the licenses behind it.', href: 'https://opensource.org' },
-  { name: 'Creative Commons', desc: 'Open licensing that keeps content and culture shareable.', href: 'https://creativecommons.org' },
-];
 
-const domain = (url: string) => new URL(url).hostname.replace(/^www\./, '');
 ---
 
 <BaseLayout
-  title="About — rendoire"
-  description="Software and AI, and keeping my data on machines I own."
+  image="/og/about.png"
+  title={`About ${author.name} — rendoire`}
+  description={`${author.name}: ${author.short} What I write about, what I have built, and where to find me.`}
   canonical="https://rendoire.com/about/"
+  jsonLd={{ '@context': 'https://schema.org', '@type': 'ProfilePage', mainEntity: person }}
 >
   <Navigation />
 
@@ -45,41 +52,49 @@ const domain = (url: string) => new URL(url).hostname.replace(/^www\./, '');
     <div class="section-label">About</div>
     <h1 class="section-title">Nice to <em>meet you</em></h1>
     <p class="lead">
-      I'm rendoire. I write about artificial intelligence and software, and I keep my data on
-      machines I actually own. This site is the overlap of those three things — the writing,
-      the recommendations, and the tools.
+      I'm {author.name}, a technology manager in {author.location}. By day I run live services and
+      build and teach generative AI in the public sector. Here I write about what happens when AI
+      meets a real organisation, and about running more of my own technology.
+    </p>
+    <p class="lead" style="margin-top:1rem;">
+      The essays are my own views, not my employer's.
     </p>
 
     <section style="margin-top: 4rem;">
-      <div class="section-label">What I care about</div>
+      <div class="section-label">What I write about</div>
       <div class="post-grid">
-        {values.map((v) => (
-          <div class="card" style="min-height: 150px;">
-            <h3 class="post-title" style="font-size:1.3rem;">{v.title}</h3>
-            <p class="post-desc" style="-webkit-line-clamp: unset;">{v.desc}</p>
-          </div>
+        {Object.values(series).map((s) => (
+          <a href="/blog/" class="card" style="min-height: 150px;">
+            <h2 class="post-title" style="font-size:1.3rem;">{s.title}</h2>
+            <p class="post-desc" style="-webkit-line-clamp: unset;">{s.blurb}</p>
+          </a>
         ))}
+        <a href="/ai/" class="card" style="min-height: 150px;">
+          <h2 class="post-title" style="font-size:1.3rem;">Learning AI properly</h2>
+          <p class="post-desc" style="-webkit-line-clamp: unset;">A learning path from the maths up to agents, with the books worth the time.</p>
+        </a>
       </div>
     </section>
 
     <section style="margin-top: 4rem;">
-      <div class="section-label">Read more</div>
-      <h2 class="section-title" style="font-size:2.2rem;">EU &amp; <em>open source</em></h2>
-      <p class="lead" style="margin-top:-1rem; margin-bottom:2rem;">
-        Reputable places to go deeper on European technology and open source — the ideas this
-        site is built on.
-      </p>
-      <div class="dir-grid">
-        {euResources.map((r) => (
-          <a href={r.href} target="_blank" rel="noopener" class="card dir-card">
-            <div class="dir-card-top">
-              <h3 class="dir-name" style="font-size:1.2rem;">{r.name}</h3>
-              {r.eu && <span class="eu-badge" title="European">EU</span>}
-            </div>
-            <p class="dir-why">{r.desc}</p>
-            <span class="dir-link">{domain(r.href)} ↗</span>
-          </a>
-        ))}
+      <div class="section-label">Things I've built</div>
+      <div class="post-grid" style="grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));">
+        {projects.map((p) => {
+          const external = p.href?.startsWith('http');
+          const Tag = p.href ? 'a' : 'div';
+          return (
+            <Tag
+              href={p.href}
+              target={external ? '_blank' : undefined}
+              rel={external ? 'noopener' : undefined}
+              class="card"
+              style="min-height: 150px;"
+            >
+              <h3 class="post-title" style="font-size:1.2rem;">{p.name}{external && ' ↗'}</h3>
+              <p class="post-desc" style="-webkit-line-clamp: unset;">{p.desc}</p>
+            </Tag>
+          );
+        })}
       </div>
     </section>
 

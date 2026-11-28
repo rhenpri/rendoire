@@ -6,7 +6,12 @@ import autolinkTools from './src/lib/autolink.mjs';
 
 export default defineConfig({
   site: 'https://rendoire.com',
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      // /tools/ only redirects to /self-hosting/ now.
+      filter: (page) => !page.endsWith('/tools/'),
+    }),
+  ],
 
   markdown: {
     rehypePlugins: [autolinkTools],

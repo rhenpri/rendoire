@@ -7,6 +7,19 @@ import MiniViz from '../components/MiniViz.astro';
 
 import { execSync } from 'node:child_process';
 
+const euResources = [
+  { name: 'Free Software Foundation Europe', desc: 'The leading European voice for software freedom and open standards.', href: 'https://fsfe.org', eu: true },
+  { name: 'European Commission · Digital Strategy', desc: 'The EU\u2019s policy hub for open source, data, and digital sovereignty.', href: 'https://digital-strategy.ec.europa.eu', eu: true },
+  { name: 'EU Open Source Observatory', desc: 'Tracks open source policy and adoption across EU public services.', href: 'https://joinup.ec.europa.eu/collection/open-source-observatory-osor', eu: true },
+  { name: 'Next Generation Internet', desc: 'EU-funded programme building an open, human-centric internet.', href: 'https://www.ngi.eu', eu: true },
+  { name: 'Linux Foundation Europe', desc: 'The European hub for open source industry and standards.', href: 'https://linuxfoundation.eu', eu: true },
+  { name: 'European Digital Rights (EDRi)', desc: 'The network defending digital rights and freedoms across Europe.', href: 'https://edri.org', eu: true },
+  { name: 'Gaia-X', desc: 'European initiative for sovereign, federated data infrastructure.', href: 'https://gaia-x.eu', eu: true },
+  { name: 'European Data Protection Board', desc: 'Independent GDPR guidance and enforcement across the EU.', href: 'https://www.edpb.europa.eu', eu: true },
+  { name: 'Open Source Initiative', desc: 'Stewards the Open Source Definition and the licenses behind it.', href: 'https://opensource.org' },
+  { name: 'Creative Commons', desc: 'Open licensing that keeps content and culture shareable.', href: 'https://creativecommons.org' },
+];
+
 const domain = (url: string) => new URL(url).hostname.replace(/^www\./, '');
 const total = categories.reduce((n, c) => n + c.items.length, 0);
 
@@ -21,8 +34,9 @@ const updatedLabel = updated?.toLocaleDateString('en-US', { year: 'numeric', mon
 ---
 
 <BaseLayout
-  title="Self-hosting — rendoire"
-  description="A curated, opinionated list of tools for owning your data — Linux, private cloud, security, and local AI."
+  image="/og/self-hosting.png"
+  title="Self-hosting and privacy tools — rendoire"
+  description="An opinionated list of tools for owning your data: Linux, private cloud, security, local AI, privacy apps for your phone, and the hardware to run it on."
   canonical="https://rendoire.com/self-hosting/"
 >
   <Navigation />
@@ -31,8 +45,10 @@ const updatedLabel = updated?.toLocaleDateString('en-US', { year: 'numeric', mon
     <div class="section-label">Recommendations</div>
     <h1 class="section-title">Self-<em>hosting</em></h1>
     <p class="lead" style="margin-top:-1.25rem; margin-bottom:1.5rem;">
-      A short, opinionated list: things I've used, plus a few I'm keeping an eye on. Every link
-      goes straight to the project.
+      An opinionated list: things I've used, plus a few I'm keeping an eye on. Self-hosted
+      services first, then the privacy apps and hardware that go with them. Every link goes
+      straight to the project. Wondering if it is worth it? <a href="/savings/">Work out what
+      it saves</a>.
     </p>
     <p class="fine-print">
       {total} tools in {categories.length} categories{updated && (
@@ -96,6 +112,26 @@ const updatedLabel = updated?.toLocaleDateString('en-US', { year: 'numeric', mon
         <p id="dir-status" class="visually-hidden" role="status"></p>
       </div>
     </div>
+
+    <section style="margin-top: 5rem;" aria-labelledby="further-reading">
+      <div class="section-label">Further reading</div>
+      <h2 class="section-title" style="font-size:2.2rem;" id="further-reading">EU &amp; <em>open source</em></h2>
+      <p class="lead" style="margin-top:-1rem; margin-bottom:2rem;">
+        Reputable places to go deeper on European technology, open source and digital rights.
+      </p>
+      <div class="dir-grid">
+        {euResources.map((r) => (
+          <a href={r.href} target="_blank" rel="noopener" class="card dir-card">
+            <div class="dir-card-top">
+              <h3 class="dir-name" style="font-size:1.2rem;">{r.name}</h3>
+              {r.eu && <span class="eu-badge" title="European">EU</span>}
+            </div>
+            <p class="dir-why">{r.desc}</p>
+            <span class="dir-link">{domain(r.href)} ↗</span>
+          </a>
+        ))}
+      </div>
+    </section>
 
     <p style="font-family:var(--fm); font-size:0.66rem; color:var(--mid); margin-top:3rem; line-height:1.7;">
       No affiliate links and no sponsors — just the tools I reach for. Your data, your rules.
