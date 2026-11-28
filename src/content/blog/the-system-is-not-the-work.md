@@ -2,10 +2,10 @@
 title: "The System Is Not the Work"
 seoTitle: "Why Most Productivity Advice Makes You Less Productive"
 description: "I recently spent most of a Sunday reorganising my notes into seven neat maps. It felt like the most productive day of the month. I did not produce anything."
-pubDate: 2026-11-28
+pubDate: 2026-11-28T09:30:00Z
 tags: ["digital-minimalism", "software"]
 cover: "../../assets/blog/the-system-is-not-the-work/cover.webp"
-draft: true
+draft: false
 ---
 
 *I recently spent most of a Sunday reorganising my notes into seven neat maps. It felt like the most productive day of the month. I did not produce a thing.*

@@ -1,11 +1,11 @@
 ---
 title: "AI on Call"
 description: "Every operations team has a Brent: the one engineer who knows how everything works. The first AI agent you build should make sure the rest of the team can manage while Brent is asleep."
-pubDate: 2026-11-28
+pubDate: 2026-11-28T13:00:00Z
 tags: ["ai", "software"]
 series: the-layer
 cover: "../../assets/blog/ai-on-call/cover.webp"
-draft: true
+draft: false
 ---
 
 *The hardest minute of an incident is the first one. A vague ticket, a quiet channel, and no idea where to start. That minute is where AI earns its place in live services.*

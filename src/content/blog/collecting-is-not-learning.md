@@ -1,10 +1,10 @@
 ---
 title: "Collecting Is Not Learning"
 description: "I automated my reading so well that every highlight lands in my notes without me lifting a finger. It made me a better collector and, for a while, a worse learner."
-pubDate: 2026-11-28
+pubDate: 2026-11-28T09:00:00Z
 tags: ["digital-minimalism", "culture"]
 cover: "../../assets/blog/collecting-is-not-learning/cover.webp"
-draft: true
+draft: false
 ---
 
 *I automated my reading so well that every highlight lands in my notes without me lifting a finger. It made me a brilliant collector. For a while, it made me a worse learner.*

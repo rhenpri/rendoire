@@ -2,10 +2,10 @@
 title: "The Light Switch Wins"
 seoTitle: "Why Your Smart Home Makes You Dumber"
 description: "A light switch has worked the same way for over a century. The smart home promised to make life simpler, and mostly put an app, a hub and a subscription between you and the lights."
-pubDate: 2026-11-28
+pubDate: 2026-11-28T10:00:00Z
 tags: ["self-hosting", "digital-minimalism"]
 cover: "../../assets/blog/the-light-switch-wins/cover.webp"
-draft: true
+draft: false
 ---
 
 *A light switch has worked the same way for more than a century. The smart home promised to make life simpler. Mostly it put an app, a hub and a subscription between you and the lights.*

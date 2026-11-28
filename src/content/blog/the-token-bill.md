@@ -1,11 +1,11 @@
 ---
 title: "The Token Bill"
 description: "Remember coming home from holiday to a phone bill bigger than the holiday? AI is heading for the same moment, and the fix is mostly arithmetic."
-pubDate: 2026-11-28
+pubDate: 2026-11-28T13:30:00Z
 tags: ["ai", "software"]
 series: the-layer
 cover: "../../assets/blog/the-token-bill/cover.webp"
-draft: true
+draft: false
 ---
 
 *Remember coming home from holiday to a phone bill bigger than the holiday? AI is heading for the same moment. The fix is mostly arithmetic.*

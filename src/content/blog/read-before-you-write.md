@@ -1,11 +1,12 @@
 ---
 title: "Read Before You Write"
 description: "Google once wiped the disks of almost every machine in its content delivery network in minutes, because an empty list meant 'everything'. AI agents need a graduated licence before they get the keys."
-pubDate: 2026-11-28
+pubDate: 2026-11-28T12:00:00Z
 tags: ["ai", "software"]
 series: the-layer
 cover: "../../assets/blog/read-before-you-write/cover.webp"
-draft: true
+draft: false
+featured: true
 ---
 
 *An empty list once told Google's automation to wipe almost every machine in its content network. It did, in minutes. AI agents need a graduated licence before they get the keys.*

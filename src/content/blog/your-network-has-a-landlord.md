@@ -2,11 +2,11 @@
 title: "Your Network Has a Landlord"
 seoTitle: "Mesh VPNs and Owning Your Own Network"
 description: "When one Amazon data centre region failed in December 2021, doorbells and robot hoovers stopped working. Mesh networks are a quieter way to stop renting the plumbing of your digital life."
-pubDate: 2026-11-28
+pubDate: 2026-11-28T10:30:00Z
 tags: ["self-hosting", "privacy"]
 series: owning-it
 cover: "../../assets/blog/your-network-has-a-landlord/cover.webp"
-draft: true
+draft: false
 ---
 
 *When one Amazon data centre region failed in December 2021, people could not use their doorbells. That is what renting the plumbing looks like.*

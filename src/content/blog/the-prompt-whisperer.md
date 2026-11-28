@@ -2,10 +2,10 @@
 title: "The Prompt Whisperer"
 seoTitle: "The Prompt Whisperer: Dyslexic Thinking and AI Engineering"
 description: "A sequel to Think Different. Prompting a language model is a systems problem, not a writing one, and that is exactly the kind of problem dyslexic thinking is built for. Mostly."
-pubDate: 2026-11-28
+pubDate: 2026-11-28T11:00:00Z
 tags: ["ai", "neurodiversity"]
 cover: "../../assets/blog/the-prompt-whisperer/cover.webp"
-draft: true
+draft: false
 ---
 
 *A sequel to [Think Different](/blog/think-different-the-dyslexic-advantage-in-systems-thinking/). More specific this time, and more honest about where the advantage runs out.*

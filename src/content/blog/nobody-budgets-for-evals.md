@@ -1,11 +1,11 @@
 ---
 title: "Nobody Budgets for Evals"
 description: "Medicines are watched for side effects for years after approval. Most AI features get one good demo and then nobody looks again."
-pubDate: 2026-11-28
+pubDate: 2026-11-28T12:30:00Z
 tags: ["ai", "software"]
 series: the-layer
 cover: "../../assets/blog/nobody-budgets-for-evals/cover.webp"
-draft: true
+draft: false
 ---
 
 *A medicine is not finished when it is approved. It is watched for years afterwards. Most AI features get one good demo, and then nobody looks again.*

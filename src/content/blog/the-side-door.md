@@ -1,10 +1,10 @@
 ---
 title: "The Side Door"
 description: "I left school at 16, skipped A-levels, did my degree one day a week and graduated with no debt. The front door is not the only way into tech, and it should not be the only one we talk about."
-pubDate: 2026-11-28
+pubDate: 2026-11-28T11:30:00Z
 tags: ["culture", "neurodiversity"]
 cover: "../../assets/blog/the-side-door/cover.webp"
-draft: true
+draft: false
 ---
 
 *Every step of my career has felt like finding a door that was not supposed to be there. The side door needs to be visible, or the next person will not know it exists.*

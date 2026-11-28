@@ -2,11 +2,11 @@
 title: "The Pocket Terminal"
 seoTitle: "Running an AI Coding Agent on a Steam Deck"
 description: "A Steam Deck is a poor laptop. It turns out to be a very good terminal for an AI coding agent, because the job has changed from typing code to describing, reading and approving it."
-pubDate: 2026-11-28
+pubDate: 2026-11-28T14:00:00Z
 tags: ["ai", "software"]
 series: owning-it
 cover: "../../assets/blog/the-pocket-terminal/cover.webp"
-draft: true
+draft: false
 ---
 
 *A Steam Deck makes a poor laptop. It turns out to make a very good terminal for an AI coding agent, because the job has changed.*
