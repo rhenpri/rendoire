@@ -20,9 +20,9 @@ That’s the thing about technology’s greatest moments — they’ve never
 
 And now, as **AI reshapes everything around us**, we’re at a crossroads. Do we repeat the mistakes of modern tech, building systems that **impress investors** more than they **help humans?** Or *do we remember what made technology magic* for anyone from a coder to a musician.
 
-### When Design Beat Specs (And Why We Loved It)
+## When Design Beat Specs (And Why We Loved It)
 
-### 1984: The Mac That Smiled Back
+## 1984: The Mac That Smiled Back
 
 ![](../../assets/blog/the-best-technology-is-human/d7c51730f8.webp)
 

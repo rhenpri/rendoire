@@ -8,6 +8,7 @@
     "preview": "astro preview",
     "import:medium": "node scripts/import-medium.mjs",
     "posts:tidy": "node scripts/tidy-posts.mjs",
+    "og": "node scripts/og-cards.mjs",
     "ig": "node scripts/instagram/cli.mjs"
   },
   "engines": {

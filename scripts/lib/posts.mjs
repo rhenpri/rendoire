@@ -1,3 +1,4 @@
+import YAML from 'yaml';
 // Shared post-processing for Markdown posts in src/content/blog/.
 // Used by import-medium.mjs (new imports) and tidy-posts.mjs (existing files).
 //
@@ -77,9 +78,34 @@ export function normalizeTags(tags) {
 
 // --- body cleanup -----------------------------------------------------------
 
+// Medium exports section headings as h3 (and sometimes wraps them in bold).
+// The page already has an h1, so the top heading level in a post must be h2:
+// shift every heading up until the highest one is h2, outside code fences.
+export function normalizeHeadings(md) {
+  const lines = md.split('\n');
+  let fenced = false;
+  const isHeading = [];
+  let top = 7;
+  lines.forEach((line, i) => {
+    if (/^\s*(```|~~~)/.test(line)) fenced = !fenced;
+    const m = !fenced && /^(#{2,6}) /.exec(line);
+    isHeading[i] = Boolean(m);
+    if (m) top = Math.min(top, m[1].length);
+  });
+  const shift = top < 7 ? top - 2 : 0;
+  return lines
+    .map((line, i) => {
+      if (!isHeading[i]) return line;
+      const [, hashes, text] = /^(#+) (.*)$/.exec(line);
+      const bare = text.replace(/^\*\*(.+?)\*\*\s*$/, '$1').trim();
+      return `${'#'.repeat(hashes.length - shift)} ${bare}`;
+    })
+    .join('\n');
+}
+
 export function cleanBody(md) {
   return (
-    md
+    normalizeHeadings(md)
       // Medium's read-tracking pixel rides along in the RSS body.
       .replace(/^!\[[^\]]*\]\(https?:\/\/medium\.com\/_\/stat\?[^)]*\)\s*$/gm, '')
       // "word*(aside)*" is not valid emphasis in CommonMark; it needs a space.
@@ -214,21 +240,13 @@ export async function localizeImages({ slug, cover, body }) {
 export function parsePost(raw) {
   const m = raw.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
   if (!m) throw new Error('missing frontmatter');
-  const data = {};
-  for (const line of m[1].split('\n')) {
-    const kv = line.match(/^([A-Za-z]+):\s*(.*)$/);
-    if (!kv) continue;
-    const [, key, value] = kv;
-    try {
-      data[key] = JSON.parse(value);
-    } catch {
-      data[key] = value;
-    }
-  }
+  // A real YAML parser, so nested blocks (the `instagram:` slides) survive a
+  // round trip instead of being dropped.
+  const data = YAML.parse(m[1]) ?? {};
   return { data, body: m[2].replace(/^\n+/, '') };
 }
 
-const ORDER = ['title', 'description', 'pubDate', 'updatedDate', 'tags', 'cover', 'coverAlt', 'medium', 'draft', 'featured'];
+const ORDER = ['title', 'seoTitle', 'description', 'summary', 'pubDate', 'updatedDate', 'tags', 'series', 'cover', 'coverAlt', 'coverCredit', 'medium', 'draft', 'featured'];
 
 export function serializePost(data, body) {
   const keys = [...ORDER.filter((k) => k in data), ...Object.keys(data).filter((k) => !ORDER.includes(k))];
@@ -237,7 +255,10 @@ export function serializePost(data, body) {
     .map((k) => {
       const v = data[k];
       if (k === 'pubDate' || k === 'updatedDate') return `${k}: ${v}`;
-      if (Array.isArray(v)) return `${k}: [${v.map((x) => JSON.stringify(x)).join(', ')}]`;
+      if (Array.isArray(v) && v.every((x) => typeof x !== 'object')) {
+        return `${k}: [${v.map((x) => JSON.stringify(x)).join(', ')}]`;
+      }
+      if (typeof v === 'object') return YAML.stringify({ [k]: v }, { lineWidth: 0 }).trimEnd();
       return `${k}: ${JSON.stringify(v)}`;
     });
   return `---\n${lines.join('\n')}\n---\n\n${body.trim()}\n`;

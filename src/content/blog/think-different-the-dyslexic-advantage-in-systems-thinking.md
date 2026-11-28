@@ -14,7 +14,7 @@ Apple’s old campaign had it right: “*Think Different.*” Albert Einstein, T
 
 What if thinking differently isn’t just a marketing slogan but an actual cognitive advantage?
 
-### The Pattern Spotters
+## The Pattern Spotters
 
 ![](../../assets/blog/think-different-the-dyslexic-advantage-in-systems-thinking/efdd9982b7.webp)
 
@@ -22,13 +22,13 @@ Working in software systems, I’ve noticed something curious. When it breaks, y
 
 That’s not luck, that’s a different intelligence.
 
-### The Science Behind It
+## The Science Behind It
 
 Research from Cambridge University is rewriting what we know about dyslexia. Dr. Helen Taylor’s team found that dyslexic brains aren’t broken. They are specialised to explore the unknown. Optimised for pattern recognition across complex systems.
 
 Brain imaging shows these advantages come from fundamental neural differences present from birth.
 
-### Why Complex Systems Need Different Thinking
+## Why Complex Systems Need Different Thinking
 
 Traditional analysis breaks problems into parts. Dyslexic cognition naturally grasps how parts interact as wholes. Researchers call it “*global exploratory learning.*” Understanding complexity through interconnections rather than components.
 
@@ -41,7 +41,7 @@ Dyslexic engineers often excel at:
 -   Reducing Noise & Improving Signal rate
 -   Connecting seemingly unrelated incidents
 
-### The Entrepreneur Connection
+## The Entrepreneur Connection
 
 A 2003 study found that **40% of successful entrepreneurs are dyslexic**. That’s four times the general population rate.
 
@@ -51,7 +51,7 @@ Richard Branson: “*My dyslexia became my massive advantage. It helped me think
 
 Entrepreneurship is systems design. Identifying market gaps, orchestrating resources, creating value networks. The same cognitive traits that make reading difficult make systems thinking natural.
 
-### Building Better Teams
+## Building Better Teams
 
 ![](../../assets/blog/think-different-the-dyslexic-advantage-in-systems-thinking/ea7bb69c71.webp)
 
@@ -59,7 +59,7 @@ The best engineering teams combine different cognitive styles. Detail-oriented l
 
 Cognitive diversity reduces single points of failure in problem-solving.
 
-### Changing the Story
+## Changing the Story
 
 ![](../../assets/blog/think-different-the-dyslexic-advantage-in-systems-thinking/c8cc5a54d1.webp)
 
@@ -67,7 +67,7 @@ We’ve spent decades focused on what dyslexic people can’t do. Reading diffic
 
 Researchers now advocate for “*shifting focus to dyslexic advantages.*” In technology, this matters. Instead of seeing dyslexia as something to overcome, we can recognise it as cognitive specialisation suited to complex systems work.
 
-### The Hidden Architecture
+## The Hidden Architecture
 
 Every complex system has hidden architecture. Patterns and dependencies that determine how it behaves under stress. Understanding this requires the kind of global, pattern-oriented thinking that dyslexic cognition provides.
 
@@ -75,7 +75,7 @@ The engineers who excel at this level often share certain traits: they see conne
 
 These aren’t accidents. They’re enhanced abilities vital for adapting to changing environments.
 
-### Why This Matters Now
+## Why This Matters Now
 
 As systems become increasingly complex (distributed cloud, AI systems, global supply chains), dyslexic thinking becomes more valuable, not less.
 

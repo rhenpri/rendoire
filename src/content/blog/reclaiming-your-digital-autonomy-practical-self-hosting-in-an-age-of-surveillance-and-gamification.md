@@ -5,10 +5,12 @@ pubDate: 2025-07-30
 tags: ["ai", "digital-minimalism", "self-hosting", "privacy"]
 cover: "../../assets/blog/reclaiming-your-digital-autonomy-practical-self-hosting-in-an-age-of-surveillance-and-gamification/cover.webp"
 medium: "https://rendoire.medium.com/reclaiming-your-digital-autonomy-practical-self-hosting-in-an-age-of-surveillance-and-gamification-0455e1140933"
+seoTitle: "Practical Self-Hosting in an Age of Surveillance"
+series: owning-it
 draft: false
 ---
 
-### Reclaiming Your Digital Autonomy: Practical Self-Hosting in an Age of Data Gathering and Gamification
+## Reclaiming Your Digital Autonomy: Practical Self-Hosting in an Age of Data Gathering and Gamification
 
 Our daily lives are increasingly shaped by digital services that promise convenience at the hidden cost of our privacy and autonomy. Each notification, like, and tap is carefully engineered to capture our attention, turning everyday interactions into a relentless pursuit of engagement. Cal Newport, author of *Digital Minimalism*, reveals how digital platforms exploit psychological vulnerabilities to monopolise attention and transform users into data sources:
 
@@ -18,7 +20,7 @@ Our daily lives are increasingly shaped by digital services that promise conveni
 
 Similarly, Cory Doctorow, in *The Internet Con*, describes how platforms initially offer value, only to degrade the user experience once they achieve market dominance — ultimately prioritising data extraction over user satisfaction.
 
-### AI and the Intensification of Surveillance Capitalism
+## AI and the Intensification of Surveillance Capitalism
 
 The rapid evolution of artificial intelligence has dramatically intensified these dynamics. AI systems rely heavily on vast datasets and immense computational resources, favoring large corporations that control the necessary infrastructure. Melanie Mitchell, in *AI: A Guide for Thinking Humans*, points out that AI’s current limitations compel companies to double down on data collection to sustain performance.
 
@@ -28,11 +30,11 @@ Shoshana Zuboff, in *The Age of Surveillance Capitalism*, underscores the threa
 
 Modern AI tools often act as mere interfaces for centralised platforms like OpenAI, consolidating data control in the hands of a few.
 
-### Self-Hosting: A Path to Digital Sovereignty
+## Self-Hosting: A Path to Digital Sovereignty
 
 Self-hosting offers a powerful way to counteract centralisation and reclaim digital control. By hosting services yourself, you manage your own digital infrastructure, reducing reliance on corporate platforms and shielding yourself from surveillance and gamification.
 
-### Practical Steps for Digital Self-Reliance
+## Practical Steps for Digital Self-Reliance
 
 Here are actionable steps you can take to begin self-hosting:
 
@@ -51,19 +53,19 @@ Opt for self-hosted alternatives:
 -   *Bitwarden for password management*
 -   *Home Assistant for smart home control*
 
-### Repurposing Old Hardware
+## Repurposing Old Hardware
 
 ![](../../assets/blog/reclaiming-your-digital-autonomy-practical-self-hosting-in-an-age-of-surveillance-and-gamification/3de42c4f96.webp)
 
 Repurpose older desktops or laptops as home servers to cut costs and reduce e-waste. These machines can efficiently run essential services such as storage, media streaming, and even AI models.
 
-### Consumer Electronics and AI Accessibility
+## Consumer Electronics and AI Accessibility
 
 As consumer hardware evolves, it can either empower or limit access to independent AI capabilities. Frameworks like Mixture of Experts (MoE) will eventually enable high-performance AI with significantly lower computational demands, allowing individuals to achieve near-corporate-grade AI performance without needing massive infrastructure, thus democratising access.
 
 ![](../../assets/blog/reclaiming-your-digital-autonomy-practical-self-hosting-in-an-age-of-surveillance-and-gamification/f930237f3e.webp)
 
-### Advantages
+## Advantages
 
 The mixture of Expert (MoE) architecture offers several advantages over traditional deep learning models.
 
@@ -72,7 +74,7 @@ The mixture of Expert (MoE) architecture offers several advantages over traditio
 -   **Efficiency:** Since MoE activates only the most relevant experts for each input, it can handle diverse tasks more efficiently than traditional models. This makes it faster and more accurate, as experts can focus on what they do best.
 -   **Parallel processing:** Experts can work independently, which allows for efficient parallel processing. This approach can cause faster training and inference times.
 
-### The Hidden Costs of Convenience
+## The Hidden Costs of Convenience
 
 ![](../../assets/blog/reclaiming-your-digital-autonomy-practical-self-hosting-in-an-age-of-surveillance-and-gamification/cc4ba3ec09.webp)
 
@@ -82,7 +84,7 @@ Samuel Florman, in *The Existential Pleasures of Engineering*, reminds us:
 
 > *“Technology is not what alienates us; it is what connects our intentions with the physical world.”*
 
-### Digital Minimalism Meets Self-Hosting
+## Digital Minimalism Meets Self-Hosting
 
 Combining digital minimalism with self-hosting creates a resilient framework for reclaiming autonomy. By rejecting superficial digital engagement and embracing intentional, privacy-respecting habits, you foster genuine **independence**.
 

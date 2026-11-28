@@ -3,9 +3,9 @@
 export const site = {
   url: 'https://rendoire.com',
   name: 'rendoire',
-  tagline: 'Writing on AI, software, and owning your own tools.',
+  tagline: 'Essays on putting AI to work in the real world, and a guide to self-hosting.',
   description:
-    'Writing, AI knowledge, and self-hosting recommendations — building and owning your own tools.',
+    'Essays by Ry Henderson on putting AI to work in the real world, plus an AI learning path and self-hosting recommendations.',
   medium: 'https://rendoire.medium.com',
   github: 'https://github.com/rhenpri',
   linkedin: 'https://www.linkedin.com/in/rhenderson832/',
@@ -29,11 +29,30 @@ export const hasReferral = Boolean(referral.oreilly);
 /** `rel` for a book link: paid links must be marked as sponsored. */
 export const bookRel = hasReferral ? 'sponsored noopener' : 'noopener';
 
+/**
+ * Who writes this. One place for the byline, the About page and the JSON-LD.
+ * Keep `role` to the job, never the infrastructure: the site does not say what
+ * is running where.
+ */
+export const author = {
+  name: 'Ry Henderson',
+  role: 'Technology manager',
+  location: 'Derry',
+  short: 'Technology manager in Derry. I run live services and build with AI.',
+  /**
+   * Where "Reply by email" sends readers. Leave empty to hide the link; set it
+   * once the address forwards (Namecheap → Email Forwarding).
+   */
+  replyEmail: '',
+};
+
 /** schema.org description of the author, shared by every page's JSON-LD. */
 export const person = {
   '@type': 'Person',
-  name: site.name,
-  url: site.url,
+  name: author.name,
+  jobTitle: author.role,
+  url: `${site.url}/about/`,
+  homeLocation: { '@type': 'Place', name: author.location },
   sameAs: [site.medium, site.github, site.linkedin],
 };
 

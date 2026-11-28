@@ -5,19 +5,29 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Navigation from '../../components/Navigation.astro';
 import Footer from '../../components/Footer.astro';
 import PintButton from '../../components/PintButton.astro';
-import { formatDate, getEntries, relatedPosts, summarize, topicLabel } from '../../lib/blog';
-import { person, site } from '../../config';
+import { formatDate, getEntries, relatedPosts, seriesPosts, summarize, topicLabel } from '../../lib/blog';
+import { author, person, site } from '../../config';
+import { series as allSeries } from '../../data/series';
 
 export async function getStaticPaths() {
   const entries = await getEntries();
   const all = entries.map(summarize);
   return entries.map((entry, i) => ({
     params: { slug: entry.id },
-    props: { entry, post: all[i], related: relatedPosts(all[i], all) },
+    props: {
+      entry,
+      post: all[i],
+      related: relatedPosts(all[i], all),
+      inSeries: all[i].series ? seriesPosts(all[i].series!, all) : [],
+    },
   }));
 }
 
-const { entry, post, related } = Astro.props;
+const { entry, post, related, inSeries } = Astro.props;
+const series = post.series ? allSeries[post.series] : undefined;
+const replyHref = author.replyEmail
+  ? `mailto:${author.replyEmail}?subject=${encodeURIComponent(`Re: ${post.title}`)}`
+  : undefined;
 const { Content } = await render(entry);
 
 const url = `${site.url}/blog/${post.slug}/`;
@@ -44,7 +54,7 @@ const jsonLd = {
 ---
 
 <BaseLayout
-  title={`${post.title} — rendoire`}
+  title={`${post.seoTitle ?? post.title} — rendoire`}
   description={post.description ?? post.title}
   canonical={url}
   image={ogImage}
@@ -71,6 +81,7 @@ const jsonLd = {
           )}
         </div>
         <h1 class="article-title">{post.title}</h1>
+        <p class="article-byline">By <a href="/about/">{author.name}</a></p>
         {post.tags.length > 0 && (
           <ul class="post-tags" aria-label="Topics">
             {post.tags.map((tag) => (
@@ -90,7 +101,33 @@ const jsonLd = {
             loading="eager"
             fetchpriority="high"
           />
+          {post.coverCredit && <p class="article-credit">{post.coverCredit}</p>}
         </div>
+      )}
+
+      {series && inSeries.length > 1 && (
+        <nav class="series-box" aria-label={`Series: ${series.title}`}>
+          <span class="series-kicker">Series · {inSeries.findIndex((p) => p.slug === post.slug) + 1} of {inSeries.length}</span>
+          <span class="series-title">{series.title}</span>
+          <ol>
+            {inSeries.map((p) => (
+              <li>
+                {p.slug === post.slug ? (
+                  <span aria-current="page">{p.title}</span>
+                ) : (
+                  <a href={`/blog/${p.slug}/`}>{p.title}</a>
+                )}
+              </li>
+            ))}
+          </ol>
+        </nav>
+      )}
+
+      {post.summary && (
+        <aside class="article-summary" aria-label="In short">
+          <span class="series-kicker">In short</span>
+          <p>{post.summary}</p>
+        </aside>
       )}
 
       <div class="article-body">
@@ -98,10 +135,17 @@ const jsonLd = {
       </div>
 
       <footer class="article-foot">
+        <div class="article-author">
+          <p>
+            <strong><a href="/about/">{author.name}</a></strong> · {author.short}
+          </p>
+        </div>
         <p>
           Thanks for reading. New essays arrive by <a href="/feed.xml">RSS</a>{post.medium && (
             <>, and this one is <a href={post.medium} target="_blank" rel="noopener">also on Medium ↗</a></>
-          )}.
+          )}.{replyHref && (
+            <> Disagree, or have a story that fits? <a href={replyHref}>Reply by email</a>.</>
+          )}
         </p>
         <div class="article-support">
           <p>If this saved you some time or gave you something to think about, you can buy me a pint.</p>

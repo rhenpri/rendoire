@@ -5,6 +5,8 @@ pubDate: 2026-11-22
 tags: ["kindle", "self-hosting", "digital-minimalism", "reading"]
 cover: "../../assets/blog/i-just-broke-my-kindle-and-it-got-way-better/cover.webp"
 coverAlt: "A Kindle Paperwhite showing a page of Alice in Wonderland, beside the title I just broke my Kindle and it got way better"
+series: owning-it
+summary: "I jailbroke a 2013 Paperwhite, dropped the Amazon account and moved my library onto my own server. Every morning it now delivers the weather, my calendar and the news, and my highlights go straight into my notes. It takes an evening and carries a small risk, and it is a project you maintain, not a gadget you buy."
 draft: false
 instagram:
   coverImage: "../../assets/blog/i-just-broke-my-kindle-and-it-got-way-better/reader.webp"
@@ -81,7 +83,7 @@ I broke my Kindle on purpose, and it is now the best reading device I have owned
 
 The polite word is **jailbreak**. It means getting around the lock a maker puts on a device so you can run your own software on it. The break itself takes minutes. The preparation decides whether you end up with a better device or an expensive coaster. So this post is part argument, part step by step, and part a tour of what I do with the thing now that it is free.
 
-### Why bother
+## Why bother
 
 A Kindle is a very good screen attached to a very average shop.
 
@@ -101,7 +103,7 @@ Here is what I got for it:
 
 My opinion, plainly: the best Kindle feature is the absence of the store. Everything else follows from that.
 
-### Before you touch anything
+## Before you touch anything
 
 Three checks. Skip them and you are the person on a forum asking why it will not turn on.
 
@@ -111,7 +113,7 @@ Three checks. Skip them and you are the person on a forum asking why it will not
 
 Amazon's terms will not love this, so read them yourself. You are modifying a device you own, and I had already decided I did not need their services.
 
-### The steps
+## The steps
 
 ![](../../assets/blog/i-just-broke-my-kindle-and-it-got-way-better/six-steps.webp)
 
@@ -133,7 +135,7 @@ That is the jailbreak. Everything from here is the fun part.
 
 ![](../../assets/blog/i-just-broke-my-kindle-and-it-got-way-better/paperwhite.webp)
 
-### What I did with it
+## What I did with it
 
 Here is where I stopped being a reader with a modded Kindle and became someone running a small publishing house for one customer.
 
@@ -147,7 +149,7 @@ The Kindle is now a thin screen. Everything clever happens on a small server at 
 
 A **thin client** is a device that does little itself and shows what a bigger machine prepared. Mainframe terminals worked this way in the 1970s. We spent forty years moving the intelligence into every pocket, and it turns out an e-ink screen is happiest when it does not have to think.
 
-### A day on it
+## A day on it
 
 ![](../../assets/blog/i-just-broke-my-kindle-and-it-got-way-better/a-day.webp)
 
@@ -175,7 +177,7 @@ Plug it in to charge and it becomes a small living frame: the day, a family phot
 
 None of that was possible in the stock software. All of it is a few scripts and some patience.
 
-### Where it went wrong
+## Where it went wrong
 
 You came for the messy middle, so here it is.
 
@@ -184,7 +186,7 @@ You came for the messy middle, so here it is.
 - **Blocking Amazon too hard broke the Wi-Fi check.** See step 5.
 - **A mistake in my own startup config once made a service silently vanish on every reboot**, which meant the away-from-home path quietly died. I only noticed because I went looking. Monitoring that tells you when nothing is happening is worth more than monitoring that tells you when something is.
 
-### Should you do it
+## Should you do it
 
 If you read a lot, own books outside Amazon's shop, and enjoy tinkering for an evening, yes. The first hour is the hard bit and the payoff lasts for years.
 
@@ -194,7 +196,7 @@ What I did not expect is how much quieter reading got. No store, no recommendati
 
 If you try it, back up first. Then back up again.
 
-### Links
+## Links
 
 Everything you need is on [kindlemodding.org](https://kindlemodding.org/):
 

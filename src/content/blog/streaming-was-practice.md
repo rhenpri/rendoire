@@ -5,6 +5,7 @@ pubDate: 2026-04-25
 tags: ["ai", "self-hosting", "digital-minimalism", "culture"]
 cover: "../../assets/blog/streaming-was-practice/cover.webp"
 medium: "https://rendoire.medium.com/streaming-was-practice-5b1c1afdf7d5"
+summary: "The iPod made you choose. Streaming took the choice away and sold it back as a feed. AI is now doing the same to reasoning, and the stakes are higher. The answer is not less AI. It is owning the stack beneath it: portable models by default, rented frontier models for the hard problems, and three tiers of steps you can stop at."
 draft: false
 ---
 
@@ -20,7 +21,7 @@ Twenty-five years later you have access to a hundred million songs and most peop
 
 Tim Wu calls this pattern *The Master Switch*. Every information industry follows the same cycle. Open, centralised, monopolised, disrupted, open again. Telephone. Radio. Film. Television. The internet. It happens every time. Streaming was the last cycle. AI is the next one.
 
-### The iPod was a philosophy, not a product
+## The iPod was a philosophy, not a product
 
 ![](../../assets/blog/streaming-was-practice/67b2483d8d.webp)
 
@@ -44,7 +45,7 @@ Owning your library made you the business. The iPod was the output. The iTunes l
 
 That is gone. Most people under 25 have never owned a song.
 
-### Napster was the bridge, not the enemy
+## Napster was the bridge, not the enemy
 
 ![](../../assets/blog/streaming-was-practice/889d83607e.webp)
 
@@ -64,7 +65,7 @@ The file disappeared.
 
 You do not have a Spotify library. You have an account. When Neil Young pulled his catalogue over Joe Rogan in 2022, albums vanished from users’ “libraries” overnight. When Taylor Swift re-recorded her early albums because Scooter Braun owned the originals, the streaming versions got quietly demoted. You rented access to a catalogue that can be reorganised while you sleep.
 
-### The algorithm did not replace the radio.
+## The algorithm did not replace the radio.
 
 Streaming did not replace the iPod. It replaced the radio. Then it dressed up the radio as a library, with your face on it.
 
@@ -82,7 +83,7 @@ If you want it in black and white, Meta publishes it. Their transparency page fo
 
 This is not nostalgia, modern streaming has better ergonomics in every measurable way. What got worse is your agency over your own taste. You consume more content than anyone in history and you can recall less of it.
 
-### You are what you repeat
+## You are what you repeat
 
 ![](../../assets/blog/streaming-was-practice/8d643c3741.webp)
 
@@ -96,7 +97,7 @@ You do not decide what to hear next, because the feed decides. You do not evalua
 
 The algorithm’s job is to convince you otherwise. Sometimes it is right. The problem is that *better* is measured by engagement, not by whether it made you sharper.
 
-### Now the same story, faster
+## Now the same story, faster
 
 ![](../../assets/blog/streaming-was-practice/3ef55790e3.webp)
 
@@ -120,7 +121,7 @@ Arithmetic has a verifiable answer. Synthesis does not. When you outsource the f
 
 You build that model by writing bad drafts and fixing them. Skip the drafts and you are not editing. You are rubber-stamping a machine that optimises for confidence and encouragement to the user.
 
-### The real question is not the model. It is the stack beneath it.
+## The real question is not the model. It is the stack beneath it.
 
 For most of 2022 to 2024, the dominant narrative was *scale wins*. GPT-4, Claude 3, Gemini Ultra. The frontier was a club of four labs. Peter Thiel’s *Zero to One* had the script: monopoly is good, plan for monopoly not competition.
 
@@ -154,7 +155,7 @@ Donella Meadows’ *Thinking in Systems* names the move. **Leverage points**. Yo
 
 ![](../../assets/blog/streaming-was-practice/9238a3c97b.webp)
 
-### The Graveyard of Convenience
+## The Graveyard of Convenience
 
 Before you decide convenience is worth it, walk through the graveyard.
 
@@ -162,7 +163,7 @@ Google Reader died in 2013 and took a generation’s RSS habits with it. Evernot
 
 **If you do not host it, you do not own it. If you do not own it, you are renting. If you are renting, the landlord can evict you.**
 
-### The Technical Maturity Model
+## The Technical Maturity Model
 
 You do not need a Kubernetes cluster to start. Three tiers. Stop at any of them.
 

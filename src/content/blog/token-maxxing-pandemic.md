@@ -5,6 +5,7 @@ pubDate: 2026-06-02
 tags: ["ai", "software"]
 cover: "../../assets/blog/token-maxxing-pandemic/cover.webp"
 medium: "https://rendoire.medium.com/token-maxxing-pandemic-078214e10f2d"
+series: the-layer
 draft: false
 ---
 
@@ -16,7 +17,7 @@ Andy Grove ran Intel on the opposite rule. Measure output, not activity. A token
 
 ![](../../assets/blog/token-maxxing-pandemic/f6e9816ee1.webp)
 
-### We have measured this before
+## We have measured this before
 
 In 1982 the Lisa team at Apple decided to track productivity by lines of code. Every Friday, engineers filed a form with a number on it.
 
@@ -32,7 +33,7 @@ The Lisa shipped slow, clunky, and priced near ten thousand dollars. It flopped.
 
 Lines of code. Tokens burned. Same mistake, new units.
 
-### The market is optimising for the wrong thing
+## The market is optimising for the wrong thing
 
 Today’s AI market runs on volume and velocity, not value. Meta’s leaderboard is already gone, quietly pulled. Uber reportedly burned its entire 2026 token budget in four months. Salesforce expects an Anthropic bill near three hundred million dollars this year, and its CEO is now asking out loud for something that just sends the easy jobs to cheaper models.
 
@@ -44,7 +45,7 @@ Here is the tell. Earlier this year Anthropic called its Mythos model too danger
 
 The part the hype skips is the honest one. AI code analysis is genuinely good now. It is just not the revolution each press cycle sells, and treating every increment as a breakthrough is how you end up gaming a leaderboard instead of shipping.
 
-### Simplicity is the greatest form of sophistication
+## Simplicity is the greatest form of sophistication
 
 None of this means stop. Explore the frontier models. Run the tooling. Build the swarms. Adoption comes from creative use, from making things you actually care about, not from chasing a usage chart.
 
