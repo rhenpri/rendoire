@@ -55,7 +55,7 @@ a { color: #3ecf8e; }
 .archive__input, input[type=email] { background: #0a0a0a !important; color: #ececec !important; border: 1px solid rgba(255,255,255,0.18) !important; }
 """
 
-HEADER = '<p class="rendoire-kicker"><strong>rendoire</strong> &nbsp;·&nbsp; essays by Ry Henderson</p>'
+HEADER = '<p class="rendoire-kicker"><strong>rendoire</strong> &nbsp;·&nbsp; essays by Ryan Henderson</p>'
 FOOTER = ('<hr><p class="rendoire-footer">You are getting this because you subscribed at '
           '<a href="https://rendoire.com">rendoire.com</a>. Hit reply any time: replies come straight to me.</p>'
           '<p class="rendoire-footer"><a href="https://rendoire.com/start/">Start here</a> &nbsp;·&nbsp; '
@@ -65,7 +65,7 @@ CONFIRM_TEXT = ('<p>Hi,</p>'
   '<p>Thanks for signing up to rendoire. One click and you are in:</p>'
   '<p><a href="{{ confirmation_url }}"><strong>Yes, send me new essays</strong></a></p>'
   '<p>If you did not sign up, ignore this email and you will not hear from me again.</p>'
-  '<p>Ry</p>')
+  '<p>Ryan</p>')
 
 WELCOME_TEXT = ("Hi,\n\nYou're in. Thanks for subscribing.\n\n"
   "Here's the deal. When I publish a new essay on [rendoire.com](https://rendoire.com), it lands in your inbox the same day, in full. "
@@ -75,12 +75,12 @@ WELCOME_TEXT = ("Hi,\n\nYou're in. Thanks for subscribing.\n\n"
   "- [The Models Were the Easy Part](https://rendoire.com/blog/the-models-were-the-easy-part/): why most AI pilots stall, and it's not the models.\n"
   "- [The Safety Was Never in the Model](https://rendoire.com/blog/the-safety-was-never-in-the-model/): why guardrails have to be yours.\n"
   "- [I Just Broke My Kindle & It Got Way Better](https://rendoire.com/blog/i-just-broke-my-kindle-and-it-got-way-better/): a 2013 Paperwhite with no Amazon account.\n\n"
-  "And if anything I write makes you disagree, or reminds you of something you've seen, just hit reply. Replies come straight to me.\n\nRy")
+  "And if anything I write makes you disagree, or reminds you of something you've seen, just hit reply. Replies come straight to me.\n\nRyan")
 
 settings = {
   'name': 'rendoire',
-  'description': 'Essays by Ry Henderson on putting AI to work in the real world, and on owning your own technology. Each new essay, straight to your inbox.',
-  'from_name': 'Ry Henderson',
+  'description': 'Essays by Ryan Henderson on putting AI to work in the real world, and on owning your own technology. Each new essay, straight to your inbox.',
+  'from_name': 'Ryan Henderson',
   'locale': 'en-GB',
   'timezone': 'Europe/London',
   'template': 'modern',

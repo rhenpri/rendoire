@@ -27,7 +27,7 @@ const cards = [
   { file: 'og/self-hosting.png', kicker: 'Self-hosting', title: 'Own your data', line: 'An opinionated list of tools: private cloud, local AI, privacy apps and the hardware to run them.' },
   { file: 'og/ai.png', kicker: 'AI knowledge', title: 'From zero to agents', line: 'A learning path from the fundamentals to agents, with the books that actually teach.' },
   { file: 'og/savings.png', kicker: 'Calculator', title: 'Renting vs owning', line: 'What your subscriptions add up to over the years, against running the same things yourself.' },
-  { file: 'og/about.png', kicker: 'About', title: 'Ry Henderson', line: 'Technology manager in Derry. Live services, AI, and owning your own technology.' },
+  { file: 'og/about.png', kicker: 'About', title: 'Ryan Henderson', line: 'Technology manager in Derry. Live services, AI, and owning your own technology.' },
 ];
 
 const page = (c) => `<!doctype html><html><head><meta charset="utf-8"><style>

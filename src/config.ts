@@ -5,7 +5,7 @@ export const site = {
   name: 'rendoire',
   tagline: 'Essays on putting AI to work in the real world, and a guide to self-hosting.',
   description:
-    'Essays by Ry Henderson on putting AI to work in the real world, plus an AI learning path and self-hosting recommendations.',
+    'Essays by Ryan Henderson on putting AI to work in the real world, plus an AI learning path and self-hosting recommendations.',
   medium: 'https://rendoire.medium.com',
   github: 'https://github.com/rhenpri',
   linkedin: 'https://www.linkedin.com/in/rhenderson832/',
@@ -35,7 +35,7 @@ export const bookRel = hasReferral ? 'sponsored noopener' : 'noopener';
  * is running where.
  */
 export const author = {
-  name: 'Ry Henderson',
+  name: 'Ryan Henderson',
   role: 'Technology manager',
   location: 'Derry',
   short: 'Technology manager in Derry. I run live services and build with AI.',
