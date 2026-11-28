@@ -40,6 +40,10 @@ export async function GET(context) {
     items: await Promise.all(entries.map(async (entry) => {
       const post = summarize(entry);
       const html = entry.rendered?.html ? absolutize(await resolveImages(entry.rendered.html)) : undefined;
+      // The cover as a 1200×630 JPEG, so newsletter emails can lead with it.
+      const cover = post.cover
+        ? (await getImage({ src: post.cover, width: 1200, height: 630, fit: 'cover', format: 'jpg' })).src
+        : undefined;
       return {
         title: post.title,
         pubDate: post.pubDate,
@@ -48,6 +52,7 @@ export async function GET(context) {
         link: `/blog/${post.slug}/`,
         categories: post.tags.map(topicLabel),
         author: author.name,
+        enclosure: cover ? { url: new URL(cover, site.url).href, length: 0, type: 'image/jpeg' } : undefined,
       };
     })),
     customData: `<language>en-gb</language>`,

@@ -1,0 +1,29 @@
+---
+// Buttondown sends people here after they confirm their subscription.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import PostCard from '../components/blog/PostCard.astro';
+import { getPosts } from '../lib/blog';
+
+const PICKS = ['the-models-were-the-easy-part', 'the-safety-was-never-in-the-model', 'i-just-broke-my-kindle-and-it-got-way-better'];
+const posts = await getPosts();
+const picks = PICKS.map((s) => posts.find((p) => p.slug === s)).filter(Boolean);
+---
+
+<BaseLayout title="You're in — rendoire" description="Thanks for subscribing." noindex>
+  <Navigation />
+  <main id="main" class="container section page-top">
+    <div class="section-label">Subscribed</div>
+    <h1 class="section-title">You're <em>in</em></h1>
+    <p class="lead page-lead">
+      Thanks for subscribing. Every new essay will land in your inbox the day it goes up. Nothing
+      else, no spam, and you can unsubscribe from any email in one click. If you only have time for
+      three, start with these.
+    </p>
+    <div class="post-grid" style="margin-top:2rem;">
+      {picks.map((post) => <PostCard post={post!} level="h2" />)}
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>

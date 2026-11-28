@@ -9,7 +9,7 @@ export default defineConfig({
   integrations: [
     sitemap({
       // /tools/ only redirects to /self-hosting/ now.
-      filter: (page) => !page.endsWith('/tools/'),
+      filter: (page) => !/\/(tools|subscribed|welcome)\/$/.test(page),
     }),
   ],
 

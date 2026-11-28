@@ -1,0 +1,22 @@
+---
+// Buttondown sends people here straight after they submit the sign-up form.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout title="Check your inbox — rendoire" description="One more step to subscribe." noindex>
+  <Navigation />
+  <main id="main" class="container section page-top">
+    <div class="section-label">Almost there</div>
+    <h1 class="section-title">Check your <em>inbox</em></h1>
+    <p class="lead page-lead">
+      I've sent you an email with a confirmation link. Click it and you're in. If it hasn't
+      arrived in a couple of minutes, have a look in your spam or promotions folder.
+    </p>
+    <p class="lead" style="margin-top:1.5rem;">
+      While you wait: <a href="/start/">start here</a>, or browse <a href="/blog/">every essay</a>.
+    </p>
+  </main>
+  <Footer />
+</BaseLayout>
