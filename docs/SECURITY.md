@@ -21,39 +21,34 @@ untrusted uploads, etc.). On top of that, the following hardening is applied.
 | Locked Node | `.nvmrc` + `engines` | Node 24. |
 | Dependency audit | — | `npm audit` reports **0 vulnerabilities** as of 15 November 2026. |
 
-## Open items (need the proxy or DNS, not this repo)
+## Edge and DNS (resolved 28 November 2026)
 
-Audited 15 November 2026. Everything that lives in this repository or in GitHub's
-settings is done. These four are outside it:
+The site is served directly by GitHub Pages. There is no proxy any more.
 
-1. **Send security headers from the proxy.** None are sent today (no HSTS, no
-   `X-Content-Type-Options`, no `X-Frame-Options`). The snippet is in the next section.
-2. **Fix the `www` redirect.** `https://www.rendoire.com` answers with a 301 to
-   `http://rendoire.com/`, a plain-HTTP hop. It should go straight to
-   `https://rendoire.com/`. See `docs/SELF-HOSTING.md`.
-3. **Remove `Access-Control-Allow-Origin: *`** from the proxy's responses.
-4. **Add DNS records** at the registrar (Namecheap):
+- **DNS (Namecheap):** four `A @` records (185.199.108–111.153), four `AAAA @` records
+  (2606:50c0:8000–8003::153) and `CNAME www → rhenpri.github.io`. The **HTTPS toggle
+  on every record must stay OFF.** That toggle is Namecheap's own TLS proxy (it answered
+  as `server: APISIX` from 159.198.67.129), and new records default to ON.
+- **TLS:** Let's Encrypt certificate issued by GitHub Pages, with "Enforce HTTPS" on.
+  `www` and `http://` redirect to `https://rendoire.com/`.
+- **Mail:** DMARC on `_dmarc` (`p=quarantine`, reports to security@). CAA allows only
+  `letsencrypt.org`, with iodef to security@. Email forwarding MX and SPF unchanged.
+  Move DMARC to `p=reject` once a few weeks of reports look clean.
+- **Not possible on Pages:** custom response headers (HSTS, X-Frame-Options,
+  frame-ancestors). The `<meta>` CSP in `BaseLayout.astro` still applies.
+  `Access-Control-Allow-Origin: *` is sent by GitHub Pages itself and is harmless
+  for a public static site.
 
-   | Type | Host | Value |
-   | --- | --- | --- |
-   | TXT | `_dmarc` | `v=DMARC1; p=quarantine; rua=mailto:security@rendoire.com` |
-   | CAA | `@` | `0 issue "sectigo.com"` |
-   | CAA | `@` | `0 iodef "mailto:security@rendoire.com"` |
-
-   Without DMARC anyone can send mail that appears to come from `@rendoire.com`. Move
-   to `p=reject` once a few weeks of reports look clean. The CAA value must name the CA
-   your proxy's certificate comes from (Sectigo today); change it if you switch CA, or
-   renewals will fail.
-
-Also confirm that mail to `security@rendoire.com` reaches you: send it a test message.
-
-To re-check after changing the proxy or DNS:
+To re-check:
 
 ```bash
-curl -sI https://rendoire.com | grep -iE 'strict-transport|x-content-type|x-frame|access-control'
-curl -sI https://www.rendoire.com | grep -i location     # expect https://rendoire.com/
+curl -sI http://www.rendoire.com | grep -i location      # expect https://rendoire.com/
+dig +short A rendoire.com                                 # expect only 185.199.x.153
 dig +short TXT _dmarc.rendoire.com; dig +short CAA rendoire.com
 ```
+
+If the certificate ever gets stuck, remove and re-add the custom domain:
+`gh api -X PUT repos/rhenpri/rendoire/pages -F cname=null` then `-f cname=rendoire.com`.
 
 ## The one thing GitHub Pages can't do: HTTP headers
 
@@ -63,9 +58,9 @@ strongest headers — `Strict-Transport-Security`, `X-Frame-Options`, `frame-anc
 `X-Content-Type-Options`, and a strict CSP — must be set **at the edge**, in front of
 GitHub Pages.
 
-Your domain fronts GitHub Pages through a reverse proxy (APISIX on a Namecheap IP,
-159.198.67.129). Add these headers there. The GoatCounter origin must match
-`analytics.goatcounter` in `src/config.ts`, or the header will block page counts.
+These snippets apply only if the site ever moves behind a proxy you control again.
+The GoatCounter origin must match `analytics.goatcounter` in `src/config.ts`, or the
+header will block page counts.
 
 ### APISIX (response-rewrite)
 
