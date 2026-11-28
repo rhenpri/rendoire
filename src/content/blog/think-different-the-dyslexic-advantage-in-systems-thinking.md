@@ -47,13 +47,9 @@ A 2003 study found that **40% of successful entrepreneurs are dyslexic**. That�
 
 Richard Branson: “*My dyslexia became my massive advantage. It helped me think creatively and laterally, and see solutions where others saw problems.*”
 
-![](../../assets/blog/think-different-the-dyslexic-advantage-in-systems-thinking/530c2f5a5b.webp)
-
 Entrepreneurship is systems design. Identifying market gaps, orchestrating resources, creating value networks. The same cognitive traits that make reading difficult make systems thinking natural.
 
 ## Building Better Teams
-
-![](../../assets/blog/think-different-the-dyslexic-advantage-in-systems-thinking/ea7bb69c71.webp)
 
 The best engineering teams combine different cognitive styles. Detail-oriented linear thinkers ensure correct implementation. Big-picture systems thinkers ensure architectural coherence.
 

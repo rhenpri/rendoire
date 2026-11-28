@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { site } from '../config';
+import { goatcounterOrigin, site } from '../config';
 
 interface Props {
   title?: string;
@@ -26,6 +26,9 @@ const {
 
 const resolvedCanonical = canonical ?? new URL(Astro.url.pathname, site.url).href;
 const resolvedImage = new URL(image, site.url).href;
+// Analytics only add their own origin; scripts stay same-origin files.
+const gc = goatcounterOrigin ? ` ${goatcounterOrigin}` : '';
+const csp = `default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:${gc}; font-src 'self' data:; connect-src 'self'${gc}; object-src 'none'; base-uri 'self'; form-action 'self'`;
 ---
 
 <!DOCTYPE html>
@@ -40,13 +43,14 @@ const resolvedImage = new URL(image, site.url).href;
     <meta name="theme-color" content="#0a0a0a" />
 
     <!-- Security: baseline content-security-policy + referrer policy.
-         Every asset is served from this origin, so nothing else is allowed,
-         and scripts are external files only (no inline script can run).
+         Every asset is served from this origin. The one exception is the
+         GoatCounter endpoint, which may receive page counts (connect/img).
+         Scripts are files only (no inline script can run).
          Full HTTP headers (HSTS, frame-ancestors, etc.) belong at the edge —
          see docs/SECURITY.md for the proxy snippet. -->
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'"
+      content={csp}
     />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
 
@@ -77,6 +81,10 @@ const resolvedImage = new URL(image, site.url).href;
 
     <!-- Scroll-reveal content starts hidden; without scripts, show it. -->
     <noscript><style>.reveal { opacity: 1; transform: none; }</style></noscript>
+
+    {goatcounterOrigin && !noindex && (
+      <script is:inline async src="/js/count.js" data-goatcounter={`${goatcounterOrigin}/count`}></script>
+    )}
 
     <slot name="head" />
   </head>

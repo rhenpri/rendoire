@@ -23,8 +23,6 @@ Tim Wu calls this pattern *The Master Switch*. Every information industry follow
 
 ## The iPod was a philosophy, not a product
 
-![](../../assets/blog/streaming-was-practice/67b2483d8d.webp)
-
 A caveat first. For nearly eighty years before the iPod, the dominant mode of music consumption was radio. Someone in a tower somewhere decided what played. The iPod was not the default. It was a brief anomaly in a century of feeds.
 
 Which is why it mattered.
@@ -47,8 +45,6 @@ That is gone. Most people under 25 have never owned a song.
 
 ## Napster was the bridge, not the enemy
 
-![](../../assets/blog/streaming-was-practice/889d83607e.webp)
-
 The conventional story is that Napster killed the record industry. The honest story is that Napster taught the industry what it would become.
 
 Napster launched in June 1999. By early 2001, 80 million people had used it. Metallica sued in April 2000. They were not wrong. They were early.
@@ -56,8 +52,6 @@ Napster launched in June 1999. By early 2001, 80 million people had used it. Met
 Napster did not just make music free. It normalised **infinite access**. Before Napster, scarcity was the default. After Napster, the only question was bandwidth. The library became the cloud, before anyone called it that.
 
 The record industry fought piracy for a decade and lost. Then in 2008, Daniel Ek and Martin Lorentzon pitched the labels a deal: *what if the thing Napster did, infinite access, was legal, and we gave you a cut?* The labels, bleeding out, agreed.
-
-![](../../assets/blog/streaming-was-practice/385685374b.webp)
 
 **Piracy did not lose. Piracy was legalised and sold back to us on a subscription.**
 
