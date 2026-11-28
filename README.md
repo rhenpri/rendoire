@@ -37,8 +37,7 @@ scripts/
   import-medium.mjs        Import posts from a Medium RSS feed
   publish-medium.mjs       Cross-post a post to Medium (canonical → this site)
 docs/
-  SECURITY.md              Security hardening + edge-header config
-  SELF-HOSTING.md          Self-hosting options and recipes
+  SECURITY.md              Security setup, DNS and how to re-check it
 ```
 
 ## Local development
