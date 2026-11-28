@@ -55,8 +55,6 @@ Opt for self-hosted alternatives:
 
 ## Repurposing Old Hardware
 
-![](../../assets/blog/reclaiming-your-digital-autonomy-practical-self-hosting-in-an-age-of-surveillance-and-gamification/3de42c4f96.webp)
-
 Repurpose older desktops or laptops as home servers to cut costs and reduce e-waste. These machines can efficiently run essential services such as storage, media streaming, and even AI models.
 
 ## Consumer Electronics and AI Accessibility

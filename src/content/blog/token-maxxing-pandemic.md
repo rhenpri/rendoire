@@ -41,8 +41,6 @@ None of it is free. Tokens cost money, they cost energy, and the hardware behind
 
 Here is the tell. Earlier this year Anthropic called its Mythos model too dangerous to release widely, too good at finding security flaws. When Daniel Stenberg, who maintains curl, finally got a scan, it claimed five confirmed vulnerabilities. His team checked. One held up, low severity. The rest were false positives or a minor bug. His verdict was blunt: mostly marketing. His [write-up](https://daniel.haxx.se/blog/2026/05/11/mythos-finds-a-curl-vulnerability/) is worth your time.
 
-![](../../assets/blog/token-maxxing-pandemic/da960ce525.webp)
-
 The part the hype skips is the honest one. AI code analysis is genuinely good now. It is just not the revolution each press cycle sells, and treating every increment as a breakthrough is how you end up gaming a leaderboard instead of shipping.
 
 ## Simplicity is the greatest form of sophistication

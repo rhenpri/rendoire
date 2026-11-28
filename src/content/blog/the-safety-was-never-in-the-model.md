@@ -5,7 +5,8 @@ summary: "Safety training does not change what a language model can do. It adds 
 pubDate: 2026-11-28
 tags: ["ai", "software"]
 series: the-layer
-draft: true
+cover: "../../assets/blog/the-safety-was-never-in-the-model/cover.webp"
+draft: false
 ---
 
 *It took ninety minutes to strip the guardrails off Google's newest open model. If you deploy AI for a living, that number should change how you sign things off.*

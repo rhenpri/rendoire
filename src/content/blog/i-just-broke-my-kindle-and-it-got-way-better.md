@@ -5,6 +5,7 @@ pubDate: 2026-11-22
 tags: ["kindle", "self-hosting", "digital-minimalism", "reading"]
 cover: "../../assets/blog/i-just-broke-my-kindle-and-it-got-way-better/cover.webp"
 coverAlt: "A Kindle Paperwhite showing a page of Alice in Wonderland, beside the title I just broke my Kindle and it got way better"
+coverCredit: "Cover adapted from a photo by Frmorrison (Wikimedia Commons, CC BY-SA 3.0). This cover is shared under the same licence."
 series: owning-it
 summary: "I jailbroke a 2013 Paperwhite, dropped the Amazon account and moved my library onto my own server. Every morning it now delivers the weather, my calendar and the news, and my highlights go straight into my notes. It takes an evening and carries a small risk, and it is a project you maintain, not a gadget you buy."
 draft: false

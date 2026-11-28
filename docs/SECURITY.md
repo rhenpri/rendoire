@@ -63,8 +63,9 @@ strongest headers — `Strict-Transport-Security`, `X-Frame-Options`, `frame-anc
 `X-Content-Type-Options`, and a strict CSP — must be set **at the edge**, in front of
 GitHub Pages.
 
-Your domain already fronts GitHub Pages through a reverse proxy (APISIX on a
-DigitalOcean host). Add these headers there.
+Your domain fronts GitHub Pages through a reverse proxy (APISIX on a Namecheap IP,
+159.198.67.129). Add these headers there. The GoatCounter origin must match
+`analytics.goatcounter` in `src/config.ts`, or the header will block page counts.
 
 ### APISIX (response-rewrite)
 
@@ -81,8 +82,10 @@ plugins:
         Permissions-Policy: "camera=(), microphone=(), geolocation=(), interest-cohort=()"
         Content-Security-Policy: >-
           default-src 'self'; script-src 'self';
-          style-src 'self' 'unsafe-inline'; img-src 'self' data:;
-          font-src 'self' data:; connect-src 'self';
+          style-src 'self' 'unsafe-inline';
+          img-src 'self' data: https://rendoire.goatcounter.com;
+          font-src 'self' data:;
+          connect-src 'self' https://rendoire.goatcounter.com;
           object-src 'none'; base-uri 'self'; form-action 'self';
           frame-ancestors 'none'
 ```
@@ -102,7 +105,7 @@ rendoire.com {
         X-Frame-Options "DENY"
         Referrer-Policy "strict-origin-when-cross-origin"
         Permissions-Policy "camera=(), microphone=(), geolocation=()"
-        Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
+        Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://rendoire.goatcounter.com; font-src 'self' data:; connect-src 'self' https://rendoire.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
         -Server
     }
 }

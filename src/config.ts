@@ -46,6 +46,17 @@ export const author = {
   replyEmail: '',
 };
 
+/**
+ * Cookieless page counts via GoatCounter (goatcounter.com). The script is a
+ * local copy in public/js/count.js (ISC), so the CSP only has to allow sending
+ * counts to the endpoint. Empty string turns analytics off.
+ * Skip your own visits: open any page with #toggle-goatcounter once per browser.
+ */
+export const analytics = {
+  goatcounter: 'rendoire',
+};
+export const goatcounterOrigin = analytics.goatcounter ? `https://${analytics.goatcounter}.goatcounter.com` : '';
+
 /** schema.org description of the author, shared by every page's JSON-LD. */
 export const person = {
   '@type': 'Person',

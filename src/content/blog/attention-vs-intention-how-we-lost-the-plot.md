@@ -30,8 +30,6 @@ The early days from the mainframes to the 90s were about **utility**. You used a
 
 Even the counter-culture boom of the 70s and 80s was driven by a desire to empower people. This was the era of the Homebrew Computer Club and the garage days of Steve Jobs. It was hippie idealism meets soldering irons.
 
-![](../../assets/blog/attention-vs-intention-how-we-lost-the-plot/959d8b4fb2.webp)
-
 The vibe was simple. Here is a superpower you didn’t have before. **Go build something.**
 
 ## 2\. The Shift: When You Became the Product
@@ -43,8 +41,6 @@ They borrowed the answer from TV. **Ads.**
 ![](../../assets/blog/attention-vs-intention-how-we-lost-the-plot/508032c5aa.webp)
 
 By the mid-2000s, platforms like Facebook realised that a user who logs in, does a task, and leaves is worthless. But a user who stays for 4 hours is a goldmine.
-
-![](../../assets/blog/attention-vs-intention-how-we-lost-the-plot/f0546e90f7.webp)
 
 The metric for success switched from User Utility to Time on Device.
 
@@ -59,8 +55,6 @@ Have you noticed that every app is morphing into the same thing?
 
 Instagram used to be for photos, but now it is TikTok. YouTube used to be for long videos, but now it is TikTok Shorts. LinkedIn is somehow also becoming Facebook.
 
-![](../../assets/blog/attention-vs-intention-how-we-lost-the-plot/54e84a4855.webp)
-
 **Every app is just a vertical feed with an algorithm designed to keep you scrolling.**
 
 We have processors in our pockets that would have been supercomputers in the 90s. We could be using that power to solve energy crises or cure diseases. Instead, we use that silicon to render high-def ads and filter our faces in real-time.
@@ -68,8 +62,6 @@ We have processors in our pockets that would have been supercomputers in the 90s
 ![](../../assets/blog/attention-vs-intention-how-we-lost-the-plot/d659b5f88a.webp)
 
 There is no risk anymore. In the Dot Com boom, people tried weird stuff. The iPod changed music. Online gaming created new worlds. Now we just get a slightly faster iPhone every September and a chatbot that regurgitates data.
-
-![](../../assets/blog/attention-vs-intention-how-we-lost-the-plot/4b97405022.webp)
 
 It is a monopoly problem too. Apple and Samsung basically own the hardware. Amazon and Microsoft own the servers. When a few giants own the board, nobody wants to flip the table.
 
@@ -83,8 +75,6 @@ Right now, the smartest 22-year-old engineers are being trained to think that in
 
 If we feed young inventors a diet of shiny objects and dopamine hits, they won’t grow up wanting to solve hard problems like logistics, healthcare, or education. They will grow up wanting to build a better ad algorithm.
 
-![](../../assets/blog/attention-vs-intention-how-we-lost-the-plot/86d596d1c8.webp)
-
 We are teaching them that **Marketing Tricks** are more important than **Real Solutions**.
 
 ## The Conclusion: Let the Pendulum Swing
@@ -94,7 +84,5 @@ We are overdue for a correction.
 The 90s tech counter-culture thought the internet would free us from corporate control. Instead, it just built different cages. But the feeling is starting to shift again. You can see it in the rise of dumb phones, the privacy regulations in Europe, and the general fatigue with being online 24/7.
 
 To get back to an era of **Intention**, we need to stop measuring success by how long we stare at a screen. We need to measure it by what we achieve when we put the phone down.
-
-![](../../assets/blog/attention-vs-intention-how-we-lost-the-plot/e4e71dc8f9.webp)
 
 Real innovation isn’t a better feed, automating everything or a chat bot. **Real innovation is building a tool so good that you can finish your work and go outside.**

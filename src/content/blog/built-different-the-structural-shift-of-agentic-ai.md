@@ -25,10 +25,6 @@ Adding more agents to your business won’t fix your inefficiencies — it�
 
 Agentic AI doesn’t eliminate the need for design. **It intensifies it**. You’re now coordinating semi-autonomous tools with their own memory, feedback, and behavior. And unless you design for drift, you will get it.
 
-![](../../assets/blog/built-different-the-structural-shift-of-agentic-ai/e827a3a381.webp)
-
-_The Fast and the Furious: Tokyo Drift (2006)_
-
 Most builders will learn the hard way: **your first agentic workflow will fail** — because systems without constraints grow unpredictable.
 
 ## 2\. From Apps to Agents: A Systems-Level Shift
@@ -75,10 +71,6 @@ Think **DevOps + Product + Psychology**. Your team’s edge will not be model ac
 ## 5\. Small Builders Face a Wall They Don’t Know Exists Yet
 
 In 2008, the App Store let anyone ship. That era is gone.
-
-![](../../assets/blog/built-different-the-structural-shift-of-agentic-ai/97c33414ea.webp)
-
-_Steve Jobs at WWDC (2008)_
 
 Agentic AI is built on top of infrastructure that’s expensive, proprietary, and fast-moving. Fine-tuning a foundation model isn’t something you do in your bedroom.
 
