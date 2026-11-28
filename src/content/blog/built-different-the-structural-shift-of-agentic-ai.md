@@ -2,6 +2,7 @@
 title: "Built Different: The Structural Shift of Agentic AI"
 description: "Agentic AI does not just do more. It changes how software is structured, and adding agents to a messy organisation exposes its problems instead of fixing them."
 pubDate: 2025-07-02
+updatedDate: 2026-11-28
 tags: ["ai", "software", "culture"]
 cover: "../../assets/blog/built-different-the-structural-shift-of-agentic-ai/cover.webp"
 medium: "https://rendoire.medium.com/built-different-the-structural-shift-of-agentic-ai-6ecf0b5cd478"
@@ -9,7 +10,7 @@ series: the-layer
 draft: false
 ---
 
-> *“The real problem is not whether machines think but whether men do.” — B.F. Skinner*
+> *“The real question is not whether machines think but whether men do.” — B.F. Skinner*
 
 We’ve built software that listens. We’ve built software that learns. But now, for the first time, we’re building software that **does** — without waiting for us to tell it how.
 
@@ -21,7 +22,7 @@ This isn’t just a shift in capability. It’s a shift in structure. Agentic AI
 
 ## 1\. The Myth of Smarter Tools
 
-Adding more agents to your business won’t fix your inefficiencies — it’ll expose them. Brooks’ Law (from *The Mythical Man*) reminds us: adding manpower to a late software project makes it later. The same applies to agents. Complexity scales faster than control.
+Adding more agents to your business won’t fix your inefficiencies — it’ll expose them. Brooks’ Law (from *The Mythical Man-Month*) reminds us: adding manpower to a late software project makes it later. The same applies to agents. Complexity scales faster than control.
 
 Agentic AI doesn’t eliminate the need for design. **It intensifies it**. You’re now coordinating semi-autonomous tools with their own memory, feedback, and behavior. And unless you design for drift, you will get it.
 
@@ -107,3 +108,19 @@ But only if you own the design, the scaffolding, and the feedback loops.
 You’re not competing on intelligence anymore. You’re competing on *delegation clarity and systemic foresight*.
 
 > *Build accordingly — or be built around.*
+
+## Looking back, November 2026
+
+I wrote this in the summer of 2025. Reading it again a year and a half later, most of it has held up, and one part has not.
+
+What held up: first agentic workflows do fail, and they fail for the reasons above. Not because the models are weak, but because nobody designed the loop, the boundaries or the way back when something goes wrong. Most of my writing since has been an attempt to make that practical. [The Models Were the Easy Part](/blog/the-models-were-the-easy-part/) is about the missing layer around the model, and [The Safety Was Never in the Model](/blog/the-safety-was-never-in-the-model/) is about why the guardrails have to be part of your system rather than something you assume the vendor shipped.
+
+What I got wrong: section five. I said fine-tuning a model was not something you do in your bedroom, and that the power to shape AI behaviour was centralising. The open-weight wave proved me wrong faster than I expected. Models from Meta, Mistral, Qwen, DeepSeek and Google can now be downloaded, run on a single decent graphics card and adapted with techniques that need a fraction of the compute that full training does. Small builders hit a lower wall than I predicted.
+
+That cuts both ways, and the second edge is the subject of the Safety essay. The same openness that lets anyone adapt a model lets anyone strip its guardrails off.
+
+The closing line still stands, maybe more than when I wrote it. You are not competing on intelligence any more. Everyone can rent it, and increasingly everyone can own it. You are competing on how clearly you design what it is allowed to do.
+
+---
+
+*Further reading: Donella H. Meadows, Thinking in Systems (Chelsea Green, 2008). Frederick P. Brooks Jr., The Mythical Man-Month (Addison-Wesley, 1975). Michael Albada, Building Applications with AI Agents (O'Reilly, 2025). Betsy Beyer et al. (eds.), Site Reliability Engineering, 2nd edition (O'Reilly, 2026), chapters 20 and 21 on AI in operations.*

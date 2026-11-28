@@ -1,12 +1,24 @@
 ---
-import { site } from '../config';
+import { buttondownAction, site } from '../config';
 ---
 
 <div class="newsletter reveal">
-  <h2>New essays, occasionally</h2>
-  <p>Considered writing on AI and building. No spam, unsubscribe any time.</p>
-  <div class="newsletter-actions">
-    <a href={`${site.medium}/subscribe`} target="_blank" rel="noopener" class="newsletter-cta">Subscribe on Medium ↗</a>
-    <a href="/feed.xml" class="newsletter-alt">or follow by RSS</a>
-  </div>
+  <h2>New essays, by email</h2>
+  <p>Each new essay on AI in real organisations and on owning your own technology, straight to your inbox. No spam, unsubscribe any time.</p>
+  {buttondownAction ? (
+    <form class="newsletter-form" action={buttondownAction} method="post">
+      <label class="visually-hidden" for="newsletter-email">Email address</label>
+      <input id="newsletter-email" type="email" name="email" required placeholder="you@example.com" autocomplete="email" />
+      <input type="hidden" name="embed" value="1" />
+      <button type="submit" class="newsletter-cta">Subscribe</button>
+    </form>
+    <div class="newsletter-actions">
+      <a href="/feed.xml" class="newsletter-alt">or follow by RSS</a>
+    </div>
+  ) : (
+    <div class="newsletter-actions">
+      <a href={`${site.medium}/subscribe`} target="_blank" rel="noopener" class="newsletter-cta">Subscribe on Medium ↗</a>
+      <a href="/feed.xml" class="newsletter-alt">or follow by RSS</a>
+    </div>
+  )}
 </div>

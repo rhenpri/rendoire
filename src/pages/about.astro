@@ -3,8 +3,41 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 import PintButton from '../components/PintButton.astro';
-import { author, person } from '../config';
+import { author, person, site } from '../config';
 import { series } from '../data/series';
+
+const route = [
+  {
+    when: '2016',
+    title: 'Left school at 16',
+    desc: 'Took a BTEC in IT at North West Regional College instead of A-levels, and finished with a triple Distinction*. College was where it clicked.',
+  },
+  {
+    when: '2019',
+    title: 'Degree apprentice',
+    desc: 'Started a degree apprenticeship: four days a week at work, one at university, fully funded and no student debt.',
+  },
+  {
+    when: '2022',
+    title: 'Live services',
+    desc: 'Started running and improving live services, which is still my day job.',
+  },
+  {
+    when: '2023',
+    title: 'BSc (Hons) Business Technology, Ulster University',
+    desc: 'Graduated with a 2:1. My dissertation asked how AI would change consulting, ten months after ChatGPT launched.',
+  },
+  {
+    when: '2024',
+    title: 'AI engineering',
+    desc: 'Started building with AI in live services.',
+  },
+  {
+    when: '2025',
+    title: 'Technology manager',
+    desc: 'Leading engineering on live services, and putting AI to work in them.',
+  },
+];
 
 const projects = [
   {
@@ -18,12 +51,8 @@ const projects = [
     href: '/blog/i-just-broke-my-kindle-and-it-got-way-better/',
   },
   {
-    name: 'Teaching generative AI',
-    desc: 'Sessions that take non-technical colleagues from first principles to using AI safely at work.',
-  },
-  {
     name: 'This site',
-    desc: 'Static, no trackers, no third-party requests, and a strict content security policy. The source is public.',
+    desc: 'Static, no cookies or ad trackers, cookieless page counts only, and a strict content security policy. The source is public.',
     href: 'https://github.com/rhenpri/rendoire',
   },
 ];
@@ -52,13 +81,31 @@ const social = [
     <div class="section-label">About</div>
     <h1 class="section-title">Nice to <em>meet you</em></h1>
     <p class="lead">
-      I'm {author.name}, a technology manager in {author.location}. By day I run live services and
+      I'm {author.name}, a technology manager in {author.location}. I run live services for the
       build with AI. Here I write about what happens when AI
       meets a real organisation, and about running more of my own technology.
     </p>
     <p class="lead" style="margin-top:1rem;">
+      I didn't take the usual route in. I left school at 16, did my degree while working full
+      time, and I'm dyslexic, which shapes how I think more than it limits it.
+      I've <a href="/blog/think-different-the-dyslexic-advantage-in-systems-thinking/">written about that</a>.
       The essays are my own views, not my employer's.
     </p>
+
+    <section style="margin-top: 4rem;" aria-labelledby="route">
+      <div class="section-label" id="route">How I got here</div>
+      <ol class="route">
+        {route.map((r) => (
+          <li>
+            <span class="route-when">{r.when}</span>
+            <div>
+              <h2 class="route-title">{r.title}</h2>
+              <p class="route-desc">{r.desc}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
 
     <section style="margin-top: 4rem;">
       <div class="section-label">What I write about</div>
@@ -96,6 +143,15 @@ const social = [
           );
         })}
       </div>
+    </section>
+
+    <section style="margin-top: 4rem;">
+      <div class="section-label">Talks</div>
+      <p class="lead" style="max-width:44rem;">
+        I give STEM workshops and careers talks in local schools and colleges, about technology
+        and about getting into it without A-levels. If you run a school, college or community
+        group and want a talk, <a href={site.linkedin} target="_blank" rel="noopener">message me on LinkedIn</a>.
+      </p>
     </section>
 
     <section style="margin-top: 4rem;">

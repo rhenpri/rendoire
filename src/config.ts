@@ -52,6 +52,17 @@ export const author = {
  * counts to the endpoint. Empty string turns analytics off.
  * Skip your own visits: open any page with #toggle-goatcounter once per browser.
  */
+/**
+ * Email newsletter via Buttondown (buttondown.com). Set `buttondown` to your
+ * Buttondown username to show a sign-up form; empty keeps Medium + RSS.
+ */
+export const newsletter = {
+  buttondown: 'rendoire',
+};
+export const buttondownAction = newsletter.buttondown
+  ? `https://buttondown.com/api/emails/embed-subscribe/${newsletter.buttondown}`
+  : '';
+
 export const analytics = {
   goatcounter: 'rendoire',
 };

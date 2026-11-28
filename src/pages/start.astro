@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import PostCard from '../components/blog/PostCard.astro';
+import Subscribe from '../components/Subscribe.astro';
+import { getPosts, seriesPosts } from '../lib/blog';
+import { author, site } from '../config';
+import { series } from '../data/series';
+
+// Hand-picked essays for a first visit. Slugs that are missing or still drafts
+// are skipped, so this page never links to something unpublished.
+const PICKS = [
+  'the-models-were-the-easy-part',
+  'the-safety-was-never-in-the-model',
+  'i-just-broke-my-kindle-and-it-got-way-better',
+];
+
+const posts = await getPosts();
+const picks = PICKS.map((slug) => posts.find((p) => p.slug === slug)).filter(Boolean);
+const seriesList = Object.values(series)
+  .map((s) => ({ ...s, posts: seriesPosts(s.id, posts) }))
+  .filter((s) => s.posts.length > 0);
+---
+
+<BaseLayout
+  title="Start here — rendoire"
+  description={`New to rendoire? The three essays by ${author.name} to read first, the two series, and where to go next.`}
+  canonical={`${site.url}/start/`}
+>
+  <Navigation />
+
+  <main id="main" class="container section page-top">
+    <div class="section-label">Start here</div>
+    <h1 class="section-title">New <em>here?</em></h1>
+    <p class="lead page-lead">
+      I'm {author.name}. I write about what happens when AI meets a real organisation, and about
+      running more of my own technology. If you only read three things, read these.
+    </p>
+
+    <div class="post-grid" style="margin-top:2rem;">
+      {picks.map((post) => <PostCard post={post!} level="h2" />)}
+    </div>
+
+    <section style="margin-top: 4rem;">
+      <div class="section-label">Then pick a series</div>
+      <div class="series-grid">
+        {seriesList.map((s) => (
+          <nav class="series-box" aria-label={`Series: ${s.title}`}>
+            <span class="series-kicker">Series · {s.posts.length} essays</span>
+            <h2 class="series-title">{s.title}</h2>
+            <p class="series-blurb">{s.blurb}</p>
+            <ol>
+              {s.posts.map((p) => (
+                <li><a href={`/blog/${p.slug}/`}>{p.title}</a></li>
+              ))}
+            </ol>
+          </nav>
+        ))}
+      </div>
+    </section>
+
+    <section style="margin-top: 3rem;">
+      <div class="section-label">Or go straight to</div>
+      <p class="lead">
+        <a href="/blog/">every essay</a>, the <a href="/self-hosting/">self-hosting list</a>,
+        the <a href="/ai/">AI learning path</a>, or <a href="/about/">more about me</a>.
+      </p>
+    </section>
+
+    <section style="margin-top: 3rem;">
+      <Subscribe />
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>

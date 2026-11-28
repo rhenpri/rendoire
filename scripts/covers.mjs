@@ -26,6 +26,17 @@ const COVERS = {
   'the-best-technology-is-human': { glyph: 'graph', kicker: 'Culture', accent: 1, title: 'The Best Technology Is Human' },
   'think-different-the-dyslexic-advantage-in-systems-thinking': { glyph: 'transformer', kicker: 'Neurodiversity · Systems', accent: 2, title: 'The Dyslexic Advantage' },
   'grapheneos-review': { glyph: 'security', kicker: 'Privacy · Taking my devices back', accent: 1 },
+  'read-before-you-write': { glyph: 'automation', kicker: 'AI · Between the model and the real world', accent: 1 },
+  'nobody-budgets-for-evals': { glyph: 'ml', kicker: 'AI · Between the model and the real world', accent: 1 },
+  'ai-on-call': { glyph: 'rag', kicker: 'AI · Between the model and the real world', accent: 2 },
+  'the-token-bill': { glyph: 'token', kicker: 'AI · Between the model and the real world', accent: 1 },
+  'the-prompt-whisperer': { glyph: 'embedding', kicker: 'AI · Neurodiversity', accent: 1 },
+  'the-side-door': { glyph: 'train', kicker: 'Culture · Neurodiversity', accent: 1 },
+  'collecting-is-not-learning': { glyph: 'context', kicker: 'Digital minimalism', accent: 1 },
+  'the-system-is-not-the-work': { glyph: 'os', kicker: 'Digital minimalism', accent: 1 },
+  'the-light-switch-wins': { glyph: 'cloud', kicker: 'Self-hosting', accent: 1 },
+  'your-network-has-a-landlord': { glyph: 'nn', kicker: 'Self-hosting · Taking my devices back', accent: 1 },
+  'the-pocket-terminal': { glyph: 'llm', kicker: 'AI · Taking my devices back', accent: 1 },
 };
 
 const font = (pkg, file) =>

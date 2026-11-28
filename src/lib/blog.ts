@@ -36,7 +36,7 @@ const TOPIC_LABELS: Record<string, string> = {
 export const topicLabel = (tag: string) => TOPIC_LABELS[tag] ?? tag;
 
 export const formatDate = (d: Date, month: 'short' | 'long' = 'short') =>
-  d.toLocaleDateString('en-US', { year: 'numeric', month, day: 'numeric', timeZone: 'UTC' });
+  d.toLocaleDateString('en-GB', { year: 'numeric', month, day: 'numeric', timeZone: 'UTC' });
 
 const toReadingTime = (body: string) => {
   const words = body.split(/\s+/).filter(Boolean).length;
@@ -64,9 +64,12 @@ export function summarize(post: CollectionEntry<'blog'>): PostSummary {
   };
 }
 
-/** Published posts, newest first. */
+/**
+ * Published posts, newest first. In `npm run dev`, drafts are included too so
+ * they can be read in the real layout; a production build never ships them.
+ */
 export async function getEntries(): Promise<CollectionEntry<'blog'>[]> {
-  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  const posts = await getCollection('blog', ({ data }) => import.meta.env.DEV || !data.draft);
   return posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 }
 

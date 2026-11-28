@@ -30,7 +30,7 @@ try {
   const iso = execSync('git log -1 --format=%cI -- src/data/self-hosting.ts').toString().trim();
   if (iso) updated = new Date(iso);
 } catch {}
-const updatedLabel = updated?.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+const updatedLabel = updated?.toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
 
 <BaseLayout
